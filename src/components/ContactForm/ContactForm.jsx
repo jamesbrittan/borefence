@@ -36,8 +36,9 @@ const Input = styled.input`
   background: ${props => props.dark ? 'rgba(255, 255, 255, 0.15)' : props.theme.colors.white};
   backdrop-filter: ${props => props.dark ? 'blur(10px)' : 'none'};
   -webkit-backdrop-filter: ${props => props.dark ? 'blur(10px)' : 'none'};
-  color: ${props => props.dark ? 'white' : props.theme.colors.text};
-  font-size: 1rem;
+  color: ${props => props.dark ? props.theme.colors.white : props.theme.colors.text};
+  font-family: ${props => props.theme.fonts.body};
+  font-size: ${props => props.theme.spacing.md};
   line-height: 1.5;
   width: 100%;
   transition: all 0.2s;
@@ -54,12 +55,13 @@ const Input = styled.input`
   &:focus {
     outline: none;
     border-color: ${props => props.dark ? 'rgba(255, 255, 255, 0.8)' : props.theme.colors.primary};
-    box-shadow: 0 0 0 3px ${props => props.dark ? 'rgba(255, 255, 255, 0.2)' : props.theme.colors.primary};
+    box-shadow: 0 0 0 3px ${props => props.dark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(37, 99, 235, 0.2)'};
     background: ${props => props.dark ? 'rgba(255, 255, 255, 0.25)' : props.theme.colors.white};
   }
 
   &[aria-invalid="true"] {
     border-color: ${props => props.theme.colors.error};
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
   }
 `;
 
@@ -70,8 +72,9 @@ const TextArea = styled.textarea`
   background: ${props => props.dark ? 'rgba(255, 255, 255, 0.15)' : props.theme.colors.white};
   backdrop-filter: ${props => props.dark ? 'blur(10px)' : 'none'};
   -webkit-backdrop-filter: ${props => props.dark ? 'blur(10px)' : 'none'};
-  color: ${props => props.dark ? 'white' : props.theme.colors.text};
-  font-size: 1rem;
+  color: ${props => props.dark ? props.theme.colors.white : props.theme.colors.text};
+  font-family: ${props => props.theme.fonts.body};
+  font-size: ${props => props.theme.spacing.md};
   line-height: 1.5;
   width: 100%;
   min-height: 120px;

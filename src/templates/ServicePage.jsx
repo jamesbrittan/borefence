@@ -16,7 +16,7 @@ const FullWidthSection = styled.section`
 
 const HeaderSection = styled.section`
   ${props => props.theme.mixins.narrowContainer}
-  padding: 4.5rem 0 3rem;
+  padding: ${props => props.theme.spacing.xxl} 0 ${props => props.theme.spacing.xl};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,8 +26,8 @@ const HeaderSection = styled.section`
 const ServiceHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: 3rem;
-  margin-bottom: 3rem;
+  gap: ${props => props.theme.spacing.xl};
+  margin-bottom: ${props => props.theme.spacing.xl};
   width: 100%;
   justify-content: space-between;
   
@@ -61,7 +61,7 @@ const HeaderImage = styled.img`
 const Title = styled.h1`
   ${props => props.theme.typography.heading}
   color: ${props => props.theme.colors.primary};
-  font-size: 2.5rem;
+  font-size: ${props => props.theme.spacing.xxl};
   margin: 0;
   flex: 1;
   position: relative;
@@ -72,21 +72,21 @@ const Title = styled.h1`
     width: 60px;
     height: 3px;
     background-color: ${props => props.theme.colors.primary};
-    margin-top: 1rem;
+    margin-top: ${props => props.theme.spacing.md};
     
     @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-      margin: 1rem auto 0;
+      margin: ${props => props.theme.spacing.md} auto 0;
     }
   }
   
   @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-    margin-top: 1.5rem;
+    margin-top: ${props => props.theme.spacing.lg};
   }
 `;
 
 const ContentSection = styled.section`
   ${props => props.theme.mixins.narrowContainer}
-  padding: 3.5rem 0;
+  padding: ${props => props.theme.spacing.section.padding.default};
   background-color: ${props => props.theme.colors.background};
 `;
 
@@ -102,7 +102,7 @@ const Description = styled.div`
   
   p:first-of-type {
     font-size: 1.1rem;
-    padding-left: 1rem;
+    padding-left: ${props => props.theme.spacing.md};
     border-left: 3px solid ${props => props.theme.colors.primary};
   }
 `;
@@ -116,13 +116,13 @@ const Divider = styled.div`
     ${props => props.theme.colors.border},
     transparent
   );
-  margin: 2rem 0;
+  margin: ${props => props.theme.spacing.lg} 0;
 `;
 
 const ContactWrapper = styled.div`
   background-color: ${props => props.theme.colors.background};
-  padding-top: 3rem;
-  padding-bottom: 5rem;
+  padding-top: ${props => props.theme.spacing.xl};
+  padding-bottom: ${props => props.theme.spacing.section.padding.large};
   
   &::before {
     content: '';
@@ -133,7 +133,7 @@ const ContactWrapper = styled.div`
       ${props => props.theme.colors.primary},
       ${props => props.theme.colors.primaryLight}
     );
-    margin-bottom: 3rem;
+    margin-bottom: ${props => props.theme.spacing.xl};
   }
 `;
 
@@ -141,8 +141,8 @@ const ContactSection = styled.section`
   ${props => props.theme.mixins.narrowContainer}
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem;
-  background-color: white;
+  padding: ${props => props.theme.spacing.component.padding.default};
+  background-color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
   box-shadow: ${props => props.theme.shadows.medium};
 `;

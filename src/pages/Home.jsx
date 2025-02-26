@@ -17,7 +17,7 @@ const HeroSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props => props.theme.colors.white};
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
@@ -64,13 +64,13 @@ const HeroSection = styled.section`
 `;
 
 const HeroContent = styled.div`
-  ${props => props.theme.mixins.container}
+  ${props => props.theme.mixins.narrowContainer}
   position: relative;
   z-index: 3;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 4rem;
-  padding: 4rem 0;
+  gap: ${props => props.theme.spacing.xxl};
+  padding: ${props => props.theme.spacing.xxl} 0;
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
@@ -81,9 +81,7 @@ const HeroTextContent = styled.div`
   max-width: 600px;
   position: relative;
   z-index: 3;
-  
-  /* Subtle text enhancer - just a slight gradient background */
-  padding-left: 1.5rem;
+  padding-left: ${props => props.theme.spacing.lg};
   position: relative;
   
   &::before {
@@ -98,14 +96,14 @@ const HeroTextContent = styled.div`
       ${props => props.theme.colors.accent},
       ${props => props.theme.colors.primaryLight}
     );
-    border-radius: 2px;
+    border-radius: ${props => props.theme.radius.small};
   }
   
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     text-align: center;
     margin: 0 auto;
     padding-left: 0;
-    padding-bottom: 1.5rem;
+    padding-bottom: ${props => props.theme.spacing.lg};
     
     &::before {
       width: 100%;
@@ -124,9 +122,9 @@ const HeroTextContent = styled.div`
 
 const HeroText = styled.p`
   ${props => props.theme.typography.body}
-  font-size: 1.2rem;
+  font-size: ${props => props.theme.spacing.md};
   max-width: 600px;
-  margin-bottom: 2rem;
+  margin-bottom: ${props => props.theme.spacing.lg};
   opacity: 0.95;
   line-height: 1.6;
   font-weight: ${props => props.theme.fonts.weights.medium};
@@ -138,11 +136,12 @@ const HeroText = styled.p`
 `;
 
 const HeroTitle = styled.h1`
+  ${props => props.theme.typography.heading}
   font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+  font-weight: ${props => props.theme.fonts.weights.bold};
+  margin-bottom: ${props => props.theme.spacing.md};
   line-height: 1.2;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: ${props => props.theme.shadows.medium};
   position: relative;
   
   &::after {
@@ -155,17 +154,18 @@ const HeroTitle = styled.h1`
       ${props => props.theme.colors.accent},
       ${props => props.theme.colors.primaryLight}
     );
-    margin-top: 1rem;
+    margin-top: ${props => props.theme.spacing.md};
     
     @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-      margin: 1rem auto 0;
+      margin: ${props => props.theme.spacing.md} auto 0;
     }
   }
 `;
 
 const HeroSubtitle = styled.p`
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  ${props => props.theme.typography.body}
+  font-size: ${props => props.theme.spacing.lg};
+  margin-bottom: ${props => props.theme.spacing.lg};
   line-height: 1.5;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   font-weight: ${props => props.theme.fonts.weights.medium};
@@ -176,8 +176,8 @@ const FormWrapper = styled.div`
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px) saturate(160%);
   -webkit-backdrop-filter: blur(15px) saturate(160%);
-  padding: 2.5rem 2rem;
-  border-radius: 16px;
+  padding: ${props => props.theme.spacing.component.padding.large} ${props => props.theme.spacing.component.padding.default};
+  border-radius: ${props => props.theme.radius.large};
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.2),
@@ -196,9 +196,9 @@ const FormWrapper = styled.div`
   }
 
   h3 {
-    color: white;
-    font-size: 1.5rem;
-    margin-bottom: 1.75rem;
+    color: ${props => props.theme.colors.white};
+    font-size: ${props => props.theme.spacing.lg};
+    margin-bottom: ${props => props.theme.spacing.lg};
     font-weight: ${props => props.theme.fonts.weights.semiBold};
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
@@ -207,7 +207,7 @@ const FormWrapper = styled.div`
     justify-self: center;
     width: 100%;
     transform: translateY(0);
-    margin-top: 2rem;
+    margin-top: ${props => props.theme.spacing.lg};
     
     &:hover {
       transform: translateY(0);
@@ -220,12 +220,12 @@ const CTAButton = styled.button`
   font-weight: ${props => props.theme.fonts.weights.semiBold};
   background-color: ${props => props.theme.colors.accent};
   color: ${props => props.theme.colors.white};
-  padding: 1rem 2rem;
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};
   border: none;
   border-radius: ${props => props.theme.radius.medium};
   cursor: pointer;
   transition: transform 0.2s;
-  font-size: 1rem;
+  font-size: ${props => props.theme.spacing.md};
 
   &:hover {
     transform: translateY(-2px);
@@ -245,8 +245,9 @@ const CTAButton = styled.button`
 const GuaranteeWrapper = styled.div`
   ${props => props.theme.mixins.fullWidth}
   position: relative;
-  margin-top: -2rem;
+  margin-top: -${props => props.theme.spacing.lg};
   z-index: 2;
+  
   &::after {
     content: '';
     display: block;
@@ -258,14 +259,14 @@ const GuaranteeWrapper = styled.div`
       ${props => props.theme.colors.border},
       transparent
     );
-    margin-top: 3rem;
+    margin-top: ${props => props.theme.spacing.xl};
   }
 `;
 
 const Features = styled.section`
   ${props => props.theme.mixins.fullWidth}
   width: 100vw;
-  padding: 4rem 0;
+  padding: ${props => props.theme.spacing.section.padding.default};
   background-color: ${props => props.theme.colors.white};
   position: relative;
   
@@ -289,15 +290,19 @@ const FeaturesInner = styled.div`
   ${props => props.theme.mixins.narrowContainer}
   max-width: ${props => props.theme.breakpoints.wide};
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 ${props => props.theme.spacing.lg};
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${props => props.theme.spacing.lg};
+  
+  @media (max-width: ${props => props.theme.breakpoints.desktop}) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 `;
 
 const FeatureCard = styled.article`
   text-align: center;
-  padding: 2rem;
+  padding: ${props => props.theme.spacing.component.padding.default};
   border-radius: ${props => props.theme.radius.medium};
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   
@@ -309,8 +314,8 @@ const FeatureCard = styled.article`
   h3 {
     ${props => props.theme.typography.h3}
     color: ${props => props.theme.colors.primary};
-    margin: 1rem 0;
-    font-size: 1.5rem;
+    margin: ${props => props.theme.spacing.md} 0;
+    font-size: ${props => props.theme.spacing.lg};
     line-height: 1.3;
     position: relative;
     
@@ -320,7 +325,7 @@ const FeatureCard = styled.article`
       width: 40px;
       height: 2px;
       background-color: ${props => props.theme.colors.accent};
-      margin: 0.5rem auto 0;
+      margin: ${props => props.theme.spacing.xs} auto 0;
     }
   }
 
@@ -340,7 +345,7 @@ const Divider = styled.div`
     ${props => props.theme.colors.border},
     transparent
   );
-  margin: 2rem 0;
+  margin: ${props => props.theme.spacing.lg} 0;
 `;
 
 const DesignWrapper = styled.div`

@@ -1,8 +1,32 @@
-# React + Vite
+# BoreFence Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website for BoreFence, built with React and Vite.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React
+- Vite
+- Styled Components
+- React Router
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Deployment
+
+This site is deployed on Netlify. The `main` branch is automatically deployed when changes are pushed.
+
+### Build Settings
+- Build command: `npm run build`
+- Publish directory: `dist`
+- Node version: 18.x

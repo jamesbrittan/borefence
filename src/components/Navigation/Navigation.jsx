@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../../assets/logo.png';
+import { getImageUrl } from '../../utils/imageUtils';
+
+const logoPath = getImageUrl('logo.png');
 
 const Nav = styled.nav`
   ${props => props.theme.mixins.container}
@@ -139,7 +141,7 @@ const DropdownLink = styled(Link)`
   }
 `;
 
-const Navigation = () => {
+const Navigation = ({ theme }) => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
@@ -192,7 +194,7 @@ const Navigation = () => {
     <Nav>
       <NavContent>
         <LogoLink to="/">
-          <LogoImage src={Logo} alt="BoreFence Ltd" />
+          <LogoImage src={logoPath} alt="BoreFence Ltd" />
         </LogoLink>
         <NavLinks>
           <NavLink to="/">Home</NavLink>

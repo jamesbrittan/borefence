@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { getImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
 
 const ServiceContainer = styled.main`
@@ -14,6 +15,12 @@ const HeroSection = styled.section`
   color: ${props => props.theme.colors.white};
   padding: 6rem 0;
   position: relative;
+`;
+
+const HeroImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const ContentSection = styled.section`
@@ -51,10 +58,12 @@ const ContactSection = styled.section`
 `;
 
 const ServicePage = ({ title, description, image }) => {
+  const imageUrl = getImageUrl(image.split('/').pop());
+  
   return (
     <ServiceContainer>
       <HeroSection>
-        <Title>{title}</Title>
+        <HeroImage src={imageUrl} alt={title} />
       </HeroSection>
       
       <ContentSection>

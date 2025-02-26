@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { getImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
 import Guarantee from '../components/Guarantee/Guarantee';
 import DesignOptions from '../components/DesignOptions/DesignOptions';
@@ -10,25 +11,16 @@ const HomeContainer = styled.main`
 `;
 
 const HeroSection = styled.section`
-  ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
-  background-image: url('/src/assets/fence_brown_h.jpg');
+  height: 60vh;
+  width: 100%;
+  background-image: url('${getImageUrl('fence_brown_h.jpg')}');
   background-size: cover;
   background-position: center;
-  color: ${props => props.theme.colors.white};
-  position: relative;
-  padding: 6rem 0 12rem;
-  min-height: 90vh;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
 `;
 
 const HeroContent = styled.div`

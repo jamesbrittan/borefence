@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { getImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
@@ -11,73 +10,63 @@ const HomeContainer = styled.main`
 `;
 
 const HeroSection = styled.section`
-  height: 60vh;
+  ${props => props.theme.mixins.fullWidth}
+  position: relative;
   width: 100%;
-  background-image: url('${getImageUrl('fence_brown_h.jpg')}');
-  background-size: cover;
-  background-position: center;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  text-align: center;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('${getImageUrl('fence_brown_h.jpg')}');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      145deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.2) 75%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+    z-index: 2;
+  }
 `;
 
 const HeroContent = styled.div`
-  ${props => props.theme.mixins.narrowContainer}
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 4rem;
+  ${props => props.theme.mixins.container}
   position: relative;
-  z-index: 1;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 4rem;
   padding: 4rem 0;
-  align-items: start;
 
-  @media (max-width: ${props => props.theme.breakpoints.desktop}) {
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
-    gap: 2rem;
   }
 `;
 
 const HeroTextContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-    align-items: center;
-    text-align: center;
-  }
-`;
-
-const HeroTitle = styled.h1`
-  ${props => props.theme.typography.heading}
-  font-size: 3.5rem;
-  font-weight: ${props => props.theme.fonts.weights.bold};
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  max-width: 800px;
-
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: 2.5rem;
-    text-align: center;
-  }
-`;
-
-const HeroSubtitle = styled.h2`
-  ${props => props.theme.typography.heading}
-  font-size: 1.5rem;
-  font-weight: ${props => props.theme.fonts.weights.medium};
-  opacity: 0.9;
-  margin-bottom: 2rem;
   max-width: 600px;
-  line-height: 1.4;
-
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: 1.25rem;
-    text-align: center;
-  }
 `;
 
 const HeroText = styled.p`
@@ -91,6 +80,47 @@ const HeroText = styled.p`
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     text-align: center;
   }
+`;
+
+const FormWrapper = styled.div`
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  justify-self: end;
+
+  h3 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: ${props => props.theme.fonts.weights.semiBold};
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    justify-self: center;
+    width: 100%;
+  }
+`;
+
+const HeroTitle = styled.h1`
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
+const HeroSubtitle = styled.p`
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 `;
 
 const CTAButton = styled.button`
@@ -120,20 +150,10 @@ const CTAButton = styled.button`
   }
 `;
 
-const FormWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-    justify-content: center;
-  }
-`;
-
 const GuaranteeWrapper = styled.div`
   ${props => props.theme.mixins.fullWidth}
   position: relative;
-  margin-top: -8rem;
+  margin-top: -2rem;
   z-index: 2;
 `;
 
@@ -179,12 +199,8 @@ const Home = () => {
       <HeroSection>
         <HeroContent>
           <HeroTextContent>
-            <HeroTitle>Transform Your Garden with BoreFence</HeroTitle>
+            <HeroTitle>Reimagine Your Landscape with BoreFence</HeroTitle>
             <HeroSubtitle>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</HeroSubtitle>
-            <HeroText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-            </HeroText>
-            <CTAButton>Get a Free Quote</CTAButton>
           </HeroTextContent>
           <FormWrapper>
             <ContactForm />

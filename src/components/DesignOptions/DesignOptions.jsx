@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import { getImageUrl } from '../../utils/imageUtils';
 
 const DesignSection = styled.section`
   ${props => props.theme.mixins.fullWidth}
@@ -53,52 +53,26 @@ const Content = styled.div`
 
 const SectionTitle = styled.h2`
   ${props => props.theme.typography.heading}
-  color: ${props => props.theme.colors.white};
-  text-align: center;
+  color: ${props => props.theme.colors.text};
   margin-bottom: 3rem;
   font-size: 2rem;
   line-height: 1.2;
 `;
 
-const ColorGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-`;
-
-const ColorBox = styled.div`
-  background-color: ${props => props.color};
-  padding: 1rem;
-  border-radius: ${props => props.theme.radius.small};
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: ${props => props.theme.shadows.small};
-  border: 1px solid rgba(255, 255, 255, 0.1);
-`;
-
 const DesignOptions = () => {
-  const colors = [
-    { name: 'Blue', hex: '#1E3F66', textColor: '#FFFFFF' },
-    { name: 'Green', hex: '#2E7D32', textColor: '#FFFFFF' },
-    { name: 'Brown', hex: '#5D4037', textColor: '#FFFFFF' },
-    { name: 'Cream', hex: '#FFF8E1', textColor: '#000000' },
-    { name: 'Grey', hex: '#455A64', textColor: '#FFFFFF' },
-  ];
 
   return (
     <DesignSection aria-labelledby="design-options-title">
       <Container>
         <ImageWrapper>
           <img 
-            src="/src/assets/Colourfence-1.jpg" 
+            src={getImageUrl('fence_black_s.jpg')}
             alt="BoreFence design options showing different color and style combinations"
             loading="lazy"
           />
         </ImageWrapper>
         <Content>
-          <SectionTitle id="design-options-title">BoreFence Design Options</SectionTitle>
+          <SectionTitle id="design-options-title">Lorem ipsum dolor sit amet</SectionTitle>
           <p>
             <strong>Customization Options</strong>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
@@ -111,19 +85,7 @@ const DesignOptions = () => {
             eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
             in culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <ColorGrid role="list">
-            {colors.map(color => (
-              <ColorBox 
-                key={color.name} 
-                color={color.hex}
-                style={{ color: color.textColor }}
-                role="listitem"
-                aria-label={`${color.name} color option`}
-              >
-                {color.name}
-              </ColorBox>
-            ))}
-          </ColorGrid>
+   
         </Content>
       </Container>
     </DesignSection>

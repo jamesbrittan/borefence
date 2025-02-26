@@ -61,7 +61,6 @@ const FooterBottom = styled.div`
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
 `;
 
 const Copyright = styled.p`

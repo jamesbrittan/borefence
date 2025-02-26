@@ -4,9 +4,8 @@ import styled from 'styled-components';
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: ${props => props.theme.spacing.component.gap.default};
+  gap: ${props => props.theme.spacing.component.gap.small};
   width: 100%;
-  max-width: 500px;
 `;
 
 const FormGroup = styled.div`
@@ -17,47 +16,49 @@ const FormGroup = styled.div`
 
 const Label = styled.label`
   ${props => props.theme.typography.label}
-  color: ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors.text};
   font-weight: ${props => props.theme.fonts.weights.medium};
-  font-size: 1rem;
+  font-size: 0.875rem;
   margin-bottom: ${props => props.theme.spacing.xxs};
 `;
 
 const ErrorMessage = styled.span`
-  color: #FF9494;
+  color: ${props => props.theme.colors.error};
   font-size: 0.875rem;
   margin-top: ${props => props.theme.spacing.xxs};
 `;
 
 const Input = styled.input`
   padding: ${props => props.theme.spacing.sm};
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: ${props => props.theme.radius.small};
-  background: rgba(255, 255, 255, 0.2);
-  color: ${props => props.theme.colors.white};
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: ${props => props.theme.colors.text};
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
   transition: all 0.2s;
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: ${props => props.theme.colors.textLight};
   }
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.9);
+    border-color: ${props => props.theme.colors.primary};
+    background: rgba(255, 255, 255, 0.7);
   }
 
   &:focus {
     outline: none;
     border-color: ${props => props.theme.colors.primary};
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px ${props => props.theme.colors.primaryLight};
+    background: rgba(255, 255, 255, 0.9);
   }
 
-  /* Only show red border when field has been touched and is invalid */
   &[aria-invalid="true"] {
-    border-color: #FF9494;
+    border-color: ${props => props.theme.colors.error};
   }
 `;
 
@@ -76,7 +77,7 @@ const SubmitButton = styled.button`
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s;
-  align-self: flex-start;
+  width: 100%;
 
   &:hover {
     background: ${props => props.theme.colors.secondary};
@@ -84,7 +85,7 @@ const SubmitButton = styled.button`
   }
 
   &:focus-visible {
-    outline: 3px solid ${props => props.theme.colors.white};
+    outline: 3px solid ${props => props.theme.colors.primaryLight};
     outline-offset: ${props => props.theme.spacing.xxs};
     background: ${props => props.theme.colors.secondary};
   }
@@ -94,7 +95,7 @@ const SubmitButton = styled.button`
   }
 
   &:disabled {
-    background: rgba(255, 255, 255, 0.3);
+    background: ${props => props.theme.colors.textLight};
     cursor: not-allowed;
     transform: none;
   }
@@ -102,7 +103,7 @@ const SubmitButton = styled.button`
 
 const FormTitle = styled.h2`
   ${props => props.theme.typography.h2}
-  color: ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.lg};
   font-size: 1.75rem;
   line-height: 1.2;
@@ -172,7 +173,7 @@ const ContactForm = () => {
       aria-labelledby="contact-form-title"
       noValidate
     >
-      <FormTitle id="contact-form-title">Contact Us</FormTitle>
+      <FormTitle id="contact-form-title">Get a free quote</FormTitle>
       
       <FormGroup>
         <Label htmlFor="name">Full Name *</Label>

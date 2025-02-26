@@ -11,6 +11,19 @@ const baseTheme = {
       bold: 700,
     }
   },
+  colors: {
+    primary: '#2563eb',
+    primaryLight: 'rgba(37, 99, 235, 0.2)',
+    primaryDark: '#1d4ed8',
+    secondary: '#1e40af',
+    text: '#1f2937',
+    textLight: '#6b7280',
+    background: '#ffffff',
+    border: '#e5e7eb',
+    error: '#ef4444',
+    success: '#22c55e',
+    white: '#ffffff'
+  },
   spacing: {
     xxs: '0.25rem',  // 4px
     xs: '0.5rem',    // 8px
@@ -106,6 +119,8 @@ export const themeVariants = {
     name: 'Coastal Blue',
     colors: {
       primary: '#1B3B5F',    // Deep Navy Blue (10.5:1)
+      primaryLight: 'rgba(27, 59, 95, 0.2)',
+      primaryDark: '#1d4ed8',
       secondary: '#2D5F8A',  // Medium Blue (7.2:1)
       accent: '#4A90E2',     // Ocean Blue (4.5:1)
       text: '#1A1A1A',
@@ -125,6 +140,8 @@ export const themeVariants = {
     name: 'Modern Mint',
     colors: {
       primary: '#1B4D3E',    // Deep Green (10.1:1)
+      primaryLight: 'rgba(27, 77, 62, 0.2)',
+      primaryDark: '#1d4ed8',
       secondary: '#2A9D8F',  // Teal (5.2:1)
       accent: '#FF6B6B',     // Coral (4.5:1)
       text: '#1A1A1A',
@@ -144,6 +161,8 @@ export const themeVariants = {
     name: 'Warm Stone',
     colors: {
       primary: '#4A4036',    // Warm Brown (9.5:1)
+      primaryLight: 'rgba(74, 64, 54, 0.2)',
+      primaryDark: '#1d4ed8',
       secondary: '#826F66',  // Taupe (5.5:1)
       accent: '#D4B499',     // Sand (4.5:1)
       text: '#2C2420',
@@ -163,6 +182,8 @@ export const themeVariants = {
     name: 'Desert Night',
     colors: {
       primary: '#2D3047',    // Deep Blue-Gray (11:1)
+      primaryLight: 'rgba(45, 48, 71, 0.2)',
+      primaryDark: '#1d4ed8',
       secondary: '#419D78',  // Green (5.2:1)
       accent: '#E0A458',     // Sand (4.5:1)
       text: '#1A1A1A',

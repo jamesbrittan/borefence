@@ -75,7 +75,7 @@ const Footer = () => {
     <FooterContainer>
       <FooterContent>
         {/* <FooterSection>
-          <FooterTitle>About BoreFence</FooterTitle>
+          <FooterTitle>About Bore Fence</FooterTitle>
           <FooterText>
             Your trusted partner in garden fencing and railings. We provide high-quality, durable solutions for your outdoor spaces.
           </FooterText> */}
@@ -95,7 +95,7 @@ const Footer = () => {
       </FooterContent>
       {/* <FooterBottom>
         <Copyright>
-          {new Date().getFullYear()} BoreFence. All rights reserved.
+          {new Date().getFullYear()} Bore Fence. All rights reserved.
         </Copyright>
       </FooterBottom> */}
     </FooterContainer>

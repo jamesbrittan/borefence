@@ -19,6 +19,7 @@ const HeroSection = styled.section`
   justify-content: center;
   color: white;
   overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   &::before {
     content: '';
@@ -47,6 +48,17 @@ const HeroSection = styled.section`
       rgba(0, 0, 0, 0.2) 75%,
       rgba(0, 0, 0, 0.1) 100%
     );
+    
+    @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.4) 25%,
+        rgba(0, 0, 0, 0.2) 75%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+    }
+    
     z-index: 2;
   }
 `;
@@ -67,44 +79,61 @@ const HeroContent = styled.div`
 
 const HeroTextContent = styled.div`
   max-width: 600px;
+  position: relative;
+  z-index: 3;
+  
+  /* Subtle text enhancer - just a slight gradient background */
+  padding-left: 1.5rem;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(
+      to bottom,
+      ${props => props.theme.colors.accent},
+      ${props => props.theme.colors.primaryLight}
+    );
+    border-radius: 2px;
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    text-align: center;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-bottom: 1.5rem;
+    
+    &::before {
+      width: 100%;
+      height: 4px;
+      left: 0;
+      top: auto;
+      bottom: 0;
+      background: linear-gradient(
+        to right,
+        ${props => props.theme.colors.accent},
+        ${props => props.theme.colors.primaryLight}
+      );
+    }
+  }
 `;
 
 const HeroText = styled.p`
   ${props => props.theme.typography.body}
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   max-width: 600px;
   margin-bottom: 2rem;
-  opacity: 0.9;
+  opacity: 0.95;
   line-height: 1.6;
-
+  font-weight: ${props => props.theme.fonts.weights.medium};
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     text-align: center;
-  }
-`;
-
-const FormWrapper = styled.div`
-  max-width: 400px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  justify-self: end;
-
-  h3 {
-    color: white;
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    font-weight: ${props => props.theme.fonts.weights.semiBold};
-  }
-
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    justify-self: center;
-    width: 100%;
   }
 `;
 
@@ -113,14 +142,77 @@ const HeroTitle = styled.h1`
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(
+      to right,
+      ${props => props.theme.colors.accent},
+      ${props => props.theme.colors.primaryLight}
+    );
+    margin-top: 1rem;
+    
+    @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+      margin: 1rem auto 0;
+    }
+  }
 `;
 
 const HeroSubtitle = styled.p`
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.5;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  font-weight: ${props => props.theme.fonts.weights.medium};
+`;
+
+const FormWrapper = styled.div`
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px) saturate(160%);
+  -webkit-backdrop-filter: blur(15px) saturate(160%);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-self: end;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-15px);
+    box-shadow: 
+      0 12px 36px rgba(0, 0, 0, 0.25),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+      0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 1.75rem;
+    font-weight: ${props => props.theme.fonts.weights.semiBold};
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    justify-self: center;
+    width: 100%;
+    transform: translateY(0);
+    margin-top: 2rem;
+    
+    &:hover {
+      transform: translateY(0);
+    }
+  }
 `;
 
 const CTAButton = styled.button`
@@ -155,6 +247,19 @@ const GuaranteeWrapper = styled.div`
   position: relative;
   margin-top: -2rem;
   z-index: 2;
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      ${props => props.theme.colors.border},
+      transparent
+    );
+    margin-top: 3rem;
+  }
 `;
 
 const Features = styled.section`
@@ -162,6 +267,22 @@ const Features = styled.section`
   width: 100vw;
   padding: 4rem 0;
   background-color: ${props => props.theme.colors.white};
+  position: relative;
+  
+  &::before {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      ${props => props.theme.colors.primary},
+      ${props => props.theme.colors.primaryLight}
+    );
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 `;
 
 const FeaturesInner = styled.div`
@@ -177,6 +298,13 @@ const FeaturesInner = styled.div`
 const FeatureCard = styled.article`
   text-align: center;
   padding: 2rem;
+  border-radius: ${props => props.theme.radius.medium};
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${props => props.theme.shadows.medium};
+  }
 
   h3 {
     ${props => props.theme.typography.h3}
@@ -184,6 +312,16 @@ const FeatureCard = styled.article`
     margin: 1rem 0;
     font-size: 1.5rem;
     line-height: 1.3;
+    position: relative;
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background-color: ${props => props.theme.colors.accent};
+      margin: 0.5rem auto 0;
+    }
   }
 
   p {
@@ -193,17 +331,47 @@ const FeatureCard = styled.article`
   }
 `;
 
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    ${props => props.theme.colors.border},
+    transparent
+  );
+  margin: 2rem 0;
+`;
+
+const DesignWrapper = styled.div`
+  position: relative;
+  
+  &::before {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      ${props => props.theme.colors.primaryLight},
+      ${props => props.theme.colors.primary}
+    );
+  }
+`;
+
 const Home = () => {
   return (
     <HomeContainer>
       <HeroSection>
         <HeroContent>
           <HeroTextContent>
-            <HeroTitle>Reimagine Your Landscape with BoreFence</HeroTitle>
+            <HeroTitle>Reimagine Your Landscape with Bore Fence</HeroTitle>
             <HeroSubtitle>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</HeroSubtitle>
+            <HeroText>
+              Transform your outdoor space with our quality fencing, decking, and landscaping solutions tailored to your needs.
+            </HeroText>
           </HeroTextContent>
           <FormWrapper>
-            <ContactForm />
+            <ContactForm dark={true} />
           </FormWrapper>
         </HeroContent>
       </HeroSection>
@@ -229,7 +397,9 @@ const Home = () => {
         </FeaturesInner>
       </Features>
 
-      <DesignOptions />
+      <DesignWrapper>
+        <DesignOptions />
+      </DesignWrapper>
     </HomeContainer>
   );
 };

@@ -1,6 +1,6 @@
 # BoreFence Website
 
-Website for BoreFence, built with React and Vite.
+Website for Bore Fence, built with React and Vite.
 
 ## Tech Stack
 

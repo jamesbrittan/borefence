@@ -10,7 +10,7 @@ const AboutContainer = styled.div`
 const About = () => {
   return (
     <AboutContainer>
-      <h1>About BoreFence</h1>
+      <h1>About Bore Fence</h1>
       <p>Coming soon...</p>
     </AboutContainer>
   );

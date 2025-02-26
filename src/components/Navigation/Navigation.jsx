@@ -107,7 +107,7 @@ const Caret = styled.span`
 const DropdownMenu = styled.div`
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   transform: translateY(-10px);
   background: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
@@ -194,10 +194,9 @@ const Navigation = ({ theme }) => {
     <Nav>
       <NavContent>
         <LogoLink to="/">
-          <LogoImage src={logoPath} alt="BoreFence Ltd" />
+          <LogoImage src={logoPath} alt="Bore Fence Ltd" />
         </LogoLink>
         <NavLinks>
-          <NavLink to="/">Home</NavLink>
           <DropdownContainer 
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -234,7 +233,6 @@ const Navigation = ({ theme }) => {
               ))}
             </DropdownMenu>
           </DropdownContainer>
-          <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>
         </NavLinks>
       </NavContent>

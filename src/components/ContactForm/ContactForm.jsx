@@ -16,10 +16,11 @@ const FormGroup = styled.div`
 
 const Label = styled.label`
   ${props => props.theme.typography.label}
-  color: ${props => props.theme.colors.text};
-  font-weight: ${props => props.theme.fonts.weights.medium};
+  color: ${props => props.dark ? props.theme.colors.white : props.theme.colors.text};
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
   font-size: 0.875rem;
   margin-bottom: ${props => props.theme.spacing.xxs};
+  text-shadow: ${props => props.dark ? '0 1px 2px rgba(0, 0, 0, 0.2)' : 'none'};
 `;
 
 const ErrorMessage = styled.span`
@@ -29,32 +30,32 @@ const ErrorMessage = styled.span`
 `;
 
 const Input = styled.input`
-  padding: ${props => props.theme.spacing.sm};
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: ${props => props.theme.radius.small};
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  color: ${props => props.theme.colors.text};
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  border: 1px solid ${props => props.dark ? 'rgba(255, 255, 255, 0.3)' : props.theme.colors.border};
+  border-radius: ${props => props.theme.radius.medium};
+  background: ${props => props.dark ? 'rgba(255, 255, 255, 0.15)' : props.theme.colors.white};
+  backdrop-filter: ${props => props.dark ? 'blur(10px)' : 'none'};
+  -webkit-backdrop-filter: ${props => props.dark ? 'blur(10px)' : 'none'};
+  color: ${props => props.dark ? 'white' : props.theme.colors.text};
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
   transition: all 0.2s;
 
   &::placeholder {
-    color: ${props => props.theme.colors.textLight};
+    color: ${props => props.dark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.4)'};
   }
 
   &:hover {
-    border-color: ${props => props.theme.colors.primary};
-    background: rgba(255, 255, 255, 0.7);
+    border-color: ${props => props.dark ? 'rgba(255, 255, 255, 0.5)' : props.theme.colors.primary};
+    background: ${props => props.dark ? 'rgba(255, 255, 255, 0.2)' : props.theme.colors.white};
   }
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.colors.primary};
-    box-shadow: 0 0 0 3px ${props => props.theme.colors.primaryLight};
-    background: rgba(255, 255, 255, 0.9);
+    border-color: ${props => props.dark ? 'rgba(255, 255, 255, 0.8)' : props.theme.colors.primary};
+    box-shadow: 0 0 0 3px ${props => props.dark ? 'rgba(255, 255, 255, 0.2)' : props.theme.colors.primary};
+    background: ${props => props.dark ? 'rgba(255, 255, 255, 0.25)' : props.theme.colors.white};
   }
 
   &[aria-invalid="true"] {
@@ -62,54 +63,126 @@ const Input = styled.input`
   }
 `;
 
-const TextArea = styled(Input).attrs({ as: 'textarea' })`
-  min-height: ${props => props.theme.spacing.huge};
+const TextArea = styled.textarea`
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  border: 1px solid ${props => props.dark ? 'rgba(255, 255, 255, 0.3)' : props.theme.colors.border};
+  border-radius: ${props => props.theme.radius.medium};
+  background: ${props => props.dark ? 'rgba(255, 255, 255, 0.15)' : props.theme.colors.white};
+  backdrop-filter: ${props => props.dark ? 'blur(10px)' : 'none'};
+  -webkit-backdrop-filter: ${props => props.dark ? 'blur(10px)' : 'none'};
+  color: ${props => props.dark ? 'white' : props.theme.colors.text};
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 100%;
+  min-height: 120px;
+  transition: all 0.2s;
   resize: vertical;
+
+  &::placeholder {
+    color: ${props => props.dark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.4)'};
+  }
+
+  &:hover {
+    border-color: ${props => props.dark ? 'rgba(255, 255, 255, 0.5)' : props.theme.colors.primary};
+    background: ${props => props.dark ? 'rgba(255, 255, 255, 0.2)' : props.theme.colors.white};
+  }
+
+  &:focus {
+    outline: none;
+    border-color: ${props => props.dark ? 'rgba(255, 255, 255, 0.8)' : props.theme.colors.primary};
+    box-shadow: 0 0 0 3px ${props => props.dark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(37, 99, 235, 0.2)'};
+    background: ${props => props.dark ? 'rgba(255, 255, 255, 0.25)' : props.theme.colors.white};
+  }
+
+  &[aria-invalid="true"] {
+    border-color: ${props => props.theme.colors.error};
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+  }
 `;
 
 const SubmitButton = styled.button`
-  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.xl};
-  background: ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.white};
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};
   border: none;
-  border-radius: ${props => props.theme.radius.small};
-  font-weight: ${props => props.theme.fonts.weights.medium};
-  font-size: 1rem;
+  border-radius: ${props => props.theme.radius.medium};
+  background: ${props => props.dark 
+    ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))' 
+    : props.theme.colors.primary};
+  color: ${props => props.dark ? 'rgba(0, 0, 0, 0.75)' : 'white'};
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  font-size: 1.125rem;
   cursor: pointer;
-  transition: all 0.2s;
-  width: 100%;
+  transition: all 0.3s;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: ${props => props.dark 
+    ? '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.2) inset' 
+    : props.theme.shadows.medium};
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
 
   &:hover {
-    background: ${props => props.theme.colors.secondary};
+    background: ${props => props.dark ? props.theme.colors.secondary : props.theme.colors.secondary};
     transform: translateY(-${props => props.theme.spacing.xxs});
+    box-shadow: ${props => props.dark 
+      ? '0 6px 12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.08)' 
+      : props.theme.shadows.large};
+    
+    &::before {
+      transform: translateX(100%);
+    }
   }
 
   &:focus-visible {
-    outline: 3px solid ${props => props.theme.colors.primaryLight};
+    outline: 3px solid ${props => props.dark ? 'rgba(255, 255, 255, 0.3)' : props.theme.colors.primary};
     outline-offset: ${props => props.theme.spacing.xxs};
-    background: ${props => props.theme.colors.secondary};
+    background: ${props => props.dark ? props.theme.colors.secondary : props.theme.colors.secondary};
   }
 
   &:active {
     transform: translateY(0);
+    box-shadow: ${props => props.dark 
+      ? '0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.08)' 
+      : props.theme.shadows.small};
   }
 
   &:disabled {
     background: ${props => props.theme.colors.textLight};
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
+    
+    &::before {
+      display: none;
+    }
   }
 `;
 
 const FormTitle = styled.h2`
   ${props => props.theme.typography.h2}
-  color: ${props => props.theme.colors.text};
+  color: ${props => props.dark ? props.theme.colors.white : props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.lg};
   font-size: 1.75rem;
   line-height: 1.2;
+  text-shadow: ${props => props.dark ? '0 1px 2px rgba(0, 0, 0, 0.2)' : 'none'};
 `;
 
-const ContactForm = () => {
+const ContactForm = ({ dark = true }) => {
   const [formState, setFormState] = React.useState({
     name: '',
     email: '',
@@ -173,21 +246,21 @@ const ContactForm = () => {
       aria-labelledby="contact-form-title"
       noValidate
     >
-      <FormTitle id="contact-form-title">Get a free quote</FormTitle>
+      <FormTitle id="contact-form-title" dark={dark}>Get a free quote</FormTitle>
       
       <FormGroup>
-        <Label htmlFor="name">Full Name *</Label>
+        <Label htmlFor="name" dark={dark}>Name *</Label>
         <Input
           type="text"
           id="name"
           name="name"
           value={formState.name}
           onChange={handleChange}
-          placeholder="Enter your full name"
           required
           aria-required="true"
           aria-invalid={!!errors.name}
           aria-describedby={errors.name ? "name-error" : undefined}
+          dark={dark}
         />
         {errors.name && (
           <ErrorMessage id="name-error" role="alert">{errors.name}</ErrorMessage>
@@ -195,18 +268,18 @@ const ContactForm = () => {
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="email">Email Address *</Label>
+        <Label htmlFor="email" dark={dark}>Email Address *</Label>
         <Input
           type="email"
           id="email"
           name="email"
           value={formState.email}
           onChange={handleChange}
-          placeholder="Enter your email address"
           required
           aria-required="true"
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "email-error" : undefined}
+          dark={dark}
         />
         {errors.email && (
           <ErrorMessage id="email-error" role="alert">{errors.email}</ErrorMessage>
@@ -214,30 +287,30 @@ const ContactForm = () => {
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="phone">Phone Number (Optional)</Label>
+        <Label htmlFor="phone" dark={dark}>Phone Number (Optional)</Label>
         <Input
           type="tel"
           id="phone"
           name="phone"
           value={formState.phone}
           onChange={handleChange}
-          placeholder="Enter your phone number"
           aria-required="false"
+          dark={dark}
         />
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="message">Message *</Label>
+        <Label htmlFor="message" dark={dark}>Message *</Label>
         <TextArea
           id="message"
           name="message"
           value={formState.message}
           onChange={handleChange}
-          placeholder="Enter your message"
           required
           aria-required="true"
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "message-error" : undefined}
+          dark={dark}
         />
         {errors.message && (
           <ErrorMessage id="message-error" role="alert">{errors.message}</ErrorMessage>
@@ -252,6 +325,7 @@ const ContactForm = () => {
         type="submit" 
         disabled={isSubmitting}
         aria-label="Submit contact form"
+        dark={dark}
       >
         {isSubmitting ? 'Sending...' : 'Send Message'}
       </SubmitButton>

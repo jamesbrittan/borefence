@@ -67,7 +67,7 @@ const DesignOptions = () => {
         <ImageWrapper>
           <img 
             src={getImageUrl('fence_black_s.jpg')}
-            alt="BoreFence design options showing different color and style combinations"
+            alt="A black fence"
             loading="lazy"
           />
         </ImageWrapper>

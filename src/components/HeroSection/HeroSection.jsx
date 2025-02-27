@@ -185,6 +185,10 @@ const FormColumn = styled.div`
       inset 0 0 0 1px rgba(255, 255, 255, 0.15),
       0 6px 10px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    justify-self: center;
+  }
 `;
 
 const HeroSection = ({ 

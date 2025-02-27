@@ -37,10 +37,6 @@ const Input = styled.input`
   width: 100%;
   transition: all 0.2s;
 
-  &::placeholder {
-    color: ${props => props.dark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.4)'};
-  }
-
   &:hover {
     border-color: ${props => props.dark ? 'rgba(255, 255, 255, 0.5)' : props.theme.colors.primary};
     background: ${props => props.dark ? 'rgba(255, 255, 255, 0.2)' : props.theme.colors.white};
@@ -94,17 +90,22 @@ const ContactForm = ({ dark = true }) => {
     <StyledForm>
       <FormGroup>
         <Label dark={dark} htmlFor="name">Name</Label>
-        <Input dark={dark} type="text" id="name" placeholder="Your name" />
+        <Input dark={dark} type="text" id="name" />
       </FormGroup>
 
       <FormGroup>
         <Label dark={dark} htmlFor="email">Email</Label>
-        <Input dark={dark} type="email" id="email" placeholder="Your email" />
+        <Input dark={dark} type="email" id="email" />
+      </FormGroup>
+
+      <FormGroup>
+        <Label dark={dark} htmlFor="phone">Phone</Label>
+        <Input dark={dark} type="tel" id="phone" />
       </FormGroup>
 
       <FormGroup>
         <Label dark={dark} htmlFor="message">Message</Label>
-        <TextArea dark={dark} id="message" placeholder="Your message" rows={4} />
+        <TextArea dark={dark} id="message" rows={4} />
       </FormGroup>
 
       <SubmitButton dark={dark} type="submit">

@@ -12,8 +12,10 @@ const HomeContainer = styled.main`
 
 const GuaranteeWrapper = styled.div`
   position: relative;
-  padding: ${props => props.theme.spacing.section.padding.small} 0;
-  background-color: ${props => props.theme.colors.white};
+  margin-top: -2rem;
+  padding-bottom: ${props => props.theme.spacing.section.padding.small};
+  background-color: transparent;
+  z-index: 5;
   
   &::after {
     content: '';

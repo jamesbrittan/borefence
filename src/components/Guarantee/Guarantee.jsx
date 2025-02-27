@@ -20,7 +20,7 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 0;
   position: relative;
-  z-index: 2;
+  z-index: 10;
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;

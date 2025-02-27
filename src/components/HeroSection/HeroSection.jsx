@@ -13,6 +13,7 @@ const StyledHeroSection = styled.section`
   color: ${props => props.theme.colors.white};
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 2; // updated z-index to 2
 
   &::before {
     content: '';

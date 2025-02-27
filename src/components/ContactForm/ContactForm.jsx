@@ -8,6 +8,13 @@ const StyledForm = styled.form`
   width: 100%;
 `;
 
+const FormHeading = styled.h3`
+  ${props => props.theme.typography.heading}
+  color: ${props => props.dark ? props.theme.colors.white : props.theme.colors.text};
+  font-size: 1.25rem;
+  margin-bottom: ${props => props.theme.spacing.md};
+`;
+
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,6 +99,7 @@ const SubmitButton = styled.button`
 const ContactForm = ({ dark = true }) => {
   return (
     <StyledForm>
+      <FormHeading dark={dark}>Get a free quote</FormHeading>
       <FormGroup>
         <Label dark={dark} htmlFor="name">Name</Label>
         <Input dark={dark} type="text" id="name" placeholder="Your name" />

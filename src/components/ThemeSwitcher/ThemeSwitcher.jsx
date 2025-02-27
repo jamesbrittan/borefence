@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { themeVariants } from '../../styles/theme';
 
 const SwitcherContainer = styled.div`
@@ -15,7 +15,7 @@ const SwitcherContainer = styled.div`
   z-index: 1000;
 `;
 
-const ThemeButton = styled.button.attrs(props => ({
+const ThemeButton = styled.button.attrs(() => ({
   type: 'button',
   // Remove isActive from DOM props
   isActive: undefined
@@ -48,6 +48,11 @@ const ThemeSwitcher = ({ onThemeChange, currentTheme }) => {
       ))}
     </SwitcherContainer>
   );
+};
+
+ThemeSwitcher.propTypes = {
+  onThemeChange: PropTypes.func.isRequired,
+  currentTheme: PropTypes.string.isRequired
 };
 
 export default ThemeSwitcher;

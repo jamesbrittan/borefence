@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { getImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
 
@@ -107,18 +107,6 @@ const Description = styled.div`
   }
 `;
 
-const Divider = styled.div`
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    ${props => props.theme.colors.border},
-    transparent
-  );
-  margin: ${props => props.theme.spacing.lg} 0;
-`;
-
 const ContactWrapper = styled.div`
   background-color: ${props => props.theme.colors.background};
   padding-top: ${props => props.theme.spacing.xl};
@@ -178,6 +166,18 @@ const ServicePage = ({ title, description, image }) => {
       </FullWidthSection>
     </ServiceContainer>
   );
+};
+
+ServicePage.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  features: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default ServicePage;

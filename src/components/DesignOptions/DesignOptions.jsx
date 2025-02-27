@@ -6,7 +6,6 @@ const DesignSection = styled.section`
   width: 100vw;
   padding: 4rem 0;
   background-color: ${props => props.theme.colors.background};
-
 `;
 
 const Container = styled.div`
@@ -60,7 +59,6 @@ const SectionTitle = styled.h2`
 `;
 
 const DesignOptions = () => {
-
   return (
     <DesignSection aria-labelledby="design-options-title">
       <Container>
@@ -74,18 +72,17 @@ const DesignOptions = () => {
         <Content>
           <SectionTitle id="design-options-title">Lorem ipsum dolor sit amet</SectionTitle>
           <p>
-            <strong>Customization Options</strong>
+            <strong>Subheading 1</strong>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
             nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
           <p>
-            <strong>Premium Materials</strong>
+            <strong>Subheading 2</strong>
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
             eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
             in culpa qui officia deserunt mollit anim id est laborum.
           </p>
-   
         </Content>
       </Container>
     </DesignSection>

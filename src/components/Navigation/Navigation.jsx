@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getImageUrl } from '../../utils/imageUtils';
@@ -141,7 +141,7 @@ const DropdownLink = styled(Link)`
   }
 `;
 
-const Navigation = ({ theme }) => {
+const Navigation = ( ) => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);

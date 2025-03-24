@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { getImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
+import ServiceGallery from '../components/ServiceGallery';
 
 const ServiceContainer = styled.main`
   ${props => props.theme.mixins.fullWidth}
@@ -21,90 +22,105 @@ const HeaderSection = styled.section`
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.border};
+  position: relative;
 `;
 
 const ServiceHeader = styled.div`
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: ${props => props.theme.spacing.xl};
   margin-bottom: ${props => props.theme.spacing.xl};
   width: 100%;
   justify-content: space-between;
+  background-color: ${props => props.theme.colors.white};
+  border-radius: ${props => props.theme.radius.medium};
+  padding: ${props => props.theme.spacing.xl};
+  box-shadow: ${props => props.theme.shadows.small};
+  flex-direction: row-reverse;
   
   @media (max-width: ${props => props.theme.breakpoints.desktop}) {
     flex-direction: column;
     text-align: center;
   }
-`;
-
-const HeaderImage = styled.img`
-  width: 400px;
-  height: 280px;
-  object-fit: cover;
-  border-radius: ${props => props.theme.radius.medium};
-  box-shadow: ${props => props.theme.shadows.medium};
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: ${props => props.theme.shadows.large};
-  }
   
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    aspect-ratio: 3/2;
+    flex-direction: column;
+    gap: ${props => props.theme.spacing.lg};
+    padding: ${props => props.theme.spacing.lg};
   }
 `;
 
 const Title = styled.h1`
   ${props => props.theme.typography.heading}
   color: ${props => props.theme.colors.primary};
-  font-size: ${props => props.theme.spacing.xxl};
-  margin: 0;
-  flex: 1;
+  font-size: calc(${props => props.theme.spacing.xxl} * 1.3);
+  margin: 0 0 ${props => props.theme.spacing.lg} 0;
   position: relative;
+  font-weight: 700;
   
   &::after {
     content: '';
-    display: block;
-    width: 60px;
+    position: absolute;
+    bottom: -${props => props.theme.spacing.xs};
+    left: 0;
+    width: 140px;
     height: 3px;
-    background-color: ${props => props.theme.colors.primary};
-    margin-top: ${props => props.theme.spacing.md};
+    background-color: ${props => props.theme.colors.accent};
     
     @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-      margin: ${props => props.theme.spacing.md} auto 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
+`;
+
+const Subtitle = styled.p`
+  color: ${props => props.theme.colors.textLight};
+  font-size: 1.1rem;
+  margin-top: ${props => props.theme.spacing.sm};
+  max-width: 90%;
+`;
+
+const GalleryWrapper = styled.div`
+  flex: 1;
+  transition: transform 0.3s ease;
   
-  @media (max-width: ${props => props.theme.breakpoints.desktop}) {
+  &:hover {
+    transform: scale(1.01);
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     margin-top: ${props => props.theme.spacing.lg};
   }
+`;
+
+const TitleSection = styled.div`
+  flex: 1;
+  padding: ${props => props.theme.spacing.lg};
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: ${props => props.theme.spacing.xl};
+  
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    margin-bottom: ${props => props.theme.spacing.md};
+    text-align: left;
+    padding: ${props => props.theme.spacing.md};
+  }
+`;
+
+const Description = styled.p`
+  ${props => props.theme.typography.body}
+  color: ${props => props.theme.colors.text};
+  font-size: 1.1rem;
+  margin: ${props => props.theme.spacing.sm} 0;
+  line-height: 1.8;
 `;
 
 const ContentSection = styled.section`
   ${props => props.theme.mixins.narrowContainer}
   padding: ${props => props.theme.spacing.section.padding.default};
   background-color: ${props => props.theme.colors.background};
-`;
-
-const Description = styled.div`
-  ${props => props.theme.typography.body}
-  max-width: 800px;
-  margin: 0 auto;
-  
-  p {
-    margin-bottom: ${props => props.theme.spacing.lg};
-    line-height: 1.6;
-  }
-  
-  p:first-of-type {
-    font-size: 1.1rem;
-    padding-left: ${props => props.theme.spacing.md};
-    border-left: 3px solid ${props => props.theme.colors.primary};
-  }
 `;
 
 const ContactWrapper = styled.div`
@@ -143,17 +159,22 @@ const ServicePage = ({ title, description, image, children }) => {
       <FullWidthSection>
         <HeaderSection>
           <ServiceHeader>
-            <HeaderImage src={imageUrl} alt={title} />
-            <Title>{title}</Title>
+            <TitleSection>
+              <Title>{title}</Title>
+              <Description>{description}</Description>
+            </TitleSection>
+            <GalleryWrapper>
+              <ServiceGallery 
+                serviceName={title.toLowerCase()}
+                defaultImage={imageUrl}
+              />
+            </GalleryWrapper>
           </ServiceHeader>
         </HeaderSection>
       </FullWidthSection>
       
       <FullWidthSection>
         <ContentSection>
-          <Description>
-            {description}
-          </Description>
           {children}
         </ContentSection>
       </FullWidthSection>
@@ -172,8 +193,8 @@ const ServicePage = ({ title, description, image, children }) => {
 ServicePage.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  image: PropTypes.string,
-  children: PropTypes.node,
+  image: PropTypes.string.isRequired,
+  children: PropTypes.node
 };
 
 export default ServicePage;

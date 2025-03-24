@@ -22,7 +22,15 @@ const baseTheme = {
     border: '#e5e7eb',
     error: '#ef4444',
     success: '#22c55e',
-    white: '#ffffff'
+    white: '#ffffff',
+    fence: {
+      cream: '#E9D9B2',
+      green: '#00513F',
+      blue: '#2D4057',
+      brown: '#5F3C39',
+      anthraciteGrey: '#3A3E3D',
+      mattBlack: '#121212'
+    }
   },
   spacing: {
     xxs: '0.25rem',  // 4px
@@ -118,6 +126,7 @@ export const themeVariants = {
     ...baseTheme,
     name: 'Coastal Blue',
     colors: {
+      ...baseTheme.colors,
       primary: '#1B3B5F',    // Deep Navy Blue (10.5:1)
       primaryLight: 'rgba(27, 59, 95, 0.2)',
       primaryDark: '#1d4ed8',
@@ -139,6 +148,7 @@ export const themeVariants = {
     ...baseTheme,
     name: 'Modern Mint',
     colors: {
+      ...baseTheme.colors,
       primary: '#1B4D3E',    // Deep Green (10.1:1)
       primaryLight: 'rgba(27, 77, 62, 0.2)',
       primaryDark: '#1d4ed8',
@@ -160,6 +170,7 @@ export const themeVariants = {
     ...baseTheme,
     name: 'Warm Stone',
     colors: {
+      ...baseTheme.colors,
       primary: '#4A4036',    // Warm Brown (9.5:1)
       primaryLight: 'rgba(74, 64, 54, 0.2)',
       primaryDark: '#1d4ed8',
@@ -181,6 +192,7 @@ export const themeVariants = {
     ...baseTheme,
     name: 'Desert Night',
     colors: {
+      ...baseTheme.colors,
       primary: '#2D3047',    // Deep Blue-Gray (11:1)
       primaryLight: 'rgba(45, 48, 71, 0.2)',
       primaryDark: '#1d4ed8',

@@ -5,8 +5,8 @@ const RailingPage = () => {
   return (
     <ServicePage 
       title="Railings"
-      description="Discover our range of bespoke railings, designed to enhance the beauty and security of your property."
-      image="/images/railings.jpg"
+      description="Railings are available in standard heights from 600mm to 1.8m, as well as bespoke sizes and a range of colours."
+      image="/images/railings/1.jpg"
     >
       <ColourPalette />
     </ServicePage>

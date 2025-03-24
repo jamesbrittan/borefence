@@ -7,15 +7,15 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Home from './pages/Home';
-import About from './pages/About';
 import Contact from './pages/Contact';
 
 // Service Pages
 import FencingPage from './pages/services/fencing';
 import TreeFellingPage from './pages/services/tree-felling';
 import ShedsPage from './pages/services/sheds';
-import WallsPage from './pages/services/walls';
-import PatiosPage from './pages/services/patios';
+import GatesPage from './pages/services/gates';
+import RailingPage from './pages/services/railings';
+import ReviewsPage from './pages/services/reviews';
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState('coastal');
@@ -40,15 +40,22 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           
           {/* Service Routes */}
+
+          {/* Fencing */}
           <Route path="/services/fencing" element={<FencingPage />} />
-          <Route path="/services/tree-felling" element={<TreeFellingPage />} />
+          {/* Railings */}
+          <Route path="/services/railings" element={<RailingPage />} />
+          {/* Gates */} 
+          <Route path="/services/gates" element={<GatesPage />} />
+          {/* Bespoke sheds */}
           <Route path="/services/sheds" element={<ShedsPage />} />
-          <Route path="/services/walls" element={<WallsPage />} />
-          <Route path="/services/patios" element={<PatiosPage />} />
+          {/* Tree Felling & Hedge Removal */}
+          <Route path="/services/tree-felling" element={<TreeFellingPage />} />
+          {/* Reviews */}
+          <Route path="/services/reviews" element={<ReviewsPage />} />
+
         </Routes>
         <Footer />
         <ThemeSwitcher 

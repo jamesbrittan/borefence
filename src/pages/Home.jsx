@@ -52,28 +52,28 @@ const DesignWrapper = styled.div`
 `;
 
 const Home = () => {
-  // Feature data
   const featuresData = [
     {
-      title: "Quality Materials",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      title: "We offer a fully professional service (3a)",
+      description: "Our own fully accredited fitters (3b)"
     },
     {
-      title: "Expert Installation",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      title: "Complete clearance of your existing fence, concrete posts, walls and hedges (3c)",
+      description: "We carry a Trade Waste License - Cymru Natural Resources Wales - Borefence Ltd CBOU9164 (3d)"
     },
     {
-      title: "Custom Solutions",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      title: "Complete project management from start to finish (3e)",
+      description: "Your hassle free option (3f)"
     }
+
   ];
 
   return (
     <HomeContainer>
       <HeroSection
-        title="Reimagine Your Landscape with Bore Fence"
-        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        description="Transform your outdoor space with our quality fencing, decking, and landscaping solutions tailored to your needs."
+        title="Fencing and Railings (1a)"
+        subtitle="Adding security, protection and style to your outdoor space (1b)"
+        description="Our products are supplied and professionally installed (1c)"
         rightColumnContent={<ContactForm dark={true} />}
       />
 

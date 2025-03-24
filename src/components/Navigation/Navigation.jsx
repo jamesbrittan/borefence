@@ -93,15 +93,8 @@ const ServicesButton = styled.button`
 const Caret = styled.span`
   display: inline-block;
   margin-left: 0.25rem;
-  transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
   transition: transform 0.2s ease;
-
-  &::after {
-    content: '▾';
-    display: block;
-    font-size: 1.2em;
-    line-height: 0.5;
-  }
+  transform: rotate(${props => props.$isOpen ? '180deg' : '0deg'});
 `;
 
 const DropdownMenu = styled.div`
@@ -115,8 +108,8 @@ const DropdownMenu = styled.div`
   padding: 0.5rem 0;
   min-width: 250px;
   z-index: 1000;
-  opacity: ${props => props.isOpen ? 1 : 0};
-  visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
+  opacity: ${props => props.$isOpen ? 1 : 0};
+  visibility: ${props => props.$isOpen ? 'visible' : 'hidden'};
   transition: all 0.2s;
   margin-top: 0.25rem;
 `;
@@ -148,10 +141,11 @@ const Navigation = ( ) => {
 
   const services = [
     { name: 'Fencing', path: '/services/fencing' },
-    { name: 'Tree Felling & Hedge Removal', path: '/services/tree-felling' },
+    { name: 'Railings', path: '/services/railings' },
+    { name: 'Gates', path: '/services/gates' },
     { name: 'Sheds', path: '/services/sheds' },
-    { name: 'Block & Brick Walls', path: '/services/walls' },
-    { name: 'Patios & Decking', path: '/services/patios' },
+    { name: 'Tree Felling', path: '/services/tree-felling' },
+    { name: 'Reviews', path: '/services/reviews' }
   ];
 
   const handleKeyDown = (e) => {
@@ -211,12 +205,12 @@ const Navigation = ( ) => {
               aria-label={`Services menu, press Enter to ${isServicesOpen ? 'close' : 'open'} dropdown`}
             >
               Services
-              <Caret isOpen={isServicesOpen} aria-hidden="true" />
+              <Caret $isOpen={isServicesOpen} aria-hidden="true" />
               <span className="sr-only">, press Enter to {isServicesOpen ? 'close' : 'open'} dropdown</span>
             </ServicesButton>
             <DropdownMenu 
               ref={dropdownRef}
-              isOpen={isServicesOpen}
+              $isOpen={isServicesOpen}
               role="menu"
               aria-label="Services menu"
             >

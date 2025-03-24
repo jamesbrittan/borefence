@@ -96,24 +96,22 @@ const Guarantee = () => {
     <GuaranteeSection aria-labelledby="guarantee-title">
       <Container>
         <GuaranteeContent>
-          <h2 id="guarantee-title">Our Quality Guarantee</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
+          <h2 id="guarantee-title">Our product (2a)</h2>
           <ul role="list">
-            <li role="listitem">Lorem ipsum dolor sit amet</li>
-            <li role="listitem">Lorem ipsum dolor sit amet</li>
-            <li role="listitem">Lorem ipsum dolor sit amet</li>
-            <li role="listitem">Lorem ipsum dolor sit amet</li>
-            <li role="listitem">Lorem ipsum dolor sit amet</li>
+            <li role="listitem">Low maintenance (2b)</li>
+            <li role="listitem">Won't rot, fade or distort with the weather. No need to stain or paint (2c)</li>
+            <li role="listitem">100% recyclable (2d)</li>
+            <li role="listitem">Colour bond steel, powder coated to provide resistance to chipping, flaking and blistering (2e)</li>
+            <li role="listitem">Dual sided finish (2f)</li>
+            <li role="listitem">2 year installation warranty (2g)</li>
+            <li role="listitem">25 year manufacturer warranty with Climar Industries (2h)</li>
           </ul>
+          <p>[TODO - please specify photo for this section or confirm existing one]</p>
         </GuaranteeContent>
         <GuaranteeImage>
           <img 
             src={getImageUrl('fence_blue_s.jpg')} 
-            alt="Quality Guarantee" 
+            alt="A blue fence in a garden next to a child's playground" 
             loading="lazy"
           />
         </GuaranteeImage>

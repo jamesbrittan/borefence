@@ -4,10 +4,19 @@ import { getImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ServiceGallery from '../components/ServiceGallery';
 
+// Add subtle animation keyframes
+const fadeIn = `
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+`;
+
 const ServiceContainer = styled.main`
   ${props => props.theme.mixins.fullWidth}
   width: 100vw;
   overflow-x: hidden;
+  ${fadeIn}
 `;
 
 const FullWidthSection = styled.section`
@@ -23,6 +32,22 @@ const HeaderSection = styled.section`
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.border};
   position: relative;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      ${props => props.theme.colors.background},
+      transparent
+    );
+    opacity: 0.6;
+    z-index: -1;
+  }
 `;
 
 const ServiceHeader = styled.div`
@@ -35,8 +60,14 @@ const ServiceHeader = styled.div`
   background-color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
   padding: ${props => props.theme.spacing.xl};
-  box-shadow: ${props => props.theme.shadows.small};
+  box-shadow: ${props => props.theme.shadows.medium};
   flex-direction: row-reverse;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-out forwards;
+  
+  &:hover {
+    box-shadow: ${props => props.theme.shadows.large};
+  }
   
   @media (max-width: ${props => props.theme.breakpoints.desktop}) {
     flex-direction: column;
@@ -50,40 +81,12 @@ const ServiceHeader = styled.div`
   }
 `;
 
-const Title = styled.h1`
-  ${props => props.theme.typography.heading}
-  color: ${props => props.theme.colors.primary};
-  font-size: calc(${props => props.theme.spacing.xxl} * 1.3);
-  margin: 0 0 ${props => props.theme.spacing.lg} 0;
-  position: relative;
-  font-weight: 700;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -${props => props.theme.spacing.xs};
-    left: 0;
-    width: 140px;
-    height: 3px;
-    background-color: ${props => props.theme.colors.accent};
-    
-    @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  }
-`;
-
-const Subtitle = styled.p`
-  color: ${props => props.theme.colors.textLight};
-  font-size: 1.1rem;
-  margin-top: ${props => props.theme.spacing.sm};
-  max-width: 90%;
-`;
-
 const GalleryWrapper = styled.div`
   flex: 1;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
+  position: relative;
+  overflow: visible;
+  border-radius: ${props => props.theme.radius.medium};
   
   &:hover {
     transform: scale(1.01);
@@ -101,11 +104,46 @@ const TitleSection = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   padding-top: ${props => props.theme.spacing.xl};
+  animation: fadeIn 0.6s ease-out forwards;
   
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     margin-bottom: ${props => props.theme.spacing.md};
     text-align: left;
     padding: ${props => props.theme.spacing.md};
+  }
+`;
+
+const Title = styled.h1`
+  ${props => props.theme.typography.heading}
+  color: ${props => props.theme.colors.primary};
+  font-size: calc(${props => props.theme.spacing.xxl} * 1.4);
+  margin: 0 0 ${props => props.theme.spacing.lg} 0;
+  position: relative;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -${props => props.theme.spacing.xs};
+    left: 0;
+    width: 140px;
+    height: 3px;
+    background: linear-gradient(
+      to left,
+      ${props => props.theme.colors.primaryLight},
+      ${props => props.theme.colors.primary}
+    );
+    transition: width 0.3s ease;
+    
+    @media (max-width: ${props => props.theme.breakpoints.desktop}) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  
+  &:hover::after {
+    width: 160px;
   }
 `;
 
@@ -115,29 +153,42 @@ const Description = styled.p`
   font-size: 1.1rem;
   margin: ${props => props.theme.spacing.sm} 0;
   line-height: 1.8;
+  position: relative;
+  
+  strong {
+    color: ${props => props.theme.colors.primary};
+    font-weight: 600;
+  }
 `;
 
 const ContentSection = styled.section`
   ${props => props.theme.mixins.narrowContainer}
-  padding: ${props => props.theme.spacing.section.padding.default};
-  background-color: ${props => props.theme.colors.background};
+  padding: ${props => props.theme.spacing.md} 0 ${props => props.theme.spacing.xl};
+  margin-top: ${props => props.theme.spacing.md};
+  animation: fadeIn 1s ease-out forwards;
 `;
 
 const ContactWrapper = styled.div`
   background-color: ${props => props.theme.colors.background};
   padding-top: ${props => props.theme.spacing.xl};
-  padding-bottom: ${props => props.theme.spacing.section.padding.large};
+  padding-bottom: ${props => props.theme.spacing.xxl};
+  margin-top: ${props => props.theme.spacing.xxl};
+  position: relative;
+  animation: fadeIn 1.2s ease-out forwards;
   
   &::before {
     content: '';
-    display: block;
-    height: 6px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
     background: linear-gradient(
       to right,
-      ${props => props.theme.colors.primary},
-      ${props => props.theme.colors.primaryLight}
+      transparent,
+      ${props => props.theme.colors.primary}40,
+      transparent
     );
-    margin-bottom: ${props => props.theme.spacing.xl};
   }
 `;
 
@@ -149,7 +200,28 @@ const ContactSection = styled.section`
   background-color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
   box-shadow: ${props => props.theme.shadows.medium};
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${props => props.theme.shadows.large};
+  }
 `;
+
+// Helper function to wrap parts of text in strong tags
+const enhanceDescription = (text) => {
+  if (!text) return '';
+  
+  // Find the first sentence or important phrases to highlight
+  const words = text.split(' ');
+  if (words.length <= 5) return text;
+  
+  // Highlight first 2-3 important words
+  const importantWords = words.slice(0, 2).join(' ');
+  const restOfText = words.slice(2).join(' ');
+  
+  return <><strong>{importantWords}</strong> {restOfText}</>;
+};
 
 const ServicePage = ({ title, description, image, children }) => {
   const imageUrl = getImageUrl(image.split('/').pop());
@@ -161,7 +233,7 @@ const ServicePage = ({ title, description, image, children }) => {
           <ServiceHeader>
             <TitleSection>
               <Title>{title}</Title>
-              <Description>{description}</Description>
+              <Description>{enhanceDescription(description)}</Description>
             </TitleSection>
             <GalleryWrapper>
               <ServiceGallery 

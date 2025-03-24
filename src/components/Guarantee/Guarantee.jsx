@@ -106,7 +106,7 @@ const Guarantee = () => {
             <li role="listitem">2 year installation warranty (2g)</li>
             <li role="listitem">25 year manufacturer warranty with Climar Industries (2h)</li>
           </ul>
-          <p>[TODO - please specify photo for this section or confirm existing one]</p>
+          <p>[TODO 2- please specify photo for this section or confirm existing one]</p>
         </GuaranteeContent>
         <GuaranteeImage>
           <img 

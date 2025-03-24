@@ -78,7 +78,7 @@ const DesignOptions = () => {
             as an accredited fitter of Colourfence and ColourRail covering the
             NP and CF postcodes and South East Wales (4b)
           </p>
-          <p>[TODO - please provide image for this section]</p>
+          <p>[TODO 1 - please provide image for this section]</p>
         </Content>
       </Container>
     </DesignSection>

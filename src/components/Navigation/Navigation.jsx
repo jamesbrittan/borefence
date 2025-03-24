@@ -93,8 +93,15 @@ const ServicesButton = styled.button`
 const Caret = styled.span`
   display: inline-block;
   margin-left: 0.25rem;
+  transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
   transition: transform 0.2s ease;
-  transform: rotate(${props => props.$isOpen ? '180deg' : '0deg'});
+
+  &::after {
+    content: '▾';
+    display: block;
+    font-size: 1.2em;
+    line-height: 0.5;
+  }
 `;
 
 const DropdownMenu = styled.div`

@@ -135,7 +135,7 @@ const ContactSection = styled.section`
   box-shadow: ${props => props.theme.shadows.medium};
 `;
 
-const ServicePage = ({ title, description, image }) => {
+const ServicePage = ({ title, description, image, children }) => {
   const imageUrl = getImageUrl(image.split('/').pop());
   
   return (
@@ -154,6 +154,7 @@ const ServicePage = ({ title, description, image }) => {
           <Description>
             {description}
           </Description>
+          {children}
         </ContentSection>
       </FullWidthSection>
       
@@ -172,12 +173,7 @@ ServicePage.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string,
-  features: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired
-    })
-  )
+  children: PropTypes.node,
 };
 
 export default ServicePage;

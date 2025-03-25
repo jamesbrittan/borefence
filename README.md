@@ -30,3 +30,12 @@ This site is deployed on Netlify. The `main` branch is automatically deployed wh
 - Build command: `npm run build`
 - Publish directory: `dist`
 - Node version: 18.x
+
+
+
+## TODO
+
+- Set up email
+- Configure contact form with Netlify forms
+- Check text and image content and add any missing
+- Reviews page?

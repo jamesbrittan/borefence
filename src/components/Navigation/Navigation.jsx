@@ -237,6 +237,7 @@ const Navigation = ( ) => {
             </DropdownMenu>
           </DropdownContainer>
           <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/reviews">Reviews</NavLink>
         </NavLinks>
       </NavContent>
     </Nav>

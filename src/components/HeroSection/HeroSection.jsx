@@ -288,6 +288,18 @@ const FormColumn = styled.div`
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     justify-self: center;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    max-width: 100%;
+    padding: ${props => props.theme.spacing.component.padding.default};
+    transform: translateY(0);
+    
+    &:hover {
+      transform: translateY(0);
+    }
   }
 `;
 
@@ -301,11 +313,9 @@ const HeroSection = ({
 }) => {
   const servicePages = [
     { name: 'Fencing', path: '/services/fencing' },
-    { name: 'Gates', path: '/services/gates' },
-    { name: 'Patios', path: '/services/patios' },
     { name: 'Railings', path: '/services/railings' },
+    { name: 'Gates', path: '/services/gates' },
     { name: 'Sheds', path: '/services/sheds' },
-    { name: 'Walls', path: '/services/walls' },
     { name: 'Tree Felling', path: '/services/tree-felling' }
   ];
 

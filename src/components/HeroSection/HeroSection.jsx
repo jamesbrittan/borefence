@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { getImageUrl } from '../../utils/imageUtils';
@@ -202,12 +203,20 @@ const ServiceLinksWrapper = styled.div`
 const ServiceLinksList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  align-items: center;
+  margin-top: ${props => props.theme.spacing.sm};
 `;
 
-const ServiceLinkItem = styled.span`
-  display: inline-flex;
+const ServiceLinkItem = styled.div`
+  display: flex;
   align-items: center;
+  white-space: nowrap;
+  margin-right: ${props => props.theme.spacing.md};
+  margin-bottom: ${props => props.theme.spacing.sm};
+  
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const ServiceLink = styled(Link)`
@@ -215,7 +224,6 @@ const ServiceLink = styled(Link)`
   font-weight: ${props => props.theme.fonts.weights.semiBold};
   text-decoration: none;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  position: relative;
   transition: all 0.2s ease;
   padding: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.xs};
   border-radius: ${props => props.theme.radius.small};
@@ -236,10 +244,12 @@ const ServiceLink = styled(Link)`
 const ServiceLinkSeparator = styled.span`
   display: inline-block;
   width: 1px;
-  height: 16px;
-  margin: 0 ${props => props.theme.spacing.xs};
+  height: 1em;
   background-color: ${props => props.theme.colors.accent};
-  opacity: 0.9;
+  opacity: 0.7;
+  margin: 0 ${props => props.theme.spacing.sm};
+  position: relative;
+  top: 0.1em;
 `;
 
 const FormColumn = styled.div`
@@ -300,13 +310,11 @@ const HeroSection = ({
           {showServiceLinks && (
             <ServiceLinksContainer>
               <ServiceLinksWrapper>
-                <ServiceLinksPrompt>Explore our professional services:</ServiceLinksPrompt>
+                <ServiceLinksPrompt>Explore our services (1d):</ServiceLinksPrompt>
                 <ServiceLinksList>
                   {servicePages.map((service, index) => (
-                    <ServiceLinkItem key={index}>
-                      <ServiceLink to={service.path}>
-                        {service.name}
-                      </ServiceLink>
+                    <ServiceLinkItem key={service.path}>
+                      <ServiceLink to={service.path}>{service.name}</ServiceLink>
                       {index < servicePages.length - 1 && <ServiceLinkSeparator />}
                     </ServiceLinkItem>
                   ))}

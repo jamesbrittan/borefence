@@ -67,7 +67,7 @@ const GuaranteeContent = styled.div`
 
       &::before {
         content: '✓';
-        color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.accent};
         font-weight: bold;
         font-size: 1.25rem;
       }

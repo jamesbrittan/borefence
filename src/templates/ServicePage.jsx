@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { getImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ServiceGallery from '../components/ServiceGallery';
-import ColourPalette from '../components/ColourPalette';
-import RailingTops from '../components/RailingTops/RailingTops';
 
-// Add subtle animation keyframes
+
 const fadeIn = `
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -269,7 +267,7 @@ const ServicePage = ({ title, description, image, children }) => {
 ServicePage.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   children: PropTypes.node
 };
 

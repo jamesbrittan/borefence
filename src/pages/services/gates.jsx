@@ -4,7 +4,7 @@ const GatesPage = () => {
   return (
     <ServicePage 
       title="Gates"
-      description="Explore our selection of custom gates, crafted for durability and style."
+      description="[TODO - please provide text content for this page]"
       image="/images/gates.jpg"
     />
   );

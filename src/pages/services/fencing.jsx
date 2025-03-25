@@ -18,9 +18,9 @@ const FencingPage = () => {
 
   return (
     <ServicePage
-      title="Fencing Services"
-      description={description}
-      image="fence_blue_h.jpg"
+      title="Fencing"
+      description="[TODO - please provide text content for this page]"
+      image="/images/fencing/1.jpg"
     />
   );
 };

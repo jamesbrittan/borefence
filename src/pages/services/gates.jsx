@@ -5,7 +5,7 @@ const GatesPage = () => {
     <ServicePage 
       title="Gates"
       description="[TODO - please provide text content for this page]"
-      image="/images/gates.jpg"
+      image="gates.jpg"
     />
   );
 };

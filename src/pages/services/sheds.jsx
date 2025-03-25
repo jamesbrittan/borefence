@@ -6,7 +6,7 @@ const ShedsPage = () => {
     <ServicePage
       title="Sheds"
       description="[TODO - please provide text content for this page and more images of better quality]"
-      image="/images/sheds/1.jpg"
+      image="sheds/1.jpg"
     />
   );
 };

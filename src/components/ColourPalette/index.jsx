@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const PaletteHeading = styled.h2`
   ${props => props.theme.typography.heading}
-  font-size: ${props => props.theme.spacing.xl};
+  font-size: ${props => props.theme.fonts.size.h2};
   margin-top: ${props => props.theme.spacing.xxxl}; /* Increased top margin */
   margin-bottom: ${props => props.theme.spacing.md};
   text-align: center;
@@ -47,13 +47,13 @@ const ColorBlock = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: ${props => props.theme.fonts.weights.semiBold};
-  font-size: ${props => props.theme.spacing.lg};
+  font-size: ${props => props.theme.fonts.size.lg};
   text-transform: uppercase;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     min-height: 150px;
-    font-size: ${props => props.theme.spacing.md};
+    font-size: ${props => props.theme.fonts.size.md};
   }
   
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {

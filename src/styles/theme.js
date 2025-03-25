@@ -9,7 +9,30 @@ const baseTheme = {
       medium: 500,
       semiBold: 600,
       bold: 700,
-    }
+    },
+    size: {
+      // Heading sizes
+      HeroTitle: 'clamp(2.5rem, 5vw, 3.5rem)',
+      h1: 'clamp(2.2rem, 4vw, 3rem)',
+      h2: 'clamp(1.8rem, 3vw, 2.5rem)',
+      h3: 'clamp(1.5rem, 2.5vw, 2rem)',
+      h4: 'clamp(1.3rem, 2vw, 1.75rem)',
+      h5: 'clamp(1.1rem, 1.5vw, 1.5rem)',
+      h6: '1.25rem',
+      
+      // Body text sizes
+      xl: '1.25rem',
+      lg: '1.125rem',
+      md: '1rem',
+      sm: '0.875rem',
+      xs: '0.75rem',
+      
+      // Special cases
+      subtitle: 'clamp(1.1rem, 2vw, 1.3rem)',
+      sectionTitle: 'clamp(1.8rem, 3vw, 2.2rem)',
+      buttonText: '1rem',
+      small: '0.8rem',
+    },
   },
   colors: {
     primary: '#2563eb',

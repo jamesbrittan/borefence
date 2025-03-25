@@ -42,6 +42,7 @@ const NavLink = styled(Link)`
   color: ${props => props.theme.colors.text};
   text-decoration: none;
   font-weight: ${props => props.theme.fonts.weights.medium};
+  font-size: ${props => props.theme.fonts.size.md};
   transition: color 0.2s;
 
   &:hover, &:focus {
@@ -57,6 +58,7 @@ const DropdownContainer = styled.div`
 const ServicesButton = styled.button`
   color: ${props => props.theme.colors.text};
   font-weight: ${props => props.theme.fonts.weights.medium};
+  font-size: ${props => props.theme.fonts.size.md};
   background: none;
   border: none;
   padding: 0;

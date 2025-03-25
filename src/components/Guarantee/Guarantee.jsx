@@ -39,7 +39,7 @@ const GuaranteeContent = styled.div`
     ${props => props.theme.typography.heading}
     color: ${props => props.theme.colors.primary};
     margin-bottom: ${props => props.theme.spacing.md};
-    font-size: 2rem;
+    font-size: ${props => props.theme.fonts.size.h2};
     line-height: 1.2;
   }
 
@@ -47,7 +47,7 @@ const GuaranteeContent = styled.div`
     ${props => props.theme.typography.body}
     color: ${props => props.theme.colors.text};
     margin-bottom: ${props => props.theme.spacing.md};
-    font-size: 1.125rem;
+    font-size: ${props => props.theme.fonts.size.lg};
     line-height: 1.6;
   }
 
@@ -63,13 +63,13 @@ const GuaranteeContent = styled.div`
       display: flex;
       align-items: center;
       gap: ${props => props.theme.spacing.sm};
-      font-size: 1.125rem;
+      font-size: ${props => props.theme.fonts.size.lg};
 
       &::before {
         content: '✓';
         color: ${props => props.theme.colors.accent};
         font-weight: bold;
-        font-size: 1.25rem;
+        font-size: ${props => props.theme.fonts.size.xl};
       }
     }
   }

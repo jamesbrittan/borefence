@@ -41,12 +41,13 @@ const Content = styled.div`
   strong {
     display: block;
     margin-bottom: 0.5rem;
-    font-size: 1.1em;
+    font-size: ${props => props.theme.fonts.size.lg};
   }
 
   p {
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    font-size: ${props => props.theme.fonts.size.md};
   }
 `;
 
@@ -54,7 +55,7 @@ const SectionTitle = styled.h2`
   ${(props) => props.theme.typography.heading}
   color: ${(props) => props.theme.colors.text};
   margin-bottom: 3rem;
-  font-size: 2rem;
+  font-size: ${props => props.theme.fonts.size.sectionTitle};
   line-height: 1.2;
 `;
 

@@ -116,12 +116,12 @@ const HeroTextContent = styled.div`
 
 const HeroTitle = styled.h1`
   ${props => props.theme.typography.heading}
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: ${props => props.theme.fonts.size.HeroTitle};
   font-weight: ${props => props.theme.fonts.weights.bold};
   margin-bottom: ${props => props.theme.spacing.md};
   line-height: 1.2;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  max-width: 700px;
+  // max-width: 700px;
   position: relative;
   
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
@@ -146,18 +146,29 @@ const HeroTitle = styled.h1`
   }
 `;
 
-const HeroSubtitle = styled.p`
-  ${props => props.theme.typography.body}
-  font-size: ${props => props.theme.spacing.lg};
-  margin-bottom: ${props => props.theme.spacing.lg};
-  line-height: 1.5;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+const HeroSubtitle = styled.h2`
+  ${props => props.theme.typography.heading}
+  font-size: ${props => props.theme.fonts.size.subtitle};
   font-weight: ${props => props.theme.fonts.weights.semiBold};
+  margin-bottom: ${props => props.theme.spacing.lg};
+  color: ${props => props.theme.colors.white};
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  max-width: 700px;
+  position: relative;
+`;
+
+const HeroDescription = styled.p`
+  ${props => props.theme.typography.body}
+  font-size: ${props => props.theme.fonts.size.lg};
+  color: ${props => props.theme.colors.white};
+  margin-bottom: ${props => props.theme.spacing.xl};
+  max-width: 600px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 `;
 
 const HeroText = styled.p`
   ${props => props.theme.typography.body}
-  font-size: ${props => props.theme.spacing.md};
+  font-size: ${props => props.theme.fonts.size.md};
   max-width: 600px;
   margin-bottom: ${props => props.theme.spacing.lg};
   opacity: 0.98;
@@ -176,15 +187,12 @@ const ServiceLinksContainer = styled.div`
   position: relative;
 `;
 
-const ServiceLinksPrompt = styled.p`
-  ${props => props.theme.typography.body}
-  font-size: ${props => props.theme.spacing.lg};
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
-  margin-bottom: ${props => props.theme.spacing.sm};
+const ServiceLinksPrompt = styled.span`
   color: ${props => props.theme.colors.white};
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  padding-bottom: ${props => props.theme.spacing.xs};
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: ${props => props.theme.fonts.size.md};
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  margin-right: ${props => props.theme.spacing.sm};
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 `;
 
 const ServiceLinksWrapper = styled.div`
@@ -222,6 +230,7 @@ const ServiceLinkItem = styled.div`
 const ServiceLink = styled(Link)`
   color: ${props => props.theme.colors.white};
   font-weight: ${props => props.theme.fonts.weights.semiBold};
+  font-size: ${props => props.theme.fonts.size.md};
   text-decoration: none;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
   transition: all 0.2s ease;
@@ -305,7 +314,7 @@ const HeroSection = ({
         <HeroTextContent>
           <HeroTitle>{title}</HeroTitle>
           {subtitle && <HeroSubtitle>{subtitle}</HeroSubtitle>}
-          {description && <HeroText>{description}</HeroText>}
+          {description && <HeroDescription>{description}</HeroDescription>}
           
           {showServiceLinks && (
             <ServiceLinksContainer>

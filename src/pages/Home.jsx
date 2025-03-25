@@ -71,9 +71,8 @@ const Home = () => {
   return (
     <HomeContainer>
       <HeroSection
-        title="Fencing and Railings (1a)"
+        title="BoreFence -Fencing and Railings (1a)"
         subtitle="Adding security, protection and style to your outdoor space (1b)"
-        description="Our products are supplied and professionally installed (1c)"
         rightColumnContent={<ContactForm dark={true} />}
         showServiceLinks={true}
       />

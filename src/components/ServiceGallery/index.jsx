@@ -46,7 +46,7 @@ const ServiceGallery = ({ serviceName, defaultImage }) => {
   // Get the gallery elements
   const gallery = ImageGallery({ 
     serviceName: normalizedServiceName, 
-    defaultImage: defaultImage || `/images/${normalizedServiceName}/1.jpg` 
+    defaultImage: defaultImage 
   });
   
   return (

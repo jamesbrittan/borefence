@@ -20,7 +20,7 @@ const FencingPage = () => {
     <ServicePage
       title="Fencing"
       description="[TODO - please provide text content for this page]"
-      image="/images/fencing/1.jpg"
+      image="fencing/1.jpg"
     />
   );
 };

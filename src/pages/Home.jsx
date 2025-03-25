@@ -75,6 +75,7 @@ const Home = () => {
         subtitle="Adding security, protection and style to your outdoor space (1b)"
         description="Our products are supplied and professionally installed (1c)"
         rightColumnContent={<ContactForm dark={true} />}
+        showServiceLinks={true}
       />
 
       <GuaranteeWrapper>

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { getImageUrl } from '../../utils/imageUtils';
+import { Link } from 'react-router-dom';
 
 const StyledHeroSection = styled.section`
-  ${props => props.theme.mixins.fullWidth}
   position: relative;
   width: 100%;
-  min-height: 80vh;
+  min-height: 68vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,6 +25,7 @@ const StyledHeroSection = styled.section`
     background-image: url('${props => props.backgroundImage ? props.backgroundImage : getImageUrl('fence_brown_h.jpg')}');
     background-size: cover;
     background-position: center;
+    filter: brightness(1.15) contrast(1.05);
     z-index: 1;
   }
 
@@ -36,11 +37,11 @@ const StyledHeroSection = styled.section`
     right: 0;
     bottom: 0;
     background: linear-gradient(
-      145deg,
-      rgba(0, 0, 0, 0.4) 0%,
-      rgba(0, 0, 0, 0.3) 50%,
-      rgba(0, 0, 0, 0.2) 75%,
-      rgba(0, 0, 0, 0.1) 100%
+      90deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.35) 30%,
+      rgba(0, 0, 0, 0.2) 60%,
+      rgba(0, 0, 0, 0.05) 100%
     );
     
     @media (max-width: ${props => props.theme.breakpoints.tablet}) {
@@ -49,7 +50,7 @@ const StyledHeroSection = styled.section`
         rgba(0, 0, 0, 0.5) 0%,
         rgba(0, 0, 0, 0.4) 25%,
         rgba(0, 0, 0, 0.2) 75%,
-        rgba(0, 0, 0, 0.1) 100%
+        rgba(0, 0, 0, 0.05) 100%
       );
     }
     
@@ -114,12 +115,17 @@ const HeroTextContent = styled.div`
 
 const HeroTitle = styled.h1`
   ${props => props.theme.typography.heading}
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: ${props => props.theme.fonts.weights.bold};
   margin-bottom: ${props => props.theme.spacing.md};
   line-height: 1.2;
-  text-shadow: ${props => props.theme.shadows.medium};
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  max-width: 700px;
   position: relative;
+  
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    text-align: center;
+  }
   
   &::after {
     content: '';
@@ -144,8 +150,8 @@ const HeroSubtitle = styled.p`
   font-size: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.lg};
   line-height: 1.5;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  font-weight: ${props => props.theme.fonts.weights.medium};
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
 `;
 
 const HeroText = styled.p`
@@ -153,14 +159,87 @@ const HeroText = styled.p`
   font-size: ${props => props.theme.spacing.md};
   max-width: 600px;
   margin-bottom: ${props => props.theme.spacing.lg};
-  opacity: 0.95;
+  opacity: 0.98;
   line-height: 1.6;
-  font-weight: ${props => props.theme.fonts.weights.medium};
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
   
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     text-align: center;
   }
+`;
+
+const ServiceLinksContainer = styled.div`
+  margin-top: ${props => props.theme.spacing.lg};
+  margin-bottom: ${props => props.theme.spacing.xl};
+  position: relative;
+`;
+
+const ServiceLinksPrompt = styled.p`
+  ${props => props.theme.typography.body}
+  font-size: ${props => props.theme.spacing.lg};
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  margin-bottom: ${props => props.theme.spacing.sm};
+  color: ${props => props.theme.colors.white};
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  padding-bottom: ${props => props.theme.spacing.xs};
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+`;
+
+const ServiceLinksWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  background: linear-gradient(
+    90deg, 
+    rgba(0, 0, 0, 0.5) 0%, 
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  border-radius: ${props => props.theme.radius.small};
+`;
+
+const ServiceLinksList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+`;
+
+const ServiceLinkItem = styled.span`
+  display: inline-flex;
+  align-items: center;
+`;
+
+const ServiceLink = styled(Link)`
+  color: ${props => props.theme.colors.white};
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  text-decoration: none;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  position: relative;
+  transition: all 0.2s ease;
+  padding: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.xs};
+  border-radius: ${props => props.theme.radius.small};
+  letter-spacing: 0.01em;
+  
+  &:hover, &:focus {
+    color: ${props => props.theme.colors.accent};
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid ${props => props.theme.colors.accent};
+    outline-offset: 2px;
+  }
+`;
+
+const ServiceLinkSeparator = styled.span`
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  margin: 0 ${props => props.theme.spacing.xs};
+  background-color: ${props => props.theme.colors.accent};
+  opacity: 0.9;
 `;
 
 const FormColumn = styled.div`
@@ -197,8 +276,19 @@ const HeroSection = ({
   subtitle, 
   description, 
   backgroundImage,
-  rightColumnContent
+  rightColumnContent,
+  showServiceLinks
 }) => {
+  const servicePages = [
+    { name: 'Fencing', path: '/services/fencing' },
+    { name: 'Gates', path: '/services/gates' },
+    { name: 'Patios', path: '/services/patios' },
+    { name: 'Railings', path: '/services/railings' },
+    { name: 'Sheds', path: '/services/sheds' },
+    { name: 'Walls', path: '/services/walls' },
+    { name: 'Tree Felling', path: '/services/tree-felling' }
+  ];
+
   return (
     <StyledHeroSection backgroundImage={backgroundImage}>
       <HeroContent>
@@ -206,6 +296,24 @@ const HeroSection = ({
           <HeroTitle>{title}</HeroTitle>
           {subtitle && <HeroSubtitle>{subtitle}</HeroSubtitle>}
           {description && <HeroText>{description}</HeroText>}
+          
+          {showServiceLinks && (
+            <ServiceLinksContainer>
+              <ServiceLinksWrapper>
+                <ServiceLinksPrompt>Explore our professional services:</ServiceLinksPrompt>
+                <ServiceLinksList>
+                  {servicePages.map((service, index) => (
+                    <ServiceLinkItem key={index}>
+                      <ServiceLink to={service.path}>
+                        {service.name}
+                      </ServiceLink>
+                      {index < servicePages.length - 1 && <ServiceLinkSeparator />}
+                    </ServiceLinkItem>
+                  ))}
+                </ServiceLinksList>
+              </ServiceLinksWrapper>
+            </ServiceLinksContainer>
+          )}
         </HeroTextContent>
         {rightColumnContent && (
           <FormColumn>
@@ -222,7 +330,12 @@ HeroSection.propTypes = {
   subtitle: PropTypes.string,
   description: PropTypes.string,
   backgroundImage: PropTypes.string,
-  rightColumnContent: PropTypes.node
+  rightColumnContent: PropTypes.node,
+  showServiceLinks: PropTypes.bool
+};
+
+HeroSection.defaultProps = {
+  showServiceLinks: false
 };
 
 export default HeroSection;

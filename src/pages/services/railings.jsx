@@ -1,5 +1,6 @@
 import ServicePage from '../../templates/ServicePage';
 import ColourPalette from '../../components/ColourPalette';
+import RailingTops from '../../components/RailingTops/RailingTops';
 
 const RailingPage = () => {
   return (
@@ -9,6 +10,7 @@ const RailingPage = () => {
       image="/images/railings/1.jpg"
     >
       <ColourPalette />
+      <RailingTops />
     </ServicePage>
   );
 };

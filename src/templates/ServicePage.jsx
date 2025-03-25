@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { getImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ServiceGallery from '../components/ServiceGallery';
+import ColourPalette from '../components/ColourPalette';
+import RailingTops from '../components/RailingTops/RailingTops';
 
 // Add subtle animation keyframes
 const fadeIn = `
@@ -210,7 +212,8 @@ const ContactSection = styled.section`
 
 // Helper function to wrap parts of text in strong tags
 const enhanceDescription = (text) => {
-  if (!text) return '';
+  // Check if text is defined and is a string
+  if (!text || typeof text !== 'string') return '';
   
   // Find the first sentence or important phrases to highlight
   const words = text.split(' ');
@@ -225,6 +228,7 @@ const enhanceDescription = (text) => {
 
 const ServicePage = ({ title, description, image, children }) => {
   const imageUrl = getImageUrl(image.split('/').pop());
+  const serviceType = title.toLowerCase();
   
   return (
     <ServiceContainer>
@@ -237,7 +241,7 @@ const ServicePage = ({ title, description, image, children }) => {
             </TitleSection>
             <GalleryWrapper>
               <ServiceGallery 
-                serviceName={title.toLowerCase()}
+                serviceName={serviceType}
                 defaultImage={imageUrl}
               />
             </GalleryWrapper>

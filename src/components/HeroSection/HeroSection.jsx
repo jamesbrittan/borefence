@@ -182,61 +182,62 @@ const HeroText = styled.p`
 `;
 
 const ServiceLinksContainer = styled.div`
-  margin-top: ${props => props.theme.spacing.lg};
-  margin-bottom: ${props => props.theme.spacing.xl};
-  position: relative;
-`;
-
-const ServiceLinksPrompt = styled.span`
-  color: ${props => props.theme.colors.white};
-  font-size: ${props => props.theme.fonts.size.md};
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
-  margin-right: ${props => props.theme.spacing.sm};
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  margin-top: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
+  background-color: rgba(0, 0, 0, 0.35);
+  border-radius: ${props => props.theme.radius.medium};
+  width: fit-content;
+  max-width: 90%;
+  
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 
 const ServiceLinksWrapper = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  position: relative;
-  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
-  background: linear-gradient(
-    90deg, 
-    rgba(0, 0, 0, 0.5) 0%, 
-    rgba(0, 0, 0, 0.4) 100%
-  );
-  border-radius: ${props => props.theme.radius.small};
 `;
 
 const ServiceLinksList = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: ${props => props.theme.spacing.sm};
 `;
 
 const ServiceLinkItem = styled.div`
   display: flex;
   align-items: center;
   white-space: nowrap;
-  margin-right: ${props => props.theme.spacing.md};
-  margin-bottom: ${props => props.theme.spacing.sm};
   
-  &:last-child {
-    margin-right: 0;
+  &:not(:last-child) {
+    margin-right: ${props => props.theme.spacing.xs};
   }
+`;
+
+const ServiceLinksPrompt = styled.span`
+  color: ${props => props.theme.colors.white};
+  font-size: ${props => props.theme.fonts.size.md};
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  margin-bottom: ${props => props.theme.spacing.xxs};
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 `;
 
 const ServiceLink = styled(Link)`
   color: ${props => props.theme.colors.white};
   font-weight: ${props => props.theme.fonts.weights.semiBold};
-  font-size: ${props => props.theme.fonts.size.md};
+  font-size: ${props => props.theme.fonts.size.sm};
   text-decoration: none;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
   transition: all 0.2s ease;
   padding: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.xs};
   border-radius: ${props => props.theme.radius.small};
   letter-spacing: 0.01em;
+
   
   &:hover, &:focus {
     color: ${props => props.theme.colors.accent};
@@ -253,10 +254,10 @@ const ServiceLink = styled(Link)`
 const ServiceLinkSeparator = styled.span`
   display: inline-block;
   width: 1px;
-  height: 1em;
+  height: 0.9em;
   background-color: ${props => props.theme.colors.accent};
   opacity: 0.7;
-  margin: 0 ${props => props.theme.spacing.sm};
+  margin: 0 ${props => props.theme.spacing.xxs};
   position: relative;
   top: 0.1em;
 `;
@@ -318,13 +319,13 @@ const HeroSection = ({
           
           {showServiceLinks && (
             <ServiceLinksContainer>
+              <ServiceLinksPrompt>Explore our services:</ServiceLinksPrompt>
               <ServiceLinksWrapper>
-                <ServiceLinksPrompt>Explore our services (1d):</ServiceLinksPrompt>
                 <ServiceLinksList>
                   {servicePages.map((service, index) => (
                     <ServiceLinkItem key={service.path}>
+                      {index > 0 && <ServiceLinkSeparator aria-hidden="true" />}
                       <ServiceLink to={service.path}>{service.name}</ServiceLink>
-                      {index < servicePages.length - 1 && <ServiceLinkSeparator />}
                     </ServiceLinkItem>
                   ))}
                 </ServiceLinksList>

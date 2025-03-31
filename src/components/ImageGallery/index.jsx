@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { getImageUrl } from '../../utils/imageUtils';
+import { getImageUrl, getResponsiveImageUrl, getThumbnailUrl } from '../../utils/imageUtils';
 
 // Styled components for the gallery
 const MainImageContainer = styled.div`
@@ -246,11 +246,11 @@ const ImageGallery = ({ serviceName }) => {
       {selectedImage && (
         <>
           <MainImage 
-            src={getImageUrl(selectedImage.replace('/assets/images/', ''))} 
+            src={getResponsiveImageUrl(selectedImage.replace('/assets/images/', ''), 800)} 
             alt={`${serviceName} gallery featured image`} 
             onError={(e) => {
               // Fallback to a default image if the selected one fails to load
-              e.target.src = getImageUrl('default.jpg');
+              e.target.src = getResponsiveImageUrl('default.jpg', 800);
             }}
           />
           {validImages.length > 1 && (
@@ -293,11 +293,11 @@ const ImageGallery = ({ serviceName }) => {
           tabIndex={0}
         >
           <Thumbnail 
-            src={getImageUrl(image.replace('/assets/images/', ''))} 
+            src={getThumbnailUrl(image.replace('/assets/images/', ''), 150)} 
             alt={`${serviceName} thumbnail ${index + 1}`}
             onError={(e) => {
               handleImageError(image);
-              e.target.src = getImageUrl('default-thumbnail.jpg');
+              e.target.src = getThumbnailUrl('default-thumbnail.jpg', 150);
             }}
           />
         </ThumbnailWrapper>

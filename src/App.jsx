@@ -52,9 +52,9 @@ function App() {
           {/* Bespoke sheds */}
           <Route path="/services/sheds" element={<ShedsPage />} />
           {/* Tree Felling & Hedge Removal */}
-          <Route path="/services/tree-felling" element={<TreeFellingPage />} />
+          {/* <Route path="/services/tree-felling" element={<TreeFellingPage />} /> */}
           {/* Reviews */}
-          <Route path="/services/reviews" element={<ReviewsPage />} />
+          {/* <Route path="/services/reviews" element={<ReviewsPage />} /> */}
 
         </Routes>
         <Footer />

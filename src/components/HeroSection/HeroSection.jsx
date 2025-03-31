@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getImageUrl } from '../../utils/imageUtils';
+import { getResponsiveImageUrl } from '../../utils/imageUtils';
 import { Link } from 'react-router-dom';
 
 const StyledHeroSection = styled.section`
@@ -23,7 +23,7 @@ const StyledHeroSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('${props => props.backgroundImage ? props.backgroundImage : getImageUrl('fence_brown_h.jpg')}');
+    background-image: url('${props => props.backgroundImage ? props.backgroundImage : getResponsiveImageUrl('fence_brown_h.jpg', 1920)}');
     background-size: cover;
     background-position: center;
     filter: brightness(1.15) contrast(1.05);

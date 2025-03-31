@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { getImageUrl } from "../../utils/imageUtils";
+import { getResizedImageUrl } from "../../utils/imageUtils";
 
 const DesignSection = styled.section`
   ${(props) => props.theme.mixins.fullWidth}
@@ -65,7 +65,7 @@ const DesignOptions = () => {
       <Container>
         <ImageWrapper>
           <img
-            src={getImageUrl("fence_black_s.jpg")}
+            src={getResizedImageUrl("fence_black_s.jpg", 600)}
             alt="A black fence"
             loading="lazy"
           />

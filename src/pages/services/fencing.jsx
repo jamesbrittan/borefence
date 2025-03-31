@@ -4,22 +4,17 @@ const FencingPage = () => {
   const description = (
     <>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <strong>Our product is guaranteed for up to 25 years – meaning our colour-bonded product stands out as the ultimate solution for garden fencing in the UK.</strong> 
       </p>
-      <p>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
-        in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
+      <p>These are some of the many benefits Colourfence offers its owners – the fact it’s maintenance free will save you thousands of pounds in the long run, as well as countless hours of time and hassle associated with treating and maintaining alternatives products.</p>
+      <p>ColourFence offers a unique combination of practicality and fabulous appearance that no other product can match. With its robust and durable construction, it provides an unparalleled level of security and protection for your garden while requiring no maintenance. </p>
     </>
   );
 
   return (
     <ServicePage
       title="Fencing"
-      description="[TODO - please provide text content for this page]"
+      description={description}
       image="fencing/1.jpg"
     />
   );

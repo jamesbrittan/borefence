@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getImageUrl } from '../../utils/imageUtils';
+import { getResizedImageUrl } from '../../utils/imageUtils';
 
 const GuaranteeSection = styled.section`
   ${props => props.theme.mixins.fullWidth}
@@ -110,7 +110,7 @@ const Guarantee = () => {
         </GuaranteeContent>
         <GuaranteeImage>
           <img 
-            src={getImageUrl('fence_blue_s.jpg')} 
+            src={getResizedImageUrl('fence_blue_s.jpg', 600)} 
             alt="A blue fence in a garden next to a child's playground" 
             loading="lazy"
           />

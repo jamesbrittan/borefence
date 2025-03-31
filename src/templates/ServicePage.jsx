@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { getImageUrl } from '../utils/imageUtils';
+import { getResponsiveImageUrl } from '../utils/imageUtils';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ServiceGallery from '../components/ServiceGallery';
 
@@ -209,13 +210,16 @@ const ContactSection = styled.section`
 `;
 
 // Helper function to wrap parts of text in strong tags
-const enhanceDescription = (text) => {
-  // Check if text is defined and is a string
-  if (!text || typeof text !== 'string') return '';
+const enhanceDescription = (content) => {
+  // If content is already a React node, return it directly
+  if (React.isValidElement(content)) return content;
+  
+  // Check if content is defined and is a string
+  if (!content || typeof content !== 'string') return '';
   
   // Find the first sentence or important phrases to highlight
-  const words = text.split(' ');
-  if (words.length <= 5) return text;
+  const words = content.split(' ');
+  if (words.length <= 5) return content;
   
   // Highlight first 2-3 important words
   const importantWords = words.slice(0, 2).join(' ');
@@ -225,7 +229,7 @@ const enhanceDescription = (text) => {
 };
 
 const ServicePage = ({ title, description, image, children }) => {
-  const imageUrl = getImageUrl(image.split('/').pop());
+  const imageUrl = getResponsiveImageUrl(image, 800);
   const serviceType = title.toLowerCase();
   
   return (
@@ -266,7 +270,10 @@ const ServicePage = ({ title, description, image, children }) => {
 
 ServicePage.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node
+  ]).isRequired,
   image: PropTypes.string,
   children: PropTypes.node
 };

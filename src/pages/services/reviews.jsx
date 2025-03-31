@@ -4,8 +4,8 @@ const ReviewsPage = () => {
   return (
     <ServicePage 
       title="Reviews"
-      description="[TODO - Please provide content for this page]"
-      image="/images/reviews.jpg"
+      description="[TODO 5 - Please provide content for this page]"
+      image="reviews.jpg"
     />
   );
 };

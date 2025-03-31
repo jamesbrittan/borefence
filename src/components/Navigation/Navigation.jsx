@@ -153,8 +153,8 @@ const Navigation = ( ) => {
     { name: 'Railings', path: '/services/railings' },
     { name: 'Gates', path: '/services/gates' },
     { name: 'Sheds', path: '/services/sheds' },
-    { name: 'Tree Felling', path: '/services/tree-felling' },
-    { name: 'Reviews', path: '/services/reviews' }
+    // { name: 'Tree Felling', path: '/services/tree-felling' },
+    // { name: 'Reviews', path: '/services/reviews' }
   ];
 
   const handleKeyDown = (e) => {
@@ -237,7 +237,7 @@ const Navigation = ( ) => {
             </DropdownMenu>
           </DropdownContainer>
           <NavLink to="/contact">Contact</NavLink>
-          <NavLink to="/reviews">Reviews</NavLink>
+          {/* <NavLink to="/reviews">Reviews</NavLink> */}
         </NavLinks>
       </NavContent>
     </Nav>

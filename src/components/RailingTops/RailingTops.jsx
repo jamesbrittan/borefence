@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getImageUrl } from '../../utils/imageUtils';
+import { getResizedImageUrl } from '../../utils/imageUtils';
 
 const Container = styled.div`
   width: 100%;
@@ -87,7 +87,7 @@ const RailingTops = () => {
           <ImageCard key={index}>
             <ImageContainer>
               <Image 
-                src={getImageUrl(top.src)} 
+                src={getResizedImageUrl(top.src, 400, 300)} 
                 alt={`${top.name} railing top style`} 
                 loading="lazy"
               />

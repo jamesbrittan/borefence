@@ -141,6 +141,11 @@ const Title = styled.h1`
       left: 50%;
       transform: translateX(-50%);
     }
+    
+    @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+      left: 0;
+      transform: none;
+    }
   }
   
   &:hover::after {

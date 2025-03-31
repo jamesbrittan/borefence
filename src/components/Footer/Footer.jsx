@@ -44,7 +44,7 @@ const Footer = () => {
           <FooterTitle>Contact Us</FooterTitle>
           <FooterText>Phone: 01633 526 247</FooterText>
           <FooterText>Mobile: 07780 002247</FooterText>
-          <FooterText>Email: info@borefence.com [TODO (JB) - set up email]</FooterText>
+          <FooterText>Email: karen.howell@borefence.co.uk</FooterText>
         </FooterSection>
       </FooterContent>
     </FooterContainer>

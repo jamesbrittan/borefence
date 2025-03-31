@@ -196,7 +196,7 @@ const ContactForm = ({ dark = true }) => {
         submitting: false,
         success: false,
         error: true,
-        message: 'Something went wrong. Please try again or contact us directly.'
+        message: `Something went wrong. Please try again or contact us directly.`
       });
     }
   };
@@ -215,7 +215,7 @@ const ContactForm = ({ dark = true }) => {
         {/* Honeypot field to prevent spam */}
         <p hidden>
           <label>
-            Don't fill this out if you're human: <input name="bot-field" />
+            Don{`'`}t fill this out if you{`'`}re human: <input name="bot-field" />
           </label>
         </p>
         

@@ -11,6 +11,7 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 1rem ${props => props.theme.spacing.lg};
+  background-color: ${props => props.theme.colors.white};
 `;
 
 const NavContent = styled.div`

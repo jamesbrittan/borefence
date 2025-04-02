@@ -4,7 +4,7 @@ import Navigation from '../Navigation/Navigation';
 
 const HeaderContainer = styled.header`
   ${props => props.theme.mixins.fullWidth}
-  background-color: ${props => props.theme.colors.background};
+  background-color: ${props => props.theme.colors.white};
   padding: 1rem 0;
   box-shadow: ${props => props.theme.shadows.medium};
   position: sticky;

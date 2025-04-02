@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const StyledForm = styled.form`
   display: flex;
@@ -147,6 +148,7 @@ const ContactForm = ({ dark = true }) => {
     error: false,
     message: ''
   });
+  const location = useLocation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -212,6 +214,8 @@ const ContactForm = ({ dark = true }) => {
       >
         {/* This hidden input is required for Netlify forms */}
         <input type="hidden" name="form-name" value="contact" />
+        {/* Hidden input to track which page the form was submitted from */}
+        <input type="hidden" name="form-source" value={location.pathname} />
         {/* Honeypot field to prevent spam */}
         <p hidden>
           <label>

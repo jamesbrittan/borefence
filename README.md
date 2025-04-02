@@ -35,7 +35,5 @@ This site is deployed on Netlify. The `main` branch is automatically deployed wh
 
 ## TODO
 
-- Set up email
-- Configure contact form with Netlify forms
-- Check text and image content and add any missing
-- Reviews page?
+- Fix contact page
+- Forward emails

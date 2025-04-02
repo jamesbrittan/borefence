@@ -96,17 +96,16 @@ const Guarantee = () => {
     <GuaranteeSection aria-labelledby="guarantee-title">
       <Container>
         <GuaranteeContent>
-          <h2 id="guarantee-title">Our product (2a)</h2>
+          <h2 id="guarantee-title">Our product</h2>
           <ul role="list">
-            <li role="listitem">Low maintenance (2b)</li>
-            <li role="listitem">Won't rot, fade or distort with the weather. No need to stain or paint (2c)</li>
-            <li role="listitem">100% recyclable (2d)</li>
-            <li role="listitem">Colour bond steel, powder coated to provide resistance to chipping, flaking and blistering (2e)</li>
-            <li role="listitem">Dual sided finish (2f)</li>
-            <li role="listitem">2 year installation warranty (2g)</li>
-            <li role="listitem">25 year manufacturer warranty with Climar Industries (2h)</li>
+            <li role="listitem">Low maintenance</li>
+            <li role="listitem">Won't rot, fade or distort with the weather. No need to stain or paint</li>
+            <li role="listitem">100% recyclable</li>
+            <li role="listitem">Colour bond steel, powder coated to provide resistance to chipping, flaking and blistering</li>
+            <li role="listitem">Dual sided finish</li>
+            <li role="listitem">1 year installation warranty</li>
+            <li role="listitem">25 year manufacturer warranty with Climar Industries</li>
           </ul>
-          <p>[TODO 2- please specify photo for this section or confirm existing one]</p>
         </GuaranteeContent>
         <GuaranteeImage>
           <img 

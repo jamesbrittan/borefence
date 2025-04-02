@@ -54,16 +54,16 @@ const DesignWrapper = styled.div`
 const Home = () => {
   const featuresData = [
     {
-      title: "We offer a fully professional service (3a)",
-      description: "Our own fully accredited fitters (3b)"
+      title: "We offer a fully professional service",
+      description: "Our own fully accredited fitters"
     },
     {
-      title: "Complete clearance of your existing fence, concrete posts, walls and hedges (3c)",
-      description: "We carry a Trade Waste License - Cymru Natural Resources Wales - Borefence Ltd CBOU9164 (3d)"
+      title: "Complete clearance of your existing fence, concrete posts, walls and hedges",
+      description: "We carry a Trade Waste License - Cymru Natural Resources Wales - Borefence Ltd CBOU9164"
     },
     {
-      title: "Complete project management from start to finish (3e)",
-      description: "Your hassle free option (3f)"
+      title: "Complete project management from start to finish",
+      description: "Your hassle free option"
     }
 
   ];
@@ -71,8 +71,8 @@ const Home = () => {
   return (
     <HomeContainer>
       <HeroSection
-        title="BoreFence -Fencing and Railings (1a)"
-        subtitle="Adding security, protection and style to your outdoor space (1b)"
+        title="BoreFence -Fencing and Railings"
+        subtitle="Adding security, protection and style to your outdoor space"
         rightColumnContent={<ContactForm dark={true} />}
         showServiceLinks={true}
       />

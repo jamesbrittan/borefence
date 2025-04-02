@@ -1,5 +1,7 @@
 import ServicePage from '../../templates/ServicePage';
 
+// currently not in use
+
 const ReviewsPage = () => {
   return (
     <ServicePage 

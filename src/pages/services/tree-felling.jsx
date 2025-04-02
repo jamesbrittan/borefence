@@ -1,6 +1,8 @@
 import React from 'react';
 import ServicePage from '../../templates/ServicePage';
 
+// currently not in use
+
 const TreeFellingPage = () => {
 
 

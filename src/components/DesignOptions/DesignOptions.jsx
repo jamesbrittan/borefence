@@ -72,14 +72,13 @@ const DesignOptions = () => {
         </ImageWrapper>
         <Content>
           <SectionTitle id="design-options-title">
-            About BoreFence (4a)
+            About BoreFence
           </SectionTitle>
           <p>
             Our team are based in Newport - we have been trading for 16+ years
             as an accredited fitter of Colourfence and ColourRail covering the
-            NP and CF postcodes and South East Wales (4b)
+            NP and CF postcodes and South East Wales
           </p>
-          <p>[TODO 1 - please provide image for this section]</p>
         </Content>
       </Container>
     </DesignSection>

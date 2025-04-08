@@ -166,27 +166,13 @@ const HeroDescription = styled.p`
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 `;
 
-const HeroText = styled.p`
-  ${props => props.theme.typography.body}
-  font-size: ${props => props.theme.fonts.size.md};
-  max-width: 600px;
-  margin-bottom: ${props => props.theme.spacing.lg};
-  opacity: 0.98;
-  line-height: 1.6;
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    text-align: center;
-  }
-`;
 
 const ServiceLinksContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: ${props => props.theme.spacing.md};
   padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: ${props => props.theme.radius.medium};
   width: fit-content;
   max-width: 90%;

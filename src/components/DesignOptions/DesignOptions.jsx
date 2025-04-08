@@ -65,7 +65,7 @@ const DesignOptions = () => {
       <Container>
         <ImageWrapper>
           <img
-            src={getResizedImageUrl("fence_black_s.jpg", 600)}
+            src={getResizedImageUrl("van_square.jpg", 600)}
             alt="A black fence"
             loading="lazy"
           />

@@ -14,6 +14,7 @@ import FencingPage from './pages/services/fencing';
 import ShedsPage from './pages/services/sheds';
 import GatesPage from './pages/services/gates';
 import RailingPage from './pages/services/railings';
+import TreeFellingPage from './pages/services/tree-felling';
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState('coastal');
@@ -26,10 +27,6 @@ function App() {
     }
   }, []);
 
-  const handleThemeChange = (themeKey) => {
-    setCurrentTheme(themeKey);
-    localStorage.setItem('theme', themeKey);
-  };
 
   return (
     <ThemeProvider theme={themeVariants[currentTheme]}>
@@ -51,7 +48,7 @@ function App() {
           {/* Bespoke sheds */}
           <Route path="/services/sheds" element={<ShedsPage />} />
           {/* Tree Felling & Hedge Removal */}
-          {/* <Route path="/services/tree-felling" element={<TreeFellingPage />} /> */}
+          <Route path="/services/tree-felling" element={<TreeFellingPage />} />
           {/* Reviews */}
           {/* <Route path="/services/reviews" element={<ReviewsPage />} /> */}
 

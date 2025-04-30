@@ -41,7 +41,6 @@ const ServiceGallery = ({ serviceName, defaultImage }) => {
   // Normalize the service name to match the folder structure
   const normalizedServiceName = serviceName.toLowerCase().replace(/\s+/g, '-');
 
-  console.log(normalizedServiceName)
   
   // Get the gallery elements
   const gallery = ImageGallery({ 

@@ -302,7 +302,7 @@ const HeroSection = ({
     { name: 'Railings', path: '/services/railings' },
     { name: 'Gates', path: '/services/gates' },
     { name: 'Sheds', path: '/services/sheds' },
-    // { name: 'Tree Felling & stump grinding', path: '/services/tree-felling' }
+    { name: 'Tree Felling & stump grinding', path: '/services/tree-felling' }
   ];
 
   return (

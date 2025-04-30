@@ -153,7 +153,7 @@ const Title = styled.h1`
   }
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   ${props => props.theme.typography.body}
   color: ${props => props.theme.colors.text};
   font-size: 1.1rem;
@@ -215,23 +215,23 @@ const ContactSection = styled.section`
 `;
 
 // Helper function to wrap parts of text in strong tags
-const enhanceDescription = (content) => {
-  // If content is already a React node, return it directly
-  if (React.isValidElement(content)) return content;
+// const enhanceDescription = (content) => {
+//   // If content is already a React node, return it directly
+//   if (React.isValidElement(content)) return content;
   
-  // Check if content is defined and is a string
-  if (!content || typeof content !== 'string') return '';
+//   // Check if content is defined and is a string
+//   if (!content || typeof content !== 'string') return '';
   
-  // Find the first sentence or important phrases to highlight
-  const words = content.split(' ');
-  if (words.length <= 5) return content;
+//   // Find the first sentence or important phrases to highlight
+//   const words = content.split(' ');
+//   if (words.length <= 5) return content;
   
-  // Highlight first 2-3 important words
-  const importantWords = words.slice(0, 2).join(' ');
-  const restOfText = words.slice(2).join(' ');
+//   // Highlight first 2-3 important words
+//   const importantWords = words.slice(0, 2).join(' ');
+//   const restOfText = words.slice(2).join(' ');
   
-  return <><strong>{importantWords}</strong> {restOfText}</>;
-};
+//   return <><strong>{importantWords}</strong> {restOfText}</>;
+// };
 
 const ServicePage = ({ title, description, image, children }) => {
   const imageUrl = getResponsiveImageUrl(image, 800);
@@ -244,7 +244,7 @@ const ServicePage = ({ title, description, image, children }) => {
           <ServiceHeader>
             <TitleSection>
               <Title>{title}</Title>
-              <Description>{enhanceDescription(description)}</Description>
+              <Description>{description}</Description>
             </TitleSection>
             <GalleryWrapper>
               <ServiceGallery 

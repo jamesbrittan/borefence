@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getResizedImageUrl } from '../../utils/imageUtils';
+import { Img } from '../../images';
 
 const Container = styled.div`
   width: 100%;
@@ -50,7 +50,7 @@ const ImageContainer = styled.div`
   position: relative;
 `;
 
-const Image = styled.img`
+const Image = styled(Img)`
   position: absolute;
   top: 0;
   left: 0;
@@ -85,9 +85,13 @@ const RailingTops = () => {
         {railingTops.map((top, index) => (
           <ImageCard key={index}>
             <ImageContainer>
-              <Image 
-                src={getResizedImageUrl(top.src, 400, 300)} 
-                alt={`${top.name} railing top style`} 
+              <Image
+                path={top.src}
+                widths={[400, 600, 800]}
+                height={300}
+                fit="cover"
+                sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, 340px"
+                alt={`${top.name} railing top style`}
                 loading="lazy"
               />
             </ImageContainer>

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { getResponsiveImageUrl } from '../../utils/imageUtils';
+import { imageSrc } from '../../images';
 import { Link } from 'react-router-dom';
 import { css } from 'styled-components';
+
+const HERO_IMAGE = 'fence_brown_h.jpg';
 
 // Dark tinted glass shared by the quote form and the service links. Opaque
 // enough that white text keeps 4.5:1 contrast even over pure white sky.
@@ -31,11 +33,20 @@ const StyledHeroSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('${props => props.backgroundImage ? props.backgroundImage : getResponsiveImageUrl('fence_brown_h.jpg', 1920)}');
+    background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 1920 })}');
     background-size: cover;
     background-position: center;
     filter: brightness(1.15) contrast(1.05);
     z-index: 1;
+
+    /* Smaller hero downloads on smaller screens */
+    @media (max-width: ${props => props.theme.breakpoints.desktop}) {
+      background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 1280 })}');
+    }
+
+    @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+      background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 800 })}');
+    }
   }
 
   &::after {

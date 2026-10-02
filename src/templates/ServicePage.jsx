@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { imageSrc } from '../images';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ServiceGallery from '../components/ServiceGallery';
+import { galleryImages } from '../catalogue/services';
 
 
 const fadeIn = `
@@ -211,25 +211,21 @@ const ContactSection = styled.section`
   }
 `;
 
-const ServicePage = ({ title, description, image, children }) => {
-  const imageUrl = imageSrc(image, { width: 800 });
-  const serviceType = title.toLowerCase();
-  
+const ServicePage = ({ service }) => {
+  const { name, description, extras = [] } = service;
+
   return (
     <ServiceContainer>
-      <title>{`${title} | BoreFence`}</title>
+      <title>{`${name} | BoreFence`}</title>
       <FullWidthSection>
         <HeaderSection>
           <ServiceHeader>
             <TitleSection>
-              <Title>{title}</Title>
+              <Title>{name}</Title>
               <Description>{description}</Description>
             </TitleSection>
             <GalleryWrapper>
-              <ServiceGallery 
-                serviceName={serviceType}
-                defaultImage={imageUrl}
-              />
+              <ServiceGallery images={galleryImages(service)} />
             </GalleryWrapper>
           </ServiceHeader>
         </HeaderSection>
@@ -237,7 +233,9 @@ const ServicePage = ({ title, description, image, children }) => {
       
       <FullWidthSection>
         <ContentSection>
-          {children}
+          {extras.map((Extra) => (
+            <Extra key={Extra.name} />
+          ))}
         </ContentSection>
       </FullWidthSection>
       

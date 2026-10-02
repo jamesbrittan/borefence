@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { imageSrc } from '../../images';
+import { services, servicePath } from '../../catalogue/services';
 import { Link } from 'react-router-dom';
 import { css } from 'styled-components';
 
@@ -312,14 +313,6 @@ const HeroSection = ({
   rightColumnContent,
   showServiceLinks = false
 }) => {
-  const servicePages = [
-    { name: 'Fencing', path: '/services/fencing' },
-    { name: 'Railings', path: '/services/railings' },
-    { name: 'Gates', path: '/services/gates' },
-    { name: 'Sheds', path: '/services/sheds' },
-    { name: 'Tree Felling & stump grinding', path: '/services/tree-felling' }
-  ];
-
   return (
     <StyledHeroSection backgroundImage={backgroundImage}>
       <HeroContent>
@@ -333,10 +326,10 @@ const HeroSection = ({
               <ServiceLinksPrompt>Explore our services:</ServiceLinksPrompt>
               <ServiceLinksWrapper>
                 <ServiceLinksList>
-                  {servicePages.map((service, index) => (
-                    <ServiceLinkItem key={service.path}>
+                  {services.map((service, index) => (
+                    <ServiceLinkItem key={service.slug}>
                       {index > 0 && <ServiceLinkSeparator aria-hidden="true" />}
-                      <ServiceLink to={service.path}>{service.name}</ServiceLink>
+                      <ServiceLink to={servicePath(service)}>{service.name}</ServiceLink>
                     </ServiceLinkItem>
                   ))}
                 </ServiceLinksList>

@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { imageSrc } from '../../images';
+import { services, servicePath } from '../../catalogue/services';
 
 // Twice the largest display width (202px) for high-density screens.
 const logoPath = imageSrc('logo.png', { width: 404 });
@@ -169,14 +170,6 @@ const Navigation = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const buttonRef = useRef(null);
 
-  const services = [
-    { name: 'Fencing', path: '/services/fencing' },
-    { name: 'Railings', path: '/services/railings' },
-    { name: 'Gates', path: '/services/gates' },
-    { name: 'Sheds', path: '/services/sheds' },
-    { name: 'Tree Felling & Stump Grinding', path: '/services/tree-felling' },
-  ];
-
   // True while the menu is open only because a mouse is hovering over it,
   // so a click on "Services" keeps it open instead of toggling it shut.
   const openedByHover = useRef(false);
@@ -247,8 +240,8 @@ const Navigation = () => {
             </ServicesButton>
             <DropdownMenu id="services-menu" $isOpen={isServicesOpen}>
               {services.map((service) => (
-                <li key={service.path}>
-                  <DropdownLink to={service.path} onClick={closeServices}>
+                <li key={service.slug}>
+                  <DropdownLink to={servicePath(service)} onClick={closeServices}>
                     {service.name}
                   </DropdownLink>
                 </li>

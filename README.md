@@ -41,6 +41,11 @@ This site is deployed on Netlify. The `main` branch is automatically deployed wh
 - Publish directory: `dist`
 - Node version: 22 (set in `netlify.toml`)
 
+### Services and gallery photos
+Every Service (Fencing, Railings, …) is defined once in `src/catalogue/services.jsx`. The menu, hero links, `/services/<slug>` pages and galleries all come from there.
+- **Add a gallery photo:** put the file in the Service's `imageFolder` under `public/assets/images/`, then add `{ file, alt }` to its `gallery` list. A test fails if a file is on disk but not listed, or listed but missing.
+- **Add a Service:** add an entry with a new `slug`. No other files need changing.
+
 ### Images
 Put image files in `public/assets/images/` and reference them through `src/images` (`imageSrc(path, { width })` or `<Img path widths sizes alt />`), never by hard-coded URL. On Netlify (`VITE_IMAGE_CDN=netlify`, set in `netlify.toml`), they're resized and served as WebP/AVIF by the Netlify Image CDN. Locally, plain files are used.
 

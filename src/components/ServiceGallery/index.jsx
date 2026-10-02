@@ -36,16 +36,9 @@ const GalleryContainer = styled.div`
   }
 `;
 
-const ServiceGallery = ({ serviceName, defaultImage }) => {
-  // Normalize the service name to match the folder structure
-  const normalizedServiceName = serviceName.toLowerCase().replace(/\s+/g, '-');
-
-  
-  // Get the gallery elements
-  const gallery = ImageGallery({ 
-    serviceName: normalizedServiceName, 
-    defaultImage: defaultImage 
-  });
+// images: [{ src: 'fencing/1.jpg', alt: '…' }] from the Service catalogue
+const ServiceGallery = ({ images }) => {
+  const gallery = ImageGallery({ images });
   
   return (
     <GalleryContainer>

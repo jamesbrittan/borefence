@@ -6,6 +6,8 @@ Terms used across the code, issues and PRs. Keep entries short; add a term when 
 
 **Service**: A product line BoreFence sells, with its own page at `/services/<slug>`: Fencing, Railings, Gates, Sheds, and Tree Felling & Stump Grinding. In this codebase "Service" always means this, never a software service.
 
+**Service catalogue**: The list of Services the site offers, kept in one place (`src/catalogue/services.jsx`). Each entry has the Service's slug, name, description, gallery photos (with alt text) and any extra sections. The menu, hero links, routes and Service pages all read from it.
+
 **ColourFence / ColourRail / ColourShed**: The manufacturer's powder-coated steel product ranges that BoreFence fits. They're described on the Fencing, Railings and Sheds pages.
 
 **Colour palette**: The standard finish colours offered: Cream, Green, Blue, Brown, Anthracite Grey, and Matt or Gloss Black.

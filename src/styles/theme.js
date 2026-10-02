@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const baseTheme = {
+const theme = {
   fonts: {
     body: "'Barlow', sans-serif",
     heading: "'Montserrat', sans-serif",
@@ -35,17 +35,22 @@ const baseTheme = {
     },
   },
   colors: {
-    primary: '#2563eb',
-    primaryLight: 'rgba(37, 99, 235, 0.2)',
+    primary: '#1B3B5F',    // Deep Navy Blue (10.5:1)
+    primaryLight: 'rgba(27, 59, 95, 0.2)',
     primaryDark: '#1d4ed8',
-    secondary: '#1e40af',
-    text: '#1f2937',
-    textLight: '#6b7280',
-    background: '#ffffff',
+    secondary: '#2D5F8A',  // Medium Blue (7.2:1)
+    accent: '#4A90E2',     // Ocean Blue (4.5:1)
+    text: '#1A1A1A',
+    textLight: '#4D4D4D',
+    background: '#F8FBFF',
     border: '#e5e7eb',
-    error: '#ef4444',
-    success: '#22c55e',
-    white: '#ffffff',
+    error: '#B54141',
+    success: '#2D694B',
+    white: '#FFFFFF',
+    gray: '#F5F5F5',
+    darkGray: '#2C2C2C',
+    overlay: 'rgba(27, 59, 95, 0.9)',
+    shadow: 'rgba(0, 0, 0, 0.1)',
     fence: {
       cream: '#E9D9B2',
       green: '#00513F',
@@ -144,96 +149,4 @@ const baseTheme = {
   },
 };
 
-export const themeVariants = {
-  coastal: {
-    ...baseTheme,
-    name: 'Coastal Blue',
-    colors: {
-      ...baseTheme.colors,
-      primary: '#1B3B5F',    // Deep Navy Blue (10.5:1)
-      primaryLight: 'rgba(27, 59, 95, 0.2)',
-      primaryDark: '#1d4ed8',
-      secondary: '#2D5F8A',  // Medium Blue (7.2:1)
-      accent: '#4A90E2',     // Ocean Blue (4.5:1)
-      text: '#1A1A1A',
-      textLight: '#4D4D4D',
-      white: '#FFFFFF',
-      background: '#F8FBFF',
-      gray: '#F5F5F5',
-      darkGray: '#2C2C2C',
-      success: '#2D694B',
-      error: '#B54141',
-      overlay: 'rgba(27, 59, 95, 0.9)',
-      shadow: 'rgba(0, 0, 0, 0.1)',
-    },
-  },
-  modern: {
-    ...baseTheme,
-    name: 'Modern Mint',
-    colors: {
-      ...baseTheme.colors,
-      primary: '#1B4D3E',    // Deep Green (10.1:1)
-      primaryLight: 'rgba(27, 77, 62, 0.2)',
-      primaryDark: '#1d4ed8',
-      secondary: '#2A9D8F',  // Teal (5.2:1)
-      accent: '#FF6B6B',     // Coral (4.5:1)
-      text: '#1A1A1A',
-      textLight: '#4D4D4D',
-      white: '#FFFFFF',
-      background: '#F7FDFC',
-      gray: '#EDF7F6',
-      darkGray: '#1B4D3E',
-      success: '#34D399',
-      error: '#F87171',
-      overlay: 'rgba(27, 77, 62, 0.9)',
-      shadow: 'rgba(0, 0, 0, 0.1)',
-    },
-  },
-  warm: {
-    ...baseTheme,
-    name: 'Warm Stone',
-    colors: {
-      ...baseTheme.colors,
-      primary: '#4A4036',    // Warm Brown (9.5:1)
-      primaryLight: 'rgba(74, 64, 54, 0.2)',
-      primaryDark: '#1d4ed8',
-      secondary: '#826F66',  // Taupe (5.5:1)
-      accent: '#D4B499',     // Sand (4.5:1)
-      text: '#2C2420',
-      textLight: '#6B5C55',
-      white: '#FFFFFF',
-      background: '#FAF6F3',
-      gray: '#F2EBE6',
-      darkGray: '#3D3530',
-      success: '#8B9D83',
-      error: '#C1614F',
-      overlay: 'rgba(74, 64, 54, 0.9)',
-      shadow: 'rgba(0, 0, 0, 0.1)',
-    },
-  },
-  desert: {
-    ...baseTheme,
-    name: 'Desert Night',
-    colors: {
-      ...baseTheme.colors,
-      primary: '#2D3047',    // Deep Blue-Gray (11:1)
-      primaryLight: 'rgba(45, 48, 71, 0.2)',
-      primaryDark: '#1d4ed8',
-      secondary: '#419D78',  // Green (5.2:1)
-      accent: '#E0A458',     // Sand (4.5:1)
-      text: '#1A1A1A',
-      textLight: '#4D4D4D',
-      white: '#FFFFFF',
-      background: '#FDFCFA',
-      gray: '#F5F3F0',
-      darkGray: '#2C2C2C',
-      success: '#2A9D8F',
-      error: '#E76F51',
-      overlay: 'rgba(45, 48, 71, 0.9)',
-      shadow: 'rgba(0, 0, 0, 0.1)',
-    },
-  },
-};
-
-const theme = themeVariants.coastal;
 export default theme;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ContactForm from '../components/ContactForm/ContactForm';
-import ServiceGallery from '../components/ServiceGallery';
+import Gallery from '../components/Gallery';
 import { galleryImages } from '../catalogue/services';
 
 
@@ -225,7 +225,7 @@ const ServicePage = ({ service }) => {
               <Description>{description}</Description>
             </TitleSection>
             <GalleryWrapper>
-              <ServiceGallery images={galleryImages(service)} />
+              <Gallery images={galleryImages(service)} />
             </GalleryWrapper>
           </ServiceHeader>
         </HeaderSection>

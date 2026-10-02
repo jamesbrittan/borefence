@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Img } from '../../images';
+import { business } from '../../business/details';
 
 const GuaranteeSection = styled.section`
   ${props => props.theme.mixins.fullWidth}
@@ -102,8 +103,10 @@ const Guarantee = () => {
             <li role="listitem">100% recyclable</li>
             <li role="listitem">Colour bond steel, powder coated to provide resistance to chipping, flaking and blistering</li>
             <li role="listitem">Dual sided finish</li>
-            <li role="listitem">1 year installation warranty</li>
-            <li role="listitem">25 year manufacturer warranty with Climar Industries</li>
+            <li role="listitem">{`${business.warranty.installationYears} year installation warranty`}</li>
+            <li role="listitem">
+              {`${business.warranty.manufacturerYears} year manufacturer warranty with ${business.warranty.manufacturer}`}
+            </li>
           </ul>
         </GuaranteeContent>
         <GuaranteeImage>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import PageMeta from '../seo/PageMeta';
 
 const NotFoundContainer = styled.main`
   ${props => props.theme.mixins.fullWidth}
@@ -29,7 +30,7 @@ const Message = styled.p`
 const NotFound = () => {
   return (
     <NotFoundContainer>
-      <title>Page not found | BoreFence</title>
+      <PageMeta title="Page not found" noIndex />
       <NotFoundContent>
         <Title>Page not found</Title>
         <Message>

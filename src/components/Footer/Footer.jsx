@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { business, telHref } from '../../business/details';
 
 const FooterContainer = styled.footer`
   ${props => props.theme.mixins.fullWidth}
@@ -58,9 +59,14 @@ const Footer = () => {
   
         <FooterSection>
           <FooterTitle>Contact Us</FooterTitle>
-          <FooterText>Phone: <FooterLink href="tel:+441633526247">01633 526 247</FooterLink></FooterText>
-          <FooterText>Mobile: <FooterLink href="tel:+447780002247">07780 002247</FooterLink></FooterText>
-          <FooterText>Email: <FooterLink href="mailto:karen.howell@borefence.co.uk">karen.howell@borefence.co.uk</FooterLink></FooterText>
+          {business.phones.map((phone) => (
+            <FooterText key={phone.international}>
+              {phone.label}: <FooterLink href={telHref(phone)}>{phone.display}</FooterLink>
+            </FooterText>
+          ))}
+          <FooterText>
+            Email: <FooterLink href={`mailto:${business.email}`}>{business.email}</FooterLink>
+          </FooterText>
         </FooterSection>
       </FooterContent>
     </FooterContainer>

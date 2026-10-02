@@ -1,5 +1,6 @@
 import ColourPalette from '../components/ColourPalette';
 import RailingTops from '../components/RailingTops/RailingTops';
+import { business } from '../business/details';
 
 // Service catalogue: the single source for every Service the site offers.
 // Routing (/services/:slug), the Services menu, the hero links and the
@@ -8,6 +9,8 @@ import RailingTops from '../components/RailingTops/RailingTops';
 //
 // - slug:        URL segment, /services/<slug>. Never derived from the name.
 // - name:        display name (menu, links, page heading and <title>).
+// - summary:     one or two sentences for search results (meta description,
+//                under 160 characters).
 // - imageFolder: folder in public/assets/images holding the gallery files.
 // - gallery:     ordered gallery images; every file in imageFolder must be
 //                listed, with alt text describing the photo.
@@ -18,6 +21,7 @@ export const services = [
   {
     slug: 'fencing',
     name: 'Fencing',
+    summary: `Maintenance-free ColourFence steel garden fencing, guaranteed for up to ${business.warranty.manufacturerYears} years, fitted across ${business.area.base} and ${business.area.region}.`,
     imageFolder: 'fencing',
     gallery: [
       { file: '1.jpg', alt: 'Blue ColourFence with a trellis top around a lawn with a slide and potted flowers' },
@@ -31,7 +35,7 @@ export const services = [
     description: (
       <>
         <p>
-          <strong>Our product is guaranteed for up to 25 years – meaning our colour-bonded product stands out as the ultimate solution for garden fencing in the UK.</strong> 
+          <strong>{`Our product is guaranteed for up to ${business.warranty.manufacturerYears} years – meaning our colour-bonded product stands out as the ultimate solution for garden fencing in the UK.`}</strong> 
         </p>
         <p>These are some of the many benefits Colourfence offers its owners – the fact it’s maintenance free will save you thousands of pounds in the long run, as well as countless hours of time and hassle associated with treating and maintaining alternatives products.</p>
         <p>ColourFence offers a unique combination of practicality and fabulous appearance that no other product can match. With its robust and durable construction, it provides an unparalleled level of security and protection for your garden while requiring no maintenance. </p>
@@ -41,6 +45,7 @@ export const services = [
   {
     slug: 'railings',
     name: 'Railings',
+    summary: `ColourRail galvanised steel railings, freestanding, between pillars or on walls, fitted across ${business.area.base} and ${business.area.region}.`,
     imageFolder: 'railings',
     gallery: [
       { file: '1.jpg', alt: 'Black ColourRail railings with straight bars along a pavement' },
@@ -62,6 +67,7 @@ export const services = [
   {
     slug: 'gates',
     name: 'Gates',
+    summary: `Lockable ColourFence and ColourRail gates in plain or trellis styles to match your fence, fitted across ${business.area.base} and ${business.area.region}.`,
     imageFolder: 'gates',
     gallery: [
       { file: '1.jpg', alt: 'Blue ColourFence side gate with a slatted top beside matching fence panels' },
@@ -86,6 +92,7 @@ export const services = [
   {
     slug: 'sheds',
     name: 'Sheds',
+    summary: `ColourShed 6x8ft metal garden sheds that won't rot, warp or rust, colour-matched to your fence. Fitted across ${business.area.base} and ${business.area.region}.`,
     imageFolder: 'sheds',
     gallery: [
       { file: '1.jpg', alt: 'Green ColourShed metal shed with double doors' },
@@ -101,6 +108,7 @@ export const services = [
   {
     slug: 'tree-felling',
     name: 'Tree Felling & Stump Grinding',
+    summary: `Safe tree felling and stump grinding across ${business.area.base} and ${business.area.region}, from ${business.name}.`,
     imageFolder: 'tree-felling-&-stump-grinding',
     gallery: [
       { file: '1.jpg', alt: 'Operator working a stump grinder on a lawn' },

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { getResponsiveImageUrl } from '../../utils/imageUtils';
 import { Link } from 'react-router-dom';
+import { FORM_VARIANTS, DEFAULT_FORM_VARIANT } from './formVariants';
 
 const StyledHeroSection = styled.section`
   position: relative;
@@ -263,6 +264,7 @@ const FormColumn = styled.div`
   justify-self: end;
   transform: translateY(-10px);
   transition: all 0.3s ease;
+  ${props => props.$variantStyles}
 
   &:hover {
     transform: translateY(-15px);
@@ -295,7 +297,8 @@ const HeroSection = ({
   description, 
   backgroundImage,
   rightColumnContent,
-  showServiceLinks
+  showServiceLinks,
+  formVariant = DEFAULT_FORM_VARIANT
 }) => {
   const servicePages = [
     { name: 'Fencing', path: '/services/fencing' },
@@ -330,7 +333,7 @@ const HeroSection = ({
           )}
         </HeroTextContent>
         {rightColumnContent && (
-          <FormColumn>
+          <FormColumn $variantStyles={FORM_VARIANTS[formVariant].styles}>
             {rightColumnContent}
           </FormColumn>
         )}

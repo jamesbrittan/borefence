@@ -7,17 +7,25 @@ const logoPath = getImageUrl('logo.png');
 
 const Nav = styled.nav`
   ${props => props.theme.mixins.container}
+  position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem ${props => props.theme.spacing.lg};
+  align-items: stretch;
+  min-height: 80px;
+  padding: 0 ${props => props.theme.spacing.lg};
   background-color: ${props => props.theme.colors.white};
+
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    min-height: 64px;
+    padding: 0 clamp(0.75rem, 4vw, 1rem);
+  }
 `;
 
 const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: ${props => props.theme.spacing.md};
   width: 100%;
 `;
 
@@ -28,15 +36,23 @@ const LogoLink = styled(Link)`
   align-items: center;
 `;
 
+// The logo is ~5:1, so on phones it shrinks with the viewport to leave room
+// for the links (202px wide at full size, ~122px at 320px).
 const LogoImage = styled.img`
-  height: 40px;
-  width: auto;
+  display: block;
+  width: clamp(112px, 38vw, 202px);
+  height: auto;
 `;
 
 const NavLinks = styled.div`
   display: flex;
-  gap: 2rem;
+  align-self: stretch;
   align-items: center;
+  gap: ${props => props.theme.spacing.xl};
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    gap: clamp(0.75rem, 4vw, 1rem);
+  }
 `;
 
 const NavLink = styled(Link)`
@@ -51,9 +67,19 @@ const NavLink = styled(Link)`
   }
 `;
 
+// Fills the header's height so the menu (top: 100%) opens at the header's
+// bottom edge and the pointer can reach it without leaving the container.
 const DropdownContainer = styled.div`
   position: relative;
-  padding: 1rem 0;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+
+  /* On phones the menu spans the header (positioned against Nav instead),
+     so it can't run off the left edge of narrow screens. */
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    position: static;
+  }
 `;
 
 const ServicesButton = styled.button`
@@ -111,6 +137,12 @@ const DropdownMenu = styled.ul`
   visibility: ${props => props.$isOpen ? 'visible' : 'hidden'};
   transition: all 0.2s;
   margin-top: 0.25rem;
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    left: clamp(0.75rem, 4vw, 1rem);
+    right: clamp(0.75rem, 4vw, 1rem);
+    min-width: 0;
+  }
 `;
 
 const DropdownLink = styled(Link)`

@@ -81,10 +81,7 @@ const Home = () => {
         <Guarantee />
       </GuaranteeWrapper>
 
-      <FeaturesSection 
-        features={featuresData} 
-        id="features-title" 
-      />
+      <FeaturesSection features={featuresData} />
 
       <DesignWrapper>
         <DesignOptions />

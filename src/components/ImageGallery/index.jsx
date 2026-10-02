@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { getImageUrl, getResponsiveImageUrl, getThumbnailUrl } from '../../utils/imageUtils';
+import { getResponsiveImageUrl, getThumbnailUrl } from '../../utils/imageUtils';
 
 // Styled components for the gallery
 const MainImageContainer = styled.div`
@@ -315,10 +314,6 @@ const ImageGallery = ({ serviceName }) => {
       </GalleryContainer>
     )
   };
-};
-
-ImageGallery.propTypes = {
-  serviceName: PropTypes.string.isRequired
 };
 
 export default ImageGallery;

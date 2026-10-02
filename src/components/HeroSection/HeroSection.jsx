@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { getResponsiveImageUrl } from '../../utils/imageUtils';
 import { Link } from 'react-router-dom';
 
@@ -121,7 +119,6 @@ const HeroTitle = styled.h1`
   margin-bottom: ${props => props.theme.spacing.md};
   line-height: 1.2;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  // max-width: 700px;
   position: relative;
   
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
@@ -295,7 +292,7 @@ const HeroSection = ({
   description, 
   backgroundImage,
   rightColumnContent,
-  showServiceLinks
+  showServiceLinks = false
 }) => {
   const servicePages = [
     { name: 'Fencing', path: '/services/fencing' },
@@ -337,19 +334,6 @@ const HeroSection = ({
       </HeroContent>
     </StyledHeroSection>
   );
-};
-
-HeroSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string,
-  description: PropTypes.string,
-  backgroundImage: PropTypes.string,
-  rightColumnContent: PropTypes.node,
-  showServiceLinks: PropTypes.bool
-};
-
-HeroSection.defaultProps = {
-  showServiceLinks: false
 };
 
 export default HeroSection;

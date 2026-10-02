@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -299,10 +298,6 @@ const ContactForm = ({ dark = true }) => {
       </StyledForm>
     </>
   );
-};
-
-ContactForm.propTypes = {
-  dark: PropTypes.bool
 };
 
 export default ContactForm;

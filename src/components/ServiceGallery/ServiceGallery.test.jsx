@@ -3,13 +3,15 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../test/utils';
 import ServiceGallery from './index';
+import { findService, galleryImages } from '../../catalogue/services';
 
-// jsdom never loads or fails images, so all 10 probed thumbnails are present.
+const fencing = galleryImages(findService('fencing'));
+
 const thumbnail = (n) => screen.getByRole('button', { name: new RegExp(`^View image ${n} of \\d+$`) });
 
 describe('ServiceGallery thumbnails', () => {
   it('are real buttons, and the first starts pressed', () => {
-    renderWithProviders(<ServiceGallery serviceName="fencing" />);
+    renderWithProviders(<ServiceGallery images={fencing} />);
     expect(thumbnail(1).tagName).toBe('BUTTON');
     expect(thumbnail(1)).toHaveAttribute('aria-pressed', 'true');
     expect(thumbnail(2)).toHaveAttribute('aria-pressed', 'false');
@@ -17,7 +19,7 @@ describe('ServiceGallery thumbnails', () => {
 
   it('change the main image with Enter', async () => {
     const user = userEvent.setup();
-    renderWithProviders(<ServiceGallery serviceName="fencing" />);
+    renderWithProviders(<ServiceGallery images={fencing} />);
 
     thumbnail(3).focus();
     await user.keyboard('{Enter}');
@@ -29,7 +31,7 @@ describe('ServiceGallery thumbnails', () => {
 
   it('change the main image with Space', async () => {
     const user = userEvent.setup();
-    renderWithProviders(<ServiceGallery serviceName="fencing" />);
+    renderWithProviders(<ServiceGallery images={fencing} />);
 
     thumbnail(5).focus();
     await user.keyboard(' ');
@@ -39,10 +41,20 @@ describe('ServiceGallery thumbnails', () => {
 
   it('can all be reached with Tab', async () => {
     const user = userEvent.setup();
-    renderWithProviders(<ServiceGallery serviceName="fencing" />);
+    renderWithProviders(<ServiceGallery images={fencing} />);
 
     thumbnail(1).focus();
     await user.tab();
     expect(thumbnail(2)).toHaveFocus();
+  });
+
+  it('shows the selected image with its catalogue alt text', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<ServiceGallery images={fencing} />);
+
+    expect(screen.getByRole('img', { name: fencing[0].alt })).toBeInTheDocument();
+    await user.click(thumbnail(4));
+    expect(screen.getByRole('img', { name: fencing[3].alt })).toBeInTheDocument();
+    expect(screen.getByText(`4 / ${fencing.length}`)).toBeInTheDocument();
   });
 });

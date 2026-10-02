@@ -99,7 +99,7 @@ const Guarantee = () => {
           <h2 id="guarantee-title">Our product</h2>
           <ul role="list">
             <li role="listitem">Low maintenance</li>
-            <li role="listitem">Won't rot, fade or distort with the weather. No need to stain or paint</li>
+            <li role="listitem">Won&apos;t rot, fade or distort with the weather. No need to stain or paint</li>
             <li role="listitem">100% recyclable</li>
             <li role="listitem">Colour bond steel, powder coated to provide resistance to chipping, flaking and blistering</li>
             <li role="listitem">Dual sided finish</li>

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ImageGallery from '../ImageGallery';
 
@@ -54,11 +53,6 @@ const ServiceGallery = ({ serviceName, defaultImage }) => {
       {gallery.thumbnails}
     </GalleryContainer>
   );
-};
-
-ServiceGallery.propTypes = {
-  serviceName: PropTypes.string.isRequired,
-  defaultImage: PropTypes.string
 };
 
 export default ServiceGallery;

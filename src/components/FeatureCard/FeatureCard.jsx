@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const StyledFeatureCard = styled.article`
   text-align: center;
@@ -44,11 +43,6 @@ const FeatureCard = ({ title, description }) => {
       <p>{description}</p>
     </StyledFeatureCard>
   );
-};
-
-FeatureCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
 };
 
 export default FeatureCard;

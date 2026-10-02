@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import FeatureCard from '../FeatureCard/FeatureCard';
 
 const FeaturesContainer = styled.section`
@@ -39,9 +38,9 @@ const FeaturesInner = styled.div`
   }
 `;
 
-const FeaturesSection = ({ features, id }) => {
+const FeaturesSection = ({ features }) => {
   return (
-    <FeaturesContainer aria-labelledby={id}>
+    <FeaturesContainer>
       <FeaturesInner>
         {features.map((feature, index) => (
           <FeatureCard
@@ -53,20 +52,6 @@ const FeaturesSection = ({ features, id }) => {
       </FeaturesInner>
     </FeaturesContainer>
   );
-};
-
-FeaturesSection.propTypes = {
-  features: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  id: PropTypes.string
-};
-
-FeaturesSection.defaultProps = {
-  id: 'features-title'
 };
 
 export default FeaturesSection;

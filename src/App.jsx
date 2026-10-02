@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer';
 // import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 // Service Pages
 import FencingPage from './pages/services/fencing';
@@ -49,8 +50,8 @@ function App() {
           <Route path="/services/sheds" element={<ShedsPage />} />
           {/* Tree Felling & Hedge Removal */}
           <Route path="/services/tree-felling" element={<TreeFellingPage />} />
-          {/* Reviews */}
-          {/* <Route path="/services/reviews" element={<ReviewsPage />} /> */}
+
+          <Route path="*" element={<NotFound />} />
 
         </Routes>
         <Footer />

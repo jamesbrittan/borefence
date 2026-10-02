@@ -3,7 +3,6 @@ import { Img } from '../../images';
 
 const GuaranteeSection = styled.section`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
   position: relative;
   padding: 0;
   background-color: transparent;

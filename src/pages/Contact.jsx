@@ -10,14 +10,11 @@ const fadeIn = `
 
 const ContactContainer = styled.main`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
-  overflow-x: hidden;
   ${fadeIn}
 `;
 
 const FullWidthSection = styled.section`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
 `;
 
 const ContactWrapper = styled.div`

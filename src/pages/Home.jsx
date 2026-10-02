@@ -6,14 +6,12 @@ import HeroSection from '../components/HeroSection/HeroSection';
 import FeaturesSection from '../components/FeaturesSection/FeaturesSection';
 
 const HomeContainer = styled.main`
-  width: 100vw;
-  overflow-x: hidden;
+  width: 100%;
 `;
 
 const GuaranteeWrapper = styled.div`
   position: relative;
   margin-top: -2rem;
-  padding-bottom: ${props => props.theme.spacing.section.padding.small};
   background-color: transparent;
   z-index: 5;
   

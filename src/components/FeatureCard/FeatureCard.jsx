@@ -12,7 +12,6 @@ const StyledFeatureCard = styled.article`
   }
 
   h3 {
-    ${props => props.theme.typography.h3}
     color: ${props => props.theme.colors.primary};
     margin: ${props => props.theme.spacing.md} 0;
     font-size: ${props => props.theme.spacing.lg};

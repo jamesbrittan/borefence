@@ -11,6 +11,31 @@ const GlobalStyle = createGlobalStyle`
     ${props => props.theme.typography.body}
     color: ${props => props.theme.colors.text};
     background-color: ${props => props.theme.colors.background};
+    min-width: 320px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Header, page and footer stack vertically; the page grows so the footer
+     sits at the bottom of the window on short pages. */
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  #root > main {
+    flex: 1 0 auto;
+  }
+
+  /* Form controls don't inherit the page font by default */
+  button,
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -35,6 +60,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     color: ${props => props.theme.colors.primary};
+    font-weight: ${props => props.theme.fonts.weights.medium};
     text-decoration: none;
     
     &:hover {

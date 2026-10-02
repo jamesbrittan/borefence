@@ -7,7 +7,6 @@ import { imageSrc } from '../../images';
 const logoPath = imageSrc('logo.png', { width: 404 });
 
 const Nav = styled.nav`
-  ${props => props.theme.mixins.container}
   position: relative;
   display: flex;
   justify-content: space-between;

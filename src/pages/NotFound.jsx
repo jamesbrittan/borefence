@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const NotFoundContainer = styled.main`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
   min-height: 60vh;
   display: flex;
   align-items: center;

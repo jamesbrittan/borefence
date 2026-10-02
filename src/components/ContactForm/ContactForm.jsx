@@ -23,7 +23,6 @@ const FormGroup = styled.div`
 `;
 
 const Label = styled.label`
-  ${props => props.theme.typography.label}
   color: ${props => props.$dark ? props.theme.colors.white : props.theme.colors.text};
   font-weight: ${props => props.theme.fonts.weights.semiBold};
   font-size: 0.875rem;

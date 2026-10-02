@@ -37,7 +37,7 @@ const theme = {
   colors: {
     primary: '#1B3B5F',    // Deep Navy Blue (10.5:1)
     primaryLight: 'rgba(27, 59, 95, 0.2)',
-    primaryDark: '#1d4ed8',
+    primaryDark: '#132B45',
     secondary: '#2D5F8A',  // Medium Blue (7.2:1)
     accent: '#4A90E2',     // Ocean Blue (4.5:1)
     text: '#1A1A1A',

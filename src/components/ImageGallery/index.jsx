@@ -78,10 +78,13 @@ const ThumbnailsContainer = styled.div`
   }
 `;
 
-const ThumbnailWrapper = styled.div`
-  width: auto;
+const ThumbnailWrapper = styled.button`
+  display: block;
+  width: 100%;
   height: 0;
-  padding-bottom: 100%; /* Create a square aspect ratio */
+  padding: 0 0 100%; /* Create a square aspect ratio */
+  background: none;
+  font: inherit;
   border-radius: ${props => props.theme.radius.small};
   overflow: hidden;
   cursor: pointer;
@@ -107,6 +110,11 @@ const ThumbnailWrapper = styled.div`
   
   &:hover::after {
     background: transparent;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${props => props.theme.colors.primary};
+    outline-offset: 2px;
   }
 `;
 
@@ -287,13 +295,13 @@ const ImageGallery = ({ serviceName }) => {
           onClick={() => handleThumbnailClick(image)}
           onMouseEnter={() => handleThumbnailHover(image)}
           $isActive={currentIndex === index}
-          role="button"
+          type="button"
+          aria-pressed={currentIndex === index}
           aria-label={`View image ${index + 1} of ${validImages.length}`}
-          tabIndex={0}
         >
           <Thumbnail 
             src={getThumbnailUrl(image.replace('/assets/images/', ''), 150)} 
-            alt={`${serviceName} thumbnail ${index + 1}`}
+            alt=""
             onError={(e) => {
               handleImageError(image);
               e.target.src = getThumbnailUrl('default-thumbnail.jpg', 150);

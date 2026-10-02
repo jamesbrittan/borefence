@@ -1,11 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { useState, useEffect } from 'react';
-import { themeVariants } from './styles/theme';
+import theme from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-// import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
@@ -18,19 +16,8 @@ import RailingPage from './pages/services/railings';
 import TreeFellingPage from './pages/services/tree-felling';
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState('coastal');
-
-  // Load theme preference from localStorage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme && themeVariants[savedTheme]) {
-      setCurrentTheme(savedTheme);
-    }
-  }, []);
-
-
   return (
-    <ThemeProvider theme={themeVariants[currentTheme]}>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
         <Header />

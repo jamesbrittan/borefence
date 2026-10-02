@@ -69,18 +69,6 @@ const ServicesButton = styled.button`
   gap: 0.25rem;
   transition: color 0.2s;
 
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
   &:hover, &:focus {
     color: ${props => props.theme.colors.primary};
     outline: none;
@@ -107,7 +95,8 @@ const Caret = styled.span`
   }
 `;
 
-const DropdownMenu = styled.div`
+const DropdownMenu = styled.ul`
+  list-style: none;
   position: absolute;
   top: 100%;
   right: 0;
@@ -144,9 +133,8 @@ const DropdownLink = styled(Link)`
   }
 `;
 
-const Navigation = ( ) => {
+const Navigation = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
   const services = [
@@ -157,40 +145,49 @@ const Navigation = ( ) => {
     { name: 'Tree Felling & Stump Grinding', path: '/services/tree-felling' },
   ];
 
-  const handleKeyDown = (e) => {
-    switch (e.key) {
-      case 'Escape':
-        setIsServicesOpen(false);
-        buttonRef.current?.focus();
-        break;
-      case 'ArrowDown':
-        if (!isServicesOpen) {
-          setIsServicesOpen(true);
-          e.preventDefault();
-          // Focus first menu item
-          setTimeout(() => {
-            dropdownRef.current?.querySelector('a')?.focus();
-          }, 100);
-        }
-        break;
-      default:
-        break;
-    }
-  };
+  // True while the menu is open only because a mouse is hovering over it,
+  // so a click on "Services" keeps it open instead of toggling it shut.
+  const openedByHover = useRef(false);
 
-  const handleButtonKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      setIsServicesOpen(!isServicesOpen);
-    }
-  };
-
-  const handleMouseEnter = () => {
-    setIsServicesOpen(true);
-  };
-
-  const handleMouseLeave = () => {
+  const closeServices = () => {
+    openedByHover.current = false;
     setIsServicesOpen(false);
+  };
+
+  const handlePointerEnter = (e) => {
+    if (e.pointerType === 'mouse' && !isServicesOpen) {
+      openedByHover.current = true;
+      setIsServicesOpen(true);
+    }
+  };
+
+  const handlePointerLeave = (e) => {
+    if (e.pointerType === 'mouse') {
+      closeServices();
+    }
+  };
+
+  const handleButtonClick = () => {
+    if (openedByHover.current) {
+      openedByHover.current = false;
+      return;
+    }
+    setIsServicesOpen(!isServicesOpen);
+  };
+
+  // Disclosure pattern: Escape closes and returns focus to the button.
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape' && isServicesOpen) {
+      closeServices();
+      buttonRef.current?.focus();
+    }
+  };
+
+  // Close once focus moves outside the button and its links.
+  const handleBlur = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      closeServices();
+    }
   };
 
   return (
@@ -200,39 +197,29 @@ const Navigation = ( ) => {
           <LogoImage src={logoPath} alt="Bore Fence Ltd" />
         </LogoLink>
         <NavLinks>
-          <DropdownContainer 
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+          <DropdownContainer
+            onPointerEnter={handlePointerEnter}
+            onPointerLeave={handlePointerLeave}
             onKeyDown={handleKeyDown}
+            onBlur={handleBlur}
           >
             <ServicesButton
               ref={buttonRef}
-              onClick={() => setIsServicesOpen(!isServicesOpen)}
-              onKeyDown={handleButtonKeyDown}
+              type="button"
+              onClick={handleButtonClick}
               aria-expanded={isServicesOpen}
-              aria-haspopup="true"
-              aria-label={`Services menu, press Enter to ${isServicesOpen ? 'close' : 'open'} dropdown`}
+              aria-controls="services-menu"
             >
               Services
               <Caret $isOpen={isServicesOpen} aria-hidden="true" />
-              <span className="sr-only">, press Enter to {isServicesOpen ? 'close' : 'open'} dropdown</span>
             </ServicesButton>
-            <DropdownMenu 
-              ref={dropdownRef}
-              $isOpen={isServicesOpen}
-              role="menu"
-              aria-label="Services menu"
-            >
+            <DropdownMenu id="services-menu" $isOpen={isServicesOpen}>
               {services.map((service) => (
-                <DropdownLink 
-                  key={service.path}
-                  to={service.path}
-                  role="menuitem"
-                  onClick={() => setIsServicesOpen(false)}
-                  tabIndex={isServicesOpen ? 0 : -1}
-                >
-                  {service.name}
-                </DropdownLink>
+                <li key={service.path}>
+                  <DropdownLink to={service.path} onClick={closeServices}>
+                    {service.name}
+                  </DropdownLink>
+                </li>
               ))}
             </DropdownMenu>
           </DropdownContainer>

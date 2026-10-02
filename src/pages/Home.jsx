@@ -4,8 +4,6 @@ import Guarantee from '../components/Guarantee/Guarantee';
 import DesignOptions from '../components/DesignOptions/DesignOptions';
 import HeroSection from '../components/HeroSection/HeroSection';
 import FeaturesSection from '../components/FeaturesSection/FeaturesSection';
-import FormVariantPicker from '../components/HeroSection/FormVariantPicker';
-import { FORM_VARIANTS, useFormVariant } from '../components/HeroSection/formVariants';
 
 const HomeContainer = styled.main`
   width: 100vw;
@@ -54,8 +52,6 @@ const DesignWrapper = styled.div`
 `;
 
 const Home = () => {
-  const [formVariant, setFormVariant] = useFormVariant();
-
   const featuresData = [
     {
       title: "We offer a fully professional service",
@@ -77,11 +73,9 @@ const Home = () => {
       <HeroSection
         title="BoreFence -Fencing and Railings"
         subtitle="Adding security, protection and style to your outdoor space"
-        rightColumnContent={<ContactForm dark={FORM_VARIANTS[formVariant].dark} />}
+        rightColumnContent={<ContactForm dark={true} />}
         showServiceLinks={true}
-        formVariant={formVariant}
       />
-      <FormVariantPicker variant={formVariant} onSelect={setFormVariant} />
 
       <GuaranteeWrapper>
         <Guarantee />

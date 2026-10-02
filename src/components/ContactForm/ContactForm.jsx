@@ -29,14 +29,13 @@ const Label = styled.label`
   font-weight: ${props => props.theme.fonts.weights.semiBold};
   font-size: 0.875rem;
   margin-bottom: ${props => props.theme.spacing.xxs};
-  text-shadow: ${props => props.$dark ? '0 1px 2px rgba(0, 0, 0, 0.2)' : 'none'};
 `;
 
 const Input = styled.input`
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
-  border: 1px solid ${props => props.$dark ? 'rgba(255, 255, 255, 0.3)' : props.theme.colors.border};
+  border: 1px solid ${props => props.$dark ? 'rgba(255, 255, 255, 0.6)' : props.theme.colors.border};
   border-radius: ${props => props.theme.radius.medium};
-  background: ${props => props.$dark ? 'rgba(255, 255, 255, 0.15)' : props.theme.colors.white};
+  background: ${props => props.$dark ? 'rgba(0, 0, 0, 0.2)' : props.theme.colors.white};
   backdrop-filter: ${props => props.$dark ? 'blur(10px)' : 'none'};
   -webkit-backdrop-filter: ${props => props.$dark ? 'blur(10px)' : 'none'};
   color: ${props => props.$dark ? props.theme.colors.white : props.theme.colors.text};
@@ -47,19 +46,19 @@ const Input = styled.input`
   transition: all 0.2s;
 
   &::placeholder {
-    color: ${props => props.$dark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.4)'};
+    color: ${props => props.$dark ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.4)'};
   }
 
   &:hover {
-    border-color: ${props => props.$dark ? 'rgba(255, 255, 255, 0.5)' : props.theme.colors.primary};
-    background: ${props => props.$dark ? 'rgba(255, 255, 255, 0.2)' : props.theme.colors.white};
+    border-color: ${props => props.$dark ? 'rgba(255, 255, 255, 0.8)' : props.theme.colors.primary};
+    background: ${props => props.$dark ? 'rgba(0, 0, 0, 0.2)' : props.theme.colors.white};
   }
 
   &:focus {
     outline: none;
-    border-color: ${props => props.$dark ? 'rgba(255, 255, 255, 0.8)' : props.theme.colors.primary};
+    border-color: ${props => props.$dark ? props.theme.colors.white : props.theme.colors.primary};
     box-shadow: 0 0 0 3px ${props => props.$dark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(37, 99, 235, 0.2)'};
-    background: ${props => props.$dark ? 'rgba(255, 255, 255, 0.25)' : props.theme.colors.white};
+    background: ${props => props.$dark ? 'rgba(0, 0, 0, 0.2)' : props.theme.colors.white};
   }
 `;
 

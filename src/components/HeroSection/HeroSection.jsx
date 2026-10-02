@@ -1,6 +1,16 @@
 import styled from 'styled-components';
 import { getResponsiveImageUrl } from '../../utils/imageUtils';
 import { Link } from 'react-router-dom';
+import { css } from 'styled-components';
+
+// Dark tinted glass shared by the quote form and the service links. Opaque
+// enough that white text keeps 4.5:1 contrast even over pure white sky.
+const smokedGlass = css`
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(15px) saturate(160%);
+  -webkit-backdrop-filter: blur(15px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+`;
 
 const StyledHeroSection = styled.section`
   position: relative;
@@ -169,7 +179,7 @@ const ServiceLinksContainer = styled.div`
   flex-direction: column;
   margin-top: ${props => props.theme.spacing.md};
   padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
-  background-color: rgba(0, 0, 0, 0.6);
+  ${smokedGlass}
   border-radius: ${props => props.theme.radius.medium};
   width: fit-content;
   max-width: 90%;
@@ -223,13 +233,13 @@ const ServiceLink = styled(Link)`
 
   
   &:hover, &:focus {
-    color: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.white};
     text-decoration: underline;
     text-underline-offset: 3px;
   }
   
   &:focus-visible {
-    outline: 2px solid ${props => props.theme.colors.accent};
+    outline: 2px solid ${props => props.theme.colors.white};
     outline-offset: 2px;
   }
 `;
@@ -247,12 +257,9 @@ const ServiceLinkSeparator = styled.span`
 
 const FormColumn = styled.div`
   max-width: 400px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px) saturate(160%);
-  -webkit-backdrop-filter: blur(15px) saturate(160%);
+  ${smokedGlass}
   padding: ${props => props.theme.spacing.component.padding.large} ${props => props.theme.spacing.component.padding.default};
   border-radius: ${props => props.theme.radius.large};
-  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.2),
     inset 0 0 0 1px rgba(255, 255, 255, 0.15),

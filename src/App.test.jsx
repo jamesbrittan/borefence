@@ -38,4 +38,14 @@ describe('routes', () => {
     renderAt('/no-such-page');
     expect(screen.getByRole('heading', { level: 1, name: /page not found/i })).toBeInTheDocument();
   });
+
+  it.each([
+    ['/', 'BoreFence | Garden Fencing and Railings'],
+    ['/contact', 'Contact us | BoreFence'],
+    ['/services/railings', 'Railings | BoreFence'],
+    ['/no-such-page', 'Page not found | BoreFence'],
+  ])('gives %s its own page title', (path, title) => {
+    renderAt(path);
+    expect(document.title).toBe(title);
+  });
 });

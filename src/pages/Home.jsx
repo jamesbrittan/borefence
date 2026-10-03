@@ -70,6 +70,7 @@ const Home = () => {
 
   return (
     <HomeContainer>
+      <title>BoreFence | Garden Fencing and Railings</title>
       <HeroSection
         title="BoreFence -Fencing and Railings"
         subtitle="Adding security, protection and style to your outdoor space"

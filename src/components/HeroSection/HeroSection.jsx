@@ -153,7 +153,7 @@ const HeroTitle = styled.h1`
   }
 `;
 
-const HeroSubtitle = styled.h2`
+const HeroSubtitle = styled.p`
   ${props => props.theme.typography.heading}
   font-size: ${props => props.theme.fonts.size.subtitle};
   font-weight: ${props => props.theme.fonts.weights.semiBold};

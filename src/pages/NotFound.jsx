@@ -30,6 +30,7 @@ const Message = styled.p`
 const NotFound = () => {
   return (
     <NotFoundContainer>
+      <title>Page not found | BoreFence</title>
       <NotFoundContent>
         <Title>Page not found</Title>
         <Message>

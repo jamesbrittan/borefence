@@ -62,10 +62,11 @@ const ContactSection = styled.section`
 const Contact = () => {
   return (
     <ContactContainer>
+      <title>Contact us | BoreFence</title>
       <FullWidthSection>
         <ContactWrapper>
           <ContactSection>
-            <ContactForm dark={false} />
+            <ContactForm dark={false} headingLevel="h1" />
           </ContactSection>
         </ContactWrapper>
       </FullWidthSection>

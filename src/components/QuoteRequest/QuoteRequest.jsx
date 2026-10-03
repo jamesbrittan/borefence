@@ -249,8 +249,7 @@ const fadeIn = keyframes`
 // Full-width band with a soft divider line along its top
 const Band = styled.div`
   background-color: ${props => props.theme.colors.background};
-  padding-top: ${props => props.theme.spacing.xl};
-  padding-bottom: ${props => props.theme.spacing.xxl};
+  padding-block: ${props => props.theme.spacing.xl} ${props => props.theme.spacing.section};
   position: relative;
   animation: ${fadeIn} 1s ease-out forwards;
 
@@ -271,10 +270,10 @@ const Band = styled.div`
 `;
 
 const Card = styled.section`
-  ${props => props.theme.mixins.narrowContainer}
+  width: calc(100% - 2 * ${props => props.theme.spacing.gutter});
   max-width: 600px;
-  margin: 0 auto;
-  padding: ${props => props.theme.spacing.component.padding.default};
+  margin-inline: auto;
+  padding: ${props => props.theme.spacing.card};
   background-color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
   box-shadow: ${props => props.theme.shadows.medium};

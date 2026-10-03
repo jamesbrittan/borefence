@@ -22,12 +22,11 @@ const FullWidthSection = styled.section`
 `;
 
 const HeaderSection = styled.section`
-  ${props => props.theme.mixins.narrowContainer}
-  padding: ${props => props.theme.spacing.xxl} 0 ${props => props.theme.spacing.xl};
+  ${props => props.theme.mixins.container}
+  padding-top: ${props => props.theme.spacing.section};
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid ${props => props.theme.colors.border};
   position: relative;
   
   &::before {
@@ -51,12 +50,11 @@ const ServiceHeader = styled.div`
   display: flex;
   align-items: stretch;
   gap: ${props => props.theme.spacing.xl};
-  margin-bottom: ${props => props.theme.spacing.xl};
   width: 100%;
   justify-content: space-between;
   background-color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
-  padding: ${props => props.theme.spacing.xl};
+  padding: ${props => props.theme.spacing.card};
   box-shadow: ${props => props.theme.shadows.medium};
   flex-direction: row-reverse;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -66,15 +64,10 @@ const ServiceHeader = styled.div`
     box-shadow: ${props => props.theme.shadows.large};
   }
   
+  /* Stack text above the gallery on tablets and phones (left-aligned throughout) */
   @media (max-width: ${props => props.theme.breakpoints.desktop}) {
     flex-direction: column;
-    text-align: center;
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    flex-direction: column;
     gap: ${props => props.theme.spacing.lg};
-    padding: ${props => props.theme.spacing.lg};
   }
 `;
 
@@ -88,26 +81,14 @@ const GalleryWrapper = styled.div`
   &:hover {
     transform: scale(1.01);
   }
-  
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    margin-top: ${props => props.theme.spacing.lg};
-  }
 `;
 
 const TitleSection = styled.div`
   flex: 1;
-  padding: ${props => props.theme.spacing.lg};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: ${props => props.theme.spacing.xl};
   animation: fadeIn 0.6s ease-out forwards;
-  
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    margin-bottom: ${props => props.theme.spacing.md};
-    text-align: left;
-    padding: ${props => props.theme.spacing.md};
-  }
 `;
 
 const Title = styled.h1`
@@ -134,16 +115,6 @@ const Title = styled.h1`
       ${props => props.theme.colors.primary}
     );
     transition: width 0.3s ease;
-    
-    @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    
-    @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-      left: 0;
-      transform: none;
-    }
   }
   
   &:hover::after {
@@ -166,15 +137,13 @@ const Description = styled.div`
 `;
 
 const ContentSection = styled.section`
-  ${props => props.theme.mixins.narrowContainer}
-  padding: ${props => props.theme.spacing.md} 0 ${props => props.theme.spacing.xl};
-  margin-top: ${props => props.theme.spacing.md};
+  ${props => props.theme.mixins.container}
   animation: fadeIn 1s ease-out forwards;
 `;
 
 // The quote section sits a little further below the page content
 const QuoteSection = styled(QuoteRequestSection)`
-  margin-top: ${props => props.theme.spacing.xxl};
+  margin-top: ${props => props.theme.spacing.section};
 `;
 
 const ServicePage = ({ service }) => {
@@ -197,14 +166,17 @@ const ServicePage = ({ service }) => {
         </HeaderSection>
       </FullWidthSection>
       
-      <FullWidthSection>
-        <ContentSection>
-          {extras.map((Extra) => (
-            <Extra key={Extra.name} />
-          ))}
-        </ContentSection>
-      </FullWidthSection>
-      
+      {/* Only Services with extra sections (e.g. Railings) get this block */}
+      {extras.length > 0 && (
+        <FullWidthSection>
+          <ContentSection>
+            {extras.map((Extra) => (
+              <Extra key={Extra.name} />
+            ))}
+          </ContentSection>
+        </FullWidthSection>
+      )}
+
       <FullWidthSection>
         <QuoteSection />
       </FullWidthSection>

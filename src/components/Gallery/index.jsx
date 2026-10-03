@@ -14,12 +14,6 @@ const MainImageContainer = styled.div`
   &:hover {
     transform: scale(1.02);
   }
-  
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-  }
 `;
 
 const MainImage = styled.img`
@@ -64,16 +58,11 @@ const ThumbnailsContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, auto);
   gap: ${props => props.theme.spacing.sm};
-  margin-top: ${props => props.theme.spacing.lg};
-  width: 85%;
-  margin-left: 0;
-  margin-right: auto;
-  
+  margin-top: ${props => props.theme.spacing.md};
+  width: 100%;
+
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    grid-template-columns: repeat(4, 1fr);
     gap: ${props => props.theme.spacing.xs};
-    width: 90%;
-    margin-top: ${props => props.theme.spacing.md};
   }
 `;
 
@@ -178,15 +167,6 @@ const GalleryContainer = styled.div`
   border-radius: ${props => props.theme.radius.medium};
   overflow: hidden;
   position: relative;
-
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    max-width: 600px;
-  }
-
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    max-width: 100%;
-    margin-bottom: ${props => props.theme.spacing.md};
-  }
 `;
 
 /**

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { services, servicePath } from './catalogue/services';
@@ -46,7 +46,7 @@ describe('routes', () => {
     expect(screen.getByText('7 / 7')).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Services' }));
-    await user.click(screen.getByRole('link', { name: 'Sheds' }));
+    await user.click(within(document.getElementById('services-menu')).getByRole('link', { name: 'Sheds' }));
 
     expect(screen.getByRole('heading', { level: 1, name: 'Sheds' })).toBeInTheDocument();
     expect(screen.getByText('1 / 2')).toBeInTheDocument();

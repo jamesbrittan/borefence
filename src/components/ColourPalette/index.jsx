@@ -2,16 +2,14 @@ import styled from 'styled-components';
 
 const PaletteHeading = styled.h2`
   ${props => props.theme.typography.heading}
-  font-size: ${props => props.theme.fonts.size.h2};
-  margin-top: ${props => props.theme.spacing.xxxl}; /* Increased top margin */
+  font-size: ${props => props.theme.fonts.size.sectionTitle};
+  margin-top: ${props => props.theme.spacing.section};
   margin-bottom: ${props => props.theme.spacing.md};
   text-align: center;
 `;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto ${props => props.theme.spacing.xl};
   display: flex;
   flex-direction: column;
   gap: ${props => props.theme.spacing.md};
@@ -64,12 +62,9 @@ const ColorBlock = styled.div`
 const LargeColorBlock = styled(ColorBlock)`
   flex: 1;
   
+  /* Two swatches per row on tablets and phones */
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     flex: 1 1 45%;
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    flex: 1 1 100%;
   }
 `;
 
@@ -93,12 +88,12 @@ const BrownBlock = styled(LargeColorBlock)`
   color: ${props => props.theme.colors.white};
 `;
 
-const AnthraciteGreyBlock = styled(ColorBlock)`
+const AnthraciteGreyBlock = styled(LargeColorBlock)`
   background-color: ${props => props.theme.colors.fence.anthraciteGrey};
   color: ${props => props.theme.colors.white};
 `;
 
-const BlackBlock = styled(ColorBlock)`
+const BlackBlock = styled(LargeColorBlock)`
   background-color: ${props => props.theme.colors.fence.mattBlack};
   color: ${props => props.theme.colors.white};
 `;

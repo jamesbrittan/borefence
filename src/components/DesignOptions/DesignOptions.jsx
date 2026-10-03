@@ -4,24 +4,20 @@ import { business, postcodeList } from "../../business/details";
 
 const DesignSection = styled.section`
   ${(props) => props.theme.mixins.fullWidth}
-  padding: 4rem 0;
+  padding: ${(props) => props.theme.spacing.section} 0;
   background-color: ${(props) => props.theme.colors.background};
 `;
 
 const Container = styled.div`
-  ${(props) => props.theme.mixins.narrowContainer}
-  width: 80%;
-  max-width: 1080px;
-  margin: 0 auto;
+  ${(props) => props.theme.mixins.container}
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: ${(props) => props.theme.spacing.section};
   align-items: center;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    width: 90%;
+    gap: ${(props) => props.theme.spacing.xl};
   }
 `;
 
@@ -54,7 +50,7 @@ const Content = styled.div`
 const SectionTitle = styled.h2`
   ${(props) => props.theme.typography.heading}
   color: ${(props) => props.theme.colors.text};
-  margin-bottom: 3rem;
+  margin-bottom: ${(props) => props.theme.spacing.lg};
   font-size: ${props => props.theme.fonts.size.sectionTitle};
   line-height: 1.2;
 `;

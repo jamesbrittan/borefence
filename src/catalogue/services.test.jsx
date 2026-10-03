@@ -6,6 +6,7 @@ import { screen, within } from '@testing-library/react';
 import { renderWithProviders } from '../test/utils';
 import Navigation from '../components/Navigation/Navigation';
 import HeroSection from '../components/HeroSection/HeroSection';
+import Footer from '../components/Footer/Footer';
 import { services, servicePath, findService, galleryImages } from './services';
 
 const IMAGES = join(process.cwd(), 'public', 'assets', 'images');
@@ -53,5 +54,11 @@ describe('Service catalogue', () => {
     for (const service of services) {
       expect(screen.getByRole('link', { name: service.name })).toHaveAttribute('href', servicePath(service));
     }
+  });
+
+  it('puts every Service in the footer', () => {
+    renderWithProviders(<Footer />);
+    const footerNav = screen.getByRole('navigation', { name: 'Services' });
+    expect(within(footerNav).getAllByRole('link').map((a) => a.getAttribute('href'))).toEqual(services.map(servicePath));
   });
 });

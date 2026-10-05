@@ -3,7 +3,6 @@ import { Img } from "../../images";
 
 const DesignSection = styled.section`
   ${(props) => props.theme.mixins.fullWidth}
-  width: 100vw;
   padding: 4rem 0;
   background-color: ${(props) => props.theme.colors.background};
 `;

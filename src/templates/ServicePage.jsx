@@ -13,14 +13,11 @@ const fadeIn = `
 
 const ServiceContainer = styled.main`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
-  overflow-x: hidden;
   ${fadeIn}
 `;
 
 const FullWidthSection = styled.section`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
 `;
 
 const HeaderSection = styled.section`
@@ -115,7 +112,9 @@ const TitleSection = styled.div`
 const Title = styled.h1`
   ${props => props.theme.typography.heading}
   color: ${props => props.theme.colors.primary};
-  font-size: calc(${props => props.theme.spacing.xxl} * 1.4);
+  /* 4.2rem on wide screens, scaling down so long words fit on phones */
+  font-size: clamp(2.25rem, 10vw, 4.2rem);
+  overflow-wrap: break-word;
   margin: 0 0 ${props => props.theme.spacing.lg} 0;
   position: relative;
   font-weight: 700;

@@ -3,7 +3,6 @@ import FeatureCard from '../FeatureCard/FeatureCard';
 
 const FeaturesContainer = styled.section`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
   padding: ${props => props.theme.spacing.section.padding.default};
   background-color: ${props => props.theme.colors.white};
   position: relative;
@@ -34,7 +33,7 @@ const FeaturesInner = styled.div`
   gap: ${props => props.theme.spacing.lg};
   
   @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   }
 `;
 

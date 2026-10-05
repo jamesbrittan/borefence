@@ -1,20 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { QuoteRequestSection } from '../components/QuoteRequest';
 import PageMeta from '../seo/PageMeta';
 import Gallery from '../components/Gallery';
-import { galleryImages } from '../catalogue/services';
+import { Link } from 'react-router-dom';
+import { galleryImages, services, servicePath } from '../catalogue/services';
+import { business, telHref } from '../business/details';
 
-
-const fadeIn = `
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-`;
+const QUOTE_ID = 'quote';
 
 const ServiceContainer = styled.main`
   ${props => props.theme.mixins.fullWidth}
-  ${fadeIn}
 `;
 
 const FullWidthSection = styled.section`
@@ -28,22 +23,6 @@ const HeaderSection = styled.section`
   flex-direction: column;
   align-items: center;
   position: relative;
-  
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      ${props => props.theme.colors.background},
-      transparent
-    );
-    opacity: 0.6;
-    z-index: -1;
-  }
 `;
 
 const ServiceHeader = styled.div`
@@ -57,7 +36,6 @@ const ServiceHeader = styled.div`
   padding: ${props => props.theme.spacing.card};
   box-shadow: ${props => props.theme.shadows.medium};
   flex-direction: row-reverse;
-  animation: fadeIn 0.8s ease-out forwards;
   
   /* Stack text above the gallery on tablets and phones (left-aligned throughout) */
   @media (max-width: ${props => props.theme.breakpoints.desktop}) {
@@ -78,7 +56,6 @@ const TitleSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  animation: fadeIn 0.6s ease-out forwards;
 `;
 
 const Title = styled.h1`
@@ -113,6 +90,8 @@ const Description = styled.div`
   font-size: 1.1rem;
   margin: ${props => props.theme.spacing.sm} 0;
   line-height: 1.8;
+  /* Readable line length when the card stacks and the text gets wide */
+  max-width: 65ch;
   position: relative;
   
   strong {
@@ -123,7 +102,118 @@ const Description = styled.div`
 
 const ContentSection = styled.section`
   ${props => props.theme.mixins.container}
-  animation: fadeIn 1s ease-out forwards;
+`;
+
+// Ways to act straight away, so the quote form at the bottom isn't the only one
+const Actions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${props => props.theme.spacing.sm};
+  margin-top: ${props => props.theme.spacing.lg};
+`;
+
+const actionBase = css`
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
+  border-radius: ${props => props.theme.radius.medium};
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+`;
+
+const PrimaryAction = styled.a`
+  ${actionBase}
+  background: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.white};
+
+  &:hover,
+  &:focus {
+    background: ${props => props.theme.colors.primaryDark};
+    color: ${props => props.theme.colors.white};
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${props => props.theme.colors.primary};
+    outline-offset: 2px;
+  }
+`;
+
+const SecondaryAction = styled.a`
+  ${actionBase}
+  border: 2px solid ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.primary};
+
+  &:hover,
+  &:focus {
+    background: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.white};
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${props => props.theme.colors.primary};
+    outline-offset: 2px;
+  }
+`;
+
+const OtherServices = styled.section`
+  ${props => props.theme.mixins.container}
+  padding-top: ${props => props.theme.spacing.section};
+`;
+
+const OtherServicesHeading = styled.h2`
+  ${props => props.theme.typography.heading}
+  font-size: ${props => props.theme.fonts.size.sectionTitle};
+  margin-bottom: ${props => props.theme.spacing.lg};
+`;
+
+const OtherServicesList = styled.ul`
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: ${props => props.theme.spacing.md};
+`;
+
+// The whole card is the link
+const OtherServiceLink = styled(Link)`
+  display: block;
+  height: 100%;
+  padding: ${props => props.theme.spacing.card};
+  background: ${props => props.theme.colors.white};
+  border-radius: ${props => props.theme.radius.medium};
+  box-shadow: ${props => props.theme.shadows.small};
+  color: ${props => props.theme.colors.text};
+  font-weight: normal;
+  transition: box-shadow 0.15s ease;
+
+  h3 {
+    color: ${props => props.theme.colors.primary};
+    font-size: ${props => props.theme.fonts.size.xl};
+    margin-bottom: ${props => props.theme.spacing.xs};
+  }
+
+  p {
+    margin: 0;
+    font-size: ${props => props.theme.fonts.size.sm};
+    line-height: 1.5;
+  }
+
+  &:hover h3,
+  &:focus h3 {
+    text-decoration: underline;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      box-shadow: ${props => props.theme.shadows.medium};
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${props => props.theme.colors.primary};
+    outline-offset: 2px;
+  }
 `;
 
 // The quote section sits a little further below the page content
@@ -133,6 +223,8 @@ const QuoteSection = styled(QuoteRequestSection)`
 
 const ServicePage = ({ service }) => {
   const { name, summary, description, extras = [] } = service;
+  const otherServices = services.filter((other) => other.slug !== service.slug);
+  const phone = business.phones[0];
 
   return (
     <ServiceContainer>
@@ -143,6 +235,10 @@ const ServicePage = ({ service }) => {
             <TitleSection>
               <Title>{name}</Title>
               <Description>{description}</Description>
+              <Actions>
+                <PrimaryAction href={`#${QUOTE_ID}`}>Get a free quote</PrimaryAction>
+                <SecondaryAction href={telHref(phone)}>Call {phone.display}</SecondaryAction>
+              </Actions>
             </TitleSection>
             <GalleryWrapper>
               <Gallery images={galleryImages(service)} />
@@ -150,7 +246,7 @@ const ServicePage = ({ service }) => {
           </ServiceHeader>
         </HeaderSection>
       </FullWidthSection>
-      
+
       {/* Only Services with extra sections (e.g. Railings) get this block */}
       {extras.length > 0 && (
         <FullWidthSection>
@@ -162,8 +258,22 @@ const ServicePage = ({ service }) => {
         </FullWidthSection>
       )}
 
+      <OtherServices aria-labelledby="other-services">
+        <OtherServicesHeading id="other-services">Other services</OtherServicesHeading>
+        <OtherServicesList>
+          {otherServices.map((other) => (
+            <li key={other.slug}>
+              <OtherServiceLink to={servicePath(other)}>
+                <h3>{other.name}</h3>
+                <p>{other.summary}</p>
+              </OtherServiceLink>
+            </li>
+          ))}
+        </OtherServicesList>
+      </OtherServices>
+
       <FullWidthSection>
-        <QuoteSection />
+        <QuoteSection id={QUOTE_ID} />
       </FullWidthSection>
     </ServiceContainer>
   );

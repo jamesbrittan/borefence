@@ -4,12 +4,6 @@ const StyledFeatureCard = styled.article`
   text-align: center;
   padding: ${props => props.theme.spacing.card};
   border-radius: ${props => props.theme.radius.medium};
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${props => props.theme.shadows.medium};
-  }
 
   h3 {
     color: ${props => props.theme.colors.primary};

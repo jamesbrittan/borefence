@@ -79,7 +79,7 @@ const Input = styled.input`
   font-size: ${props => props.theme.spacing.md};
   line-height: 1.5;
   width: 100%;
-  transition: all 0.2s;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
   &::placeholder {
     color: var(--quote-placeholder);
@@ -109,12 +109,18 @@ const SubmitButton = styled.button`
   color: var(--quote-button-text);
   font-weight: ${props => props.theme.fonts.weights.semiBold};
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
-    transform: translateY(-2px);
     background: var(--quote-button-bg-hover);
-    box-shadow: ${props => props.theme.shadows.medium};
+  }
+
+  /* A small lift as polish, only where there's a real mouse to hover with */
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: ${props => props.theme.shadows.medium};
+    }
   }
 
   &:focus-visible {
@@ -277,12 +283,6 @@ const Card = styled.section`
   background-color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
   box-shadow: ${props => props.theme.shadows.medium};
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${props => props.theme.shadows.large};
-  }
 `;
 
 /** The quote form in its white card, in a full-width band (Contact and Service pages). */

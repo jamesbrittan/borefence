@@ -94,4 +94,13 @@ describe('Gallery', () => {
     const { container } = renderWithProviders(<Gallery images={[]} />);
     expect(container).toBeEmptyDOMElement();
   });
+
+  it('does not change the photo when a thumbnail is merely hovered', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<Gallery images={fencing} />);
+
+    await user.hover(thumbnail(5));
+    expect(counter(1)).toBeInTheDocument();
+    expect(thumbnail(1)).toHaveAttribute('aria-pressed', 'true');
+  });
 });

@@ -57,12 +57,7 @@ const ServiceHeader = styled.div`
   padding: ${props => props.theme.spacing.card};
   box-shadow: ${props => props.theme.shadows.medium};
   flex-direction: row-reverse;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: fadeIn 0.8s ease-out forwards;
-  
-  &:hover {
-    box-shadow: ${props => props.theme.shadows.large};
-  }
   
   /* Stack text above the gallery on tablets and phones (left-aligned throughout) */
   @media (max-width: ${props => props.theme.breakpoints.desktop}) {
@@ -73,14 +68,9 @@ const ServiceHeader = styled.div`
 
 const GalleryWrapper = styled.div`
   flex: 1;
-  transition: transform 0.5s ease;
   position: relative;
   overflow: visible;
   border-radius: ${props => props.theme.radius.medium};
-  
-  &:hover {
-    transform: scale(1.01);
-  }
 `;
 
 const TitleSection = styled.div`
@@ -114,11 +104,6 @@ const Title = styled.h1`
       ${props => props.theme.colors.primaryLight},
       ${props => props.theme.colors.primary}
     );
-    transition: width 0.3s ease;
-  }
-  
-  &:hover::after {
-    width: 160px;
   }
 `;
 

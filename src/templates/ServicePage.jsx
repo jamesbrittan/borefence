@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getResponsiveImageUrl } from '../utils/imageUtils';
+import { imageSrc } from '../images';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ServiceGallery from '../components/ServiceGallery';
 
@@ -213,7 +213,7 @@ const ContactSection = styled.section`
 `;
 
 const ServicePage = ({ title, description, image, children }) => {
-  const imageUrl = getResponsiveImageUrl(image, 800);
+  const imageUrl = imageSrc(image, { width: 800 });
   const serviceType = title.toLowerCase();
   
   return (

@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getImageUrl } from '../../utils/imageUtils';
+import { imageSrc } from '../../images';
 
-const logoPath = getImageUrl('logo.png');
+// Twice the largest display width (202px) for high-density screens.
+const logoPath = imageSrc('logo.png', { width: 404 });
 
 const Nav = styled.nav`
   ${props => props.theme.mixins.container}

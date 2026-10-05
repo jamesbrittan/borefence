@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { getResizedImageUrl } from "../../utils/imageUtils";
+import { Img } from "../../images";
 
 const DesignSection = styled.section`
   ${(props) => props.theme.mixins.fullWidth}
@@ -64,8 +64,10 @@ const DesignOptions = () => {
     <DesignSection aria-labelledby="design-options-title">
       <Container>
         <ImageWrapper>
-          <img
-            src={getResizedImageUrl("van_square.jpg", 600)}
+          <Img
+            path="van_square.jpg"
+            widths={[400, 600, 900, 1200]}
+            sizes="(max-width: 768px) 90vw, 520px"
             alt="The BoreFence team with their ColourFence van"
             loading="lazy"
           />

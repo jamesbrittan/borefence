@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { imageSrc } from '../../images';
+import { Img } from '../../images';
+import VisuallyHidden from '../VisuallyHidden';
 
 const MainImageContainer = styled.div`
   width: 100%;
@@ -11,7 +12,7 @@ const MainImageContainer = styled.div`
   position: relative;
 `;
 
-const MainImage = styled.img`
+const MainImage = styled(Img)`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -98,7 +99,7 @@ const ThumbnailWrapper = styled.button`
   }
 `;
 
-const Thumbnail = styled.img`
+const Thumbnail = styled(Img)`
   position: absolute;
   top: 0;
   left: 0;
@@ -125,6 +126,7 @@ const NavigationButtons = styled.div`
 
 const NavButton = styled.button`
   background-color: rgba(255, 255, 255, 0.8);
+  color: ${props => props.theme.colors.text};
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -150,12 +152,29 @@ const NavButton = styled.button`
     outline-offset: 2px;
   }
   
+  /* Keep a 30px target on small phones (WCAG 2.5.8 asks for at least 24px) */
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
     width: 30px;
     height: 30px;
-    font-size: 1.2rem;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
   }
 `;
+
+const Chevron = ({ direction }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d={direction === 'left' ? 'M15 18l-6-6 6-6' : 'M9 18l6-6-6-6'} />
+  </svg>
+);
+
+// Photo width in the layout: half the Service card on desktop, the full card
+// width once the card stacks (<= 1024px). Used to pick the right srcset size.
+const MAIN_SIZES = '(max-width: 1024px) calc(100vw - 6rem), 520px';
+const THUMB_SIZES = '(max-width: 1024px) 22vw, 120px';
+const SWIPE_DISTANCE = 40;
 
 const GalleryContainer = styled.div`
   width: 100%;
@@ -171,9 +190,20 @@ const GalleryContainer = styled.div`
  *
  * images: [{ src: 'fencing/1.jpg', alt: '…' }], from the Service catalogue
  */
+/**
+ * Image gallery: a main image with previous/next buttons and a counter, plus
+ * a strip of thumbnails. Thumbnails respond to click, Enter and Space;
+ * Left/Right arrow keys step through images while focus is in the gallery,
+ * and on touch screens the photo can be swiped. Changes are announced to
+ * screen readers.
+ *
+ * images: [{ src: 'fencing/1.jpg', alt: '…' }], from the Service catalogue
+ */
 const Gallery = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [announcement, setAnnouncement] = useState('');
   const thumbnailRefs = useRef([]);
+  const touchStart = useRef(null);
   const count = images.length;
   const selectedImage = images[currentIndex];
 
@@ -181,32 +211,61 @@ const Gallery = ({ images }) => {
 
   const step = (delta) => (currentIndex + delta + count) % count;
 
+  // Every user-driven change goes through here so it's announced
+  const show = (index) => {
+    setCurrentIndex(index);
+    setAnnouncement(`Image ${index + 1} of ${count}: ${images[index].alt}`);
+  };
+
   const handleKeyDown = (e) => {
     if (count <= 1 || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
     e.preventDefault();
     const next = step(e.key === 'ArrowRight' ? 1 : -1);
-    setCurrentIndex(next);
+    show(next);
     // Keep focus with the selection when stepping through thumbnails
     if (thumbnailRefs.current.includes(e.target)) {
       thumbnailRefs.current[next]?.focus();
     }
   };
 
+  const handleTouchStart = (e) => {
+    const { clientX, clientY } = e.changedTouches[0];
+    touchStart.current = { x: clientX, y: clientY };
+  };
+
+  // A mostly-horizontal swipe of 40px or more moves to the next/previous photo
+  const handleTouchEnd = (e) => {
+    if (!touchStart.current || count <= 1) return;
+    const { clientX, clientY } = e.changedTouches[0];
+    const dx = clientX - touchStart.current.x;
+    const dy = clientY - touchStart.current.y;
+    touchStart.current = null;
+    if (Math.abs(dx) >= SWIPE_DISTANCE && Math.abs(dx) > Math.abs(dy)) {
+      show(step(dx < 0 ? 1 : -1));
+    }
+  };
+
   return (
     <GalleryContainer onKeyDown={handleKeyDown}>
-      <MainImageContainer>
-        <MainImage src={imageSrc(selectedImage.src, { width: 800 })} alt={selectedImage.alt} />
+      <MainImageContainer onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+        <MainImage
+          path={selectedImage.src}
+          widths={[480, 800, 1200, 1600]}
+          sizes={MAIN_SIZES}
+          alt={selectedImage.alt}
+          fetchPriority="high"
+        />
         {count > 1 && (
           <>
             <ImageCounter>
               {currentIndex + 1} / {count}
             </ImageCounter>
             <NavigationButtons>
-              <NavButton type="button" onClick={() => setCurrentIndex(step(-1))} aria-label="Previous image">
-                ‹
+              <NavButton type="button" onClick={() => show(step(-1))} aria-label="Previous image">
+                <Chevron direction="left" />
               </NavButton>
-              <NavButton type="button" onClick={() => setCurrentIndex(step(1))} aria-label="Next image">
-                ›
+              <NavButton type="button" onClick={() => show(step(1))} aria-label="Next image">
+                <Chevron direction="right" />
               </NavButton>
             </NavigationButtons>
           </>
@@ -218,16 +277,26 @@ const Gallery = ({ images }) => {
           <ThumbnailWrapper
             key={image.src}
             ref={(el) => (thumbnailRefs.current[index] = el)}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => show(index)}
             $isActive={currentIndex === index}
             type="button"
             aria-pressed={currentIndex === index}
             aria-label={`View image ${index + 1} of ${count}`}
           >
-            <Thumbnail src={imageSrc(image.src, { width: 150, height: 150, fit: 'cover' })} alt="" />
+            <Thumbnail
+              path={image.src}
+              widths={[150, 300, 450]}
+              height={450}
+              fit="cover"
+              sizes={THUMB_SIZES}
+              alt=""
+              loading="lazy"
+            />
           </ThumbnailWrapper>
         ))}
       </ThumbnailsContainer>
+
+      <VisuallyHidden role="status">{announcement}</VisuallyHidden>
     </GalleryContainer>
   );
 };

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { imageSrc } from '../../images';
 
@@ -180,71 +180,19 @@ const GalleryContainer = styled.div`
   align-items: flex-start;
 `;
 
-const ImageGallery = ({ serviceName }) => {
-  // Normalize service name for folder path (lowercase, no spaces)
-  const normalizedServiceName = serviceName.toLowerCase().replace(/\s+/g, '-');
-  const [images, setImages] = useState([]);
-  const [filteredImages, setFilteredImages] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+// images: [{ src: 'fencing/1.jpg', alt: '…' }], from the Service catalogue
+const ImageGallery = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  useEffect(() => {
-    // Dynamically load images from the service folder
-    try {
-      // Generate paths for images 1-10 (adjust based on expected max)
-      let galleryImages = [];
-      for (let i = 1; i <= 10; i++) {
-        galleryImages.push(`/assets/images/${normalizedServiceName}/${i}.jpg`);
-      }
-      
-      setImages(galleryImages);
-      
-      // Initial selection
-      if (galleryImages.length > 0) {
-        setSelectedImage(galleryImages[0]);
-      }
-    } catch (err) {
-      console.error("Failed to load images:", err);
-    }
-  }, [normalizedServiceName]);
+  const selectedImage = images[currentIndex];
 
-  // Filter out images that failed to load
-  const handleImageError = (imageUrl) => {
-    setFilteredImages(prevFiltered => {
-      if (!prevFiltered.includes(imageUrl)) {
-        return [...prevFiltered, imageUrl];
-      }
-      return prevFiltered;
-    });
-  };
-  
-  // Get valid images that exist
-  const validImages = images.filter(img => !filteredImages.includes(img));
-  
-  const handleThumbnailClick = (imageUrl) => {
-    setSelectedImage(imageUrl);
-    setCurrentIndex(validImages.indexOf(imageUrl));
-  };
-  
-  const handleThumbnailHover = (imageUrl) => {
-    setSelectedImage(imageUrl);
-    setCurrentIndex(validImages.indexOf(imageUrl));
-  };
-  
   const handleNextImage = () => {
-    if (validImages.length <= 1) return;
-    
-    const nextIndex = (currentIndex + 1) % validImages.length;
-    setSelectedImage(validImages[nextIndex]);
-    setCurrentIndex(nextIndex);
+    if (images.length <= 1) return;
+    setCurrentIndex((currentIndex + 1) % images.length);
   };
-  
+
   const handlePrevImage = () => {
-    if (validImages.length <= 1) return;
-    
-    const prevIndex = (currentIndex - 1 + validImages.length) % validImages.length;
-    setSelectedImage(validImages[prevIndex]);
-    setCurrentIndex(prevIndex);
+    if (images.length <= 1) return;
+    setCurrentIndex((currentIndex - 1 + images.length) % images.length);
   };
 
   // Now we return just the main image element for positioning in parent
@@ -252,18 +200,14 @@ const ImageGallery = ({ serviceName }) => {
     <MainImageContainer>
       {selectedImage && (
         <>
-          <MainImage 
-            src={imageSrc(selectedImage.replace('/assets/images/', ''), { width: 800 })} 
-            alt={`${serviceName} gallery featured image`} 
-            onError={(e) => {
-              // Fallback to a default image if the selected one fails to load
-              e.target.src = imageSrc('default.jpg', { width: 800 });
-            }}
+          <MainImage
+            src={imageSrc(selectedImage.src, { width: 800 })}
+            alt={selectedImage.alt}
           />
-          {validImages.length > 1 && (
+          {images.length > 1 && (
             <>
               <ImageCounter>
-                {currentIndex + 1} / {validImages.length}
+                {currentIndex + 1} / {images.length}
               </ImageCounter>
               <NavigationButtons>
                 <NavButton 
@@ -289,23 +233,19 @@ const ImageGallery = ({ serviceName }) => {
   // And separately return the thumbnails
   const renderThumbnails = () => (
     <ThumbnailsContainer>
-      {validImages.map((image, index) => (
-        <ThumbnailWrapper 
-          key={`thumbnail-${index}`} 
-          onClick={() => handleThumbnailClick(image)}
-          onMouseEnter={() => handleThumbnailHover(image)}
+      {images.map((image, index) => (
+        <ThumbnailWrapper
+          key={image.src}
+          onClick={() => setCurrentIndex(index)}
+          onMouseEnter={() => setCurrentIndex(index)}
           $isActive={currentIndex === index}
           type="button"
           aria-pressed={currentIndex === index}
-          aria-label={`View image ${index + 1} of ${validImages.length}`}
+          aria-label={`View image ${index + 1} of ${images.length}`}
         >
-          <Thumbnail 
-            src={imageSrc(image.replace('/assets/images/', ''), { width: 150, height: 150, fit: 'cover' })} 
+          <Thumbnail
+            src={imageSrc(image.src, { width: 150, height: 150, fit: 'cover' })}
             alt=""
-            onError={(e) => {
-              handleImageError(image);
-              e.target.src = imageSrc('default-thumbnail.jpg', { width: 150, height: 150, fit: 'cover' });
-            }}
           />
         </ThumbnailWrapper>
       ))}

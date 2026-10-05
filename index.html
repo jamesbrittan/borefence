@@ -10,8 +10,12 @@
     <title>Bore Fence - Garden Fencing and Railings</title>
   </head>
   <body>
-    <!-- Hidden form for Netlify form detection -->
+    <!-- Hidden form for Netlify form detection. Netlify only stores fields
+         declared here, so it must list every field the quote form sends
+         (a test in src/components/QuoteRequest checks this). -->
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-source" />
+      <input type="text" name="bot-field" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />

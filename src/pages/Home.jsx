@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ContactForm from '../components/ContactForm/ContactForm';
+import QuoteRequest from '../components/QuoteRequest';
 import Guarantee from '../components/Guarantee/Guarantee';
 import DesignOptions from '../components/DesignOptions/DesignOptions';
 import HeroSection from '../components/HeroSection/HeroSection';
@@ -72,7 +72,7 @@ const Home = () => {
       <HeroSection
         title="BoreFence -Fencing and Railings"
         subtitle="Adding security, protection and style to your outdoor space"
-        rightColumnContent={<ContactForm dark={true} />}
+        rightColumnContent={<QuoteRequest variant="glass" />}
         showServiceLinks={true}
       />
 

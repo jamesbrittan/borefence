@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Img } from "../../images";
+import { business, postcodeList } from "../../business/details";
 
 const DesignSection = styled.section`
   ${(props) => props.theme.mixins.fullWidth}
@@ -76,9 +77,9 @@ const DesignOptions = () => {
             About BoreFence
           </SectionTitle>
           <p>
-            Our team are based in Newport - we have been trading for 16+ years
-            as an accredited fitter of Colourfence and ColourRail covering the
-            NP and CF postcodes and South East Wales
+            {`Our team are based in ${business.area.base} - we have been trading for ${business.yearsTrading}+ years ` +
+              `as an accredited fitter of Colourfence and ColourRail covering the ${postcodeList()} postcodes ` +
+              `and ${business.area.region}`}
           </p>
         </Content>
       </Container>

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import QuoteRequest from '../components/QuoteRequest';
+import PageMeta from '../seo/PageMeta';
+import LocalBusinessSchema from '../seo/LocalBusinessSchema';
+import { business, postcodeList } from '../business/details';
 import Guarantee from '../components/Guarantee/Guarantee';
 import DesignOptions from '../components/DesignOptions/DesignOptions';
 import HeroSection from '../components/HeroSection/HeroSection';
@@ -57,7 +60,7 @@ const Home = () => {
     },
     {
       title: "Complete clearance of your existing fence, concrete posts, walls and hedges",
-      description: "We carry a Trade Waste License - Cymru Natural Resources Wales - Borefence Ltd CBOU9164"
+      description: `We carry a Trade Waste License - ${business.wasteLicence.authority} - ${business.legalName} ${business.wasteLicence.number}`
     },
     {
       title: "Complete project management from start to finish",
@@ -68,7 +71,11 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <title>BoreFence | Garden Fencing and Railings</title>
+      <PageMeta
+        fullTitle={`${business.name} | Garden Fencing and Railings`}
+        description={`${business.name} fit ColourFence fencing, ColourRail railings, gates and sheds across ${business.area.base}, the ${postcodeList()} postcodes and ${business.area.region}. Get a free quote.`}
+      />
+      <LocalBusinessSchema />
       <HeroSection
         title="BoreFence -Fencing and Railings"
         subtitle="Adding security, protection and style to your outdoor space"

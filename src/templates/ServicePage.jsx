@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { QuoteRequestSection } from '../components/QuoteRequest';
+import PageMeta from '../seo/PageMeta';
 import Gallery from '../components/Gallery';
 import { galleryImages } from '../catalogue/services';
 
@@ -177,11 +178,11 @@ const QuoteSection = styled(QuoteRequestSection)`
 `;
 
 const ServicePage = ({ service }) => {
-  const { name, description, extras = [] } = service;
+  const { name, summary, description, extras = [] } = service;
 
   return (
     <ServiceContainer>
-      <title>{`${name} | BoreFence`}</title>
+      <PageMeta title={name} description={summary} />
       <FullWidthSection>
         <HeaderSection>
           <ServiceHeader>

@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { getImageUrl } from '../../utils/imageUtils';
 
@@ -55,7 +55,15 @@ const NavLinks = styled.div`
   }
 `;
 
-const NavLink = styled(Link)`
+// Marks the link (or "Services" button) for the page you're on.
+const currentPageStyle = props => `
+  color: ${props.theme.colors.primary};
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+`;
+
+const NavLink = styled(RouterNavLink)`
   color: ${props => props.theme.colors.text};
   text-decoration: none;
   font-weight: ${props => props.theme.fonts.weights.medium};
@@ -64,6 +72,10 @@ const NavLink = styled(Link)`
 
   &:hover, &:focus {
     color: ${props => props.theme.colors.primary};
+  }
+
+  &[aria-current='page'] {
+    ${currentPageStyle}
   }
 `;
 
@@ -105,28 +117,44 @@ const ServicesButton = styled.button`
     outline-offset: 4px;
     border-radius: 2px;
   }
+
+  ${props => props.$isCurrentSection && currentPageStyle(props)}
 `;
 
-const Caret = styled.span`
-  display: inline-block;
-  margin-left: 0.25rem;
-  transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
-  transition: transform 0.2s ease;
-
-  &::after {
-    content: '▾';
-    display: block;
-    font-size: 1.2em;
-    line-height: 0.5;
-  }
+// An SVG rather than a text glyph: its box is exactly the arrow, so it turns
+// in place, and currentColor keeps it the same colour as the button text.
+const CaretIcon = styled.svg`
+  display: block;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  transform-origin: 50% 50%;
+  transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'none'};
+  transition: transform 150ms ease-out;
 `;
+
+const Caret = ({ isOpen }) => (
+  <CaretIcon
+    $isOpen={isOpen}
+    viewBox="0 0 12 12"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M2.5 4.25 6 7.75l3.5-3.5" />
+  </CaretIcon>
+);
 
 const DropdownMenu = styled.ul`
   list-style: none;
   position: absolute;
   top: 100%;
   right: 0;
-  transform: translateY(-10px);
+  margin: 0;
   background: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
   box-shadow: ${props => props.theme.shadows.medium};
@@ -134,9 +162,14 @@ const DropdownMenu = styled.ul`
   min-width: 250px;
   z-index: 1000;
   opacity: ${props => props.$isOpen ? 1 : 0};
+  transform: ${props => props.$isOpen ? 'none' : 'translateY(-4px)'};
   visibility: ${props => props.$isOpen ? 'visible' : 'hidden'};
-  transition: all 0.2s;
-  margin-top: 0.25rem;
+  /* Slides down into place, flush with the header's bottom edge. On close,
+     visibility flips only once the fade has finished. */
+  transition:
+    opacity 150ms ease-out,
+    transform 150ms ease-out,
+    visibility 0s linear ${props => props.$isOpen ? '0s' : '150ms'};
 
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
     left: clamp(0.75rem, 4vw, 1rem);
@@ -145,7 +178,7 @@ const DropdownMenu = styled.ul`
   }
 `;
 
-const DropdownLink = styled(Link)`
+const DropdownLink = styled(RouterNavLink)`
   display: block;
   padding: 0.75rem 1rem;
   color: ${props => props.theme.colors.text};
@@ -163,57 +196,53 @@ const DropdownLink = styled(Link)`
     outline: 2px solid ${props => props.theme.colors.primary};
     outline-offset: -2px;
   }
+
+  &[aria-current='page'] {
+    ${currentPageStyle}
+  }
 `;
+
+const services = [
+  { name: 'Fencing', path: '/services/fencing' },
+  { name: 'Railings', path: '/services/railings' },
+  { name: 'Gates', path: '/services/gates' },
+  { name: 'Sheds', path: '/services/sheds' },
+  { name: 'Tree Felling & Stump Grinding', path: '/services/tree-felling' },
+];
 
 const Navigation = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const buttonRef = useRef(null);
+  const dropdownRef = useRef(null);
+  const { pathname } = useLocation();
+  const isOnServicePage = services.some((service) => service.path === pathname);
 
-  const services = [
-    { name: 'Fencing', path: '/services/fencing' },
-    { name: 'Railings', path: '/services/railings' },
-    { name: 'Gates', path: '/services/gates' },
-    { name: 'Sheds', path: '/services/sheds' },
-    { name: 'Tree Felling & Stump Grinding', path: '/services/tree-felling' },
-  ];
+  const closeServices = () => setIsServicesOpen(false);
 
-  // True while the menu is open only because a mouse is hovering over it,
-  // so a click on "Services" keeps it open instead of toggling it shut.
-  const openedByHover = useRef(false);
+  // Opens on click or tap only, like the W3C disclosure navigation example.
+  // While open, Escape (from anywhere, so it works whatever opened the menu)
+  // and a click outside close it.
+  useEffect(() => {
+    if (!isServicesOpen) return undefined;
 
-  const closeServices = () => {
-    openedByHover.current = false;
-    setIsServicesOpen(false);
-  };
+    const handleKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+      const focusWasInside = dropdownRef.current?.contains(document.activeElement);
+      setIsServicesOpen(false);
+      if (focusWasInside) buttonRef.current?.focus();
+    };
 
-  const handlePointerEnter = (e) => {
-    if (e.pointerType === 'mouse' && !isServicesOpen) {
-      openedByHover.current = true;
-      setIsServicesOpen(true);
-    }
-  };
+    const handlePointerDown = (e) => {
+      if (!dropdownRef.current?.contains(e.target)) setIsServicesOpen(false);
+    };
 
-  const handlePointerLeave = (e) => {
-    if (e.pointerType === 'mouse') {
-      closeServices();
-    }
-  };
-
-  const handleButtonClick = () => {
-    if (openedByHover.current) {
-      openedByHover.current = false;
-      return;
-    }
-    setIsServicesOpen(!isServicesOpen);
-  };
-
-  // Disclosure pattern: Escape closes and returns focus to the button.
-  const handleKeyDown = (e) => {
-    if (e.key === 'Escape' && isServicesOpen) {
-      closeServices();
-      buttonRef.current?.focus();
-    }
-  };
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [isServicesOpen]);
 
   // Close once focus moves outside the button and its links.
   const handleBlur = (e) => {
@@ -229,21 +258,17 @@ const Navigation = () => {
           <LogoImage src={logoPath} alt="Bore Fence Ltd" />
         </LogoLink>
         <NavLinks>
-          <DropdownContainer
-            onPointerEnter={handlePointerEnter}
-            onPointerLeave={handlePointerLeave}
-            onKeyDown={handleKeyDown}
-            onBlur={handleBlur}
-          >
+          <DropdownContainer ref={dropdownRef} onBlur={handleBlur}>
             <ServicesButton
               ref={buttonRef}
               type="button"
-              onClick={handleButtonClick}
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
               aria-expanded={isServicesOpen}
               aria-controls="services-menu"
+              $isCurrentSection={isOnServicePage}
             >
               Services
-              <Caret $isOpen={isServicesOpen} aria-hidden="true" />
+              <Caret isOpen={isServicesOpen} />
             </ServicesButton>
             <DropdownMenu id="services-menu" $isOpen={isServicesOpen}>
               {services.map((service) => (

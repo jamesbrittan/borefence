@@ -218,6 +218,7 @@ const ServicePage = ({ title, description, image, children }) => {
   
   return (
     <ServiceContainer>
+      <title>{`${title} | BoreFence`}</title>
       <FullWidthSection>
         <HeaderSection>
           <ServiceHeader>

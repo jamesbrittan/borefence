@@ -20,7 +20,7 @@ const FooterSection = styled.div`
   gap: 1rem;
 `;
 
-const FooterTitle = styled.h3`
+const FooterTitle = styled.h2`
   ${props => props.theme.typography.heading}
   font-size: 1.25rem;
   color: ${props => props.theme.colors.white};
@@ -34,6 +34,22 @@ const FooterText = styled.p`
   line-height: 1.6;
 `;
 
+const FooterLink = styled.a`
+  color: ${props => props.theme.colors.white};
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  &:hover,
+  &:focus {
+    color: ${props => props.theme.colors.white};
+    text-decoration-thickness: 2px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${props => props.theme.colors.white};
+    outline-offset: 2px;
+  }
+`;
 
 const Footer = () => {
   return (
@@ -42,9 +58,9 @@ const Footer = () => {
   
         <FooterSection>
           <FooterTitle>Contact Us</FooterTitle>
-          <FooterText>Phone: 01633 526 247</FooterText>
-          <FooterText>Mobile: 07780 002247</FooterText>
-          <FooterText>Email: karen.howell@borefence.co.uk</FooterText>
+          <FooterText>Phone: <FooterLink href="tel:+441633526247">01633 526 247</FooterLink></FooterText>
+          <FooterText>Mobile: <FooterLink href="tel:+447780002247">07780 002247</FooterLink></FooterText>
+          <FooterText>Email: <FooterLink href="mailto:karen.howell@borefence.co.uk">karen.howell@borefence.co.uk</FooterLink></FooterText>
         </FooterSection>
       </FooterContent>
     </FooterContainer>

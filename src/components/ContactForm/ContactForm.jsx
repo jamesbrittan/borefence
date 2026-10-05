@@ -9,7 +9,7 @@ const StyledForm = styled.form`
   width: 100%;
 `;
 
-const FormHeading = styled.h3`
+const FormHeading = styled.h2`
   ${props => props.theme.typography.heading}
   color: ${props => props.$dark ? props.theme.colors.white : props.theme.colors.text};
   font-size: 1.25rem;
@@ -32,7 +32,7 @@ const Label = styled.label`
 
 const Input = styled.input`
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
-  border: 1px solid ${props => props.$dark ? 'rgba(255, 255, 255, 0.6)' : props.theme.colors.border};
+  border: 1px solid ${props => props.$dark ? 'rgba(255, 255, 255, 0.6)' : '#6B7280'};
   border-radius: ${props => props.theme.radius.medium};
   background: ${props => props.$dark ? 'rgba(0, 0, 0, 0.2)' : props.theme.colors.white};
   backdrop-filter: ${props => props.$dark ? 'blur(10px)' : 'none'};
@@ -45,7 +45,7 @@ const Input = styled.input`
   transition: all 0.2s;
 
   &::placeholder {
-    color: ${props => props.$dark ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.4)'};
+    color: ${props => props.$dark ? 'rgba(255, 255, 255, 0.85)' : '#6B7280'};
   }
 
   &:hover {
@@ -133,7 +133,7 @@ const StatusMessage = styled.div`
   display: ${props => (props.$success || props.$error) ? 'block' : 'none'};
 `;
 
-const ContactForm = ({ dark = true }) => {
+const ContactForm = ({ dark = true, headingLevel = 'h2' }) => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -221,7 +221,7 @@ const ContactForm = ({ dark = true }) => {
           </label>
         </p>
         
-        <FormHeading $dark={dark}>Get a free quote</FormHeading>
+        <FormHeading as={headingLevel} $dark={dark}>Get a free quote</FormHeading>
         
         <FormGroup>
           <Label $dark={dark} htmlFor="name">Name</Label>
@@ -252,7 +252,7 @@ const ContactForm = ({ dark = true }) => {
         </FormGroup>
 
         <FormGroup>
-          <Label $dark={dark} htmlFor="phone">Phone</Label>
+          <Label $dark={dark} htmlFor="phone">Phone (optional)</Label>
           <Input 
             $dark={dark} 
             type="tel" 
@@ -286,15 +286,16 @@ const ContactForm = ({ dark = true }) => {
           {status.submitting ? 'Sending...' : 'Send Message'}
         </SubmitButton>
         
-        {(status.success || status.error) && (
-          <StatusMessage 
-            $success={status.success} 
-            $error={status.error}
-          >
-            {status.message}
-          </StatusMessage>
-        )}
       </StyledForm>
+
+      {/* Always-present live regions so screen readers announce the result.
+          Kept outside the form so the empty regions don't add flex gap. */}
+      <div role="status">
+        {status.success && <StatusMessage $success>{status.message}</StatusMessage>}
+      </div>
+      <div role="alert">
+        {status.error && <StatusMessage $error>{status.message}</StatusMessage>}
+      </div>
     </>
   );
 };

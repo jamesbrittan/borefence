@@ -1,19 +1,18 @@
 import styled from 'styled-components';
-import { getResizedImageUrl } from '../../utils/imageUtils';
+import { Img } from '../../images';
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto ${props => props.theme.spacing.xl};
   display: flex;
   flex-direction: column;
   gap: ${props => props.theme.spacing.md};
 `;
 
-const SectionHeading = styled.h3`
+// Same style and spacing as the colour palette heading above it
+const SectionHeading = styled.h2`
   ${props => props.theme.typography.heading}
-  font-size: ${props => props.theme.fonts.size.h3};
-  margin-top: ${props => props.theme.spacing.xl};
+  font-size: ${props => props.theme.fonts.size.sectionTitle};
+  margin-top: ${props => props.theme.spacing.section};
   margin-bottom: ${props => props.theme.spacing.md};
   text-align: center;
 `;
@@ -24,14 +23,10 @@ const GridContainer = styled.div`
   grid-template-rows: repeat(2, 1fr);
   gap: ${props => props.theme.spacing.md};
   
+  /* Two per row on tablets and phones, rather than one long column */
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: none;
   }
 `;
 
@@ -50,7 +45,7 @@ const ImageContainer = styled.div`
   position: relative;
 `;
 
-const Image = styled.img`
+const Image = styled(Img)`
   position: absolute;
   top: 0;
   left: 0;
@@ -85,9 +80,13 @@ const RailingTops = () => {
         {railingTops.map((top, index) => (
           <ImageCard key={index}>
             <ImageContainer>
-              <Image 
-                src={getResizedImageUrl(top.src, 400, 300)} 
-                alt={`${top.name} railing top style`} 
+              <Image
+                path={top.src}
+                widths={[400, 600, 800]}
+                height={300}
+                fit="cover"
+                sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, 340px"
+                alt={`${top.name} railing top style`}
                 loading="lazy"
               />
             </ImageContainer>

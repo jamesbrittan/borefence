@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import PageMeta from '../seo/PageMeta';
 
 const NotFoundContainer = styled.main`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
   min-height: 60vh;
   display: flex;
   align-items: center;
 `;
 
 const NotFoundContent = styled.div`
-  ${props => props.theme.mixins.narrowContainer}
-  padding: ${props => props.theme.spacing.huge} 0;
+  ${props => props.theme.mixins.container}
+  padding-block: ${props => props.theme.spacing.section};
   text-align: center;
 `;
 
@@ -30,7 +30,7 @@ const Message = styled.p`
 const NotFound = () => {
   return (
     <NotFoundContainer>
-      <title>Page not found | BoreFence</title>
+      <PageMeta title="Page not found" noIndex />
       <NotFoundContent>
         <Title>Page not found</Title>
         <Message>

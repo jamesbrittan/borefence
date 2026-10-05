@@ -3,8 +3,7 @@ import FeatureCard from '../FeatureCard/FeatureCard';
 
 const FeaturesContainer = styled.section`
   ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
-  padding: ${props => props.theme.spacing.section.padding.default};
+  padding: ${props => props.theme.spacing.section} 0;
   background-color: ${props => props.theme.colors.white};
   position: relative;
   
@@ -24,17 +23,16 @@ const FeaturesContainer = styled.section`
   }
 `;
 
+// Three columns, or one on phones and small tablets: never a 2 + 1 split
 const FeaturesInner = styled.div`
-  ${props => props.theme.mixins.narrowContainer}
-  max-width: ${props => props.theme.breakpoints.wide};
-  margin: 0 auto;
-  padding: 0 ${props => props.theme.spacing.lg};
+  ${props => props.theme.mixins.container}
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: ${props => props.theme.spacing.lg};
-  
-  @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+    gap: ${props => props.theme.spacing.md};
   }
 `;
 

@@ -7,13 +7,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
-
-// Service Pages
-import FencingPage from './pages/services/fencing';
-import ShedsPage from './pages/services/sheds';
-import GatesPage from './pages/services/gates';
-import RailingPage from './pages/services/railings';
-import TreeFellingPage from './pages/services/tree-felling';
+import Service from './pages/Service';
 
 function App() {
   return (
@@ -24,22 +18,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
-          
-          {/* Service Routes */}
-
-          {/* Fencing */}
-          <Route path="/services/fencing" element={<FencingPage />} />
-          {/* Railings */}
-          <Route path="/services/railings" element={<RailingPage />} />
-          {/* Gates */} 
-          <Route path="/services/gates" element={<GatesPage />} />
-          {/* Bespoke sheds */}
-          <Route path="/services/sheds" element={<ShedsPage />} />
-          {/* Tree Felling & Hedge Removal */}
-          <Route path="/services/tree-felling" element={<TreeFellingPage />} />
-
+          <Route path="/services/:slug" element={<Service />} />
           <Route path="*" element={<NotFound />} />
-
         </Routes>
         <Footer />
       </Router>

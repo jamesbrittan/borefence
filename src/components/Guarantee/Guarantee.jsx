@@ -1,17 +1,15 @@
 import styled from 'styled-components';
-import { getResizedImageUrl } from '../../utils/imageUtils';
+import { Img } from '../../images';
+import { business } from '../../business/details';
 
 const GuaranteeSection = styled.section`
-  ${props => props.theme.mixins.fullWidth}
-  width: 100vw;
+  ${props => props.theme.mixins.container}
   position: relative;
-  padding: 0;
+  padding-bottom: ${props => props.theme.spacing.section};
   background-color: transparent;
-  margin-bottom: ${props => props.theme.spacing.xxl};
 `;
 
 const Container = styled.div`
-  ${props => props.theme.mixins.narrowContainer}
   background-color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
   box-shadow: ${props => props.theme.shadows.large};
@@ -24,13 +22,11 @@ const Container = styled.div`
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
-    width: 90%;
-    margin: 0 auto;
   }
 `;
 
 const GuaranteeContent = styled.div`
-  padding: ${props => props.theme.spacing.component.padding.large};
+  padding: ${props => props.theme.spacing.cardLarge};
   display: flex;
   flex-direction: column;
   gap: ${props => props.theme.spacing.component.gap.default};
@@ -61,7 +57,8 @@ const GuaranteeContent = styled.div`
       color: ${props => props.theme.colors.text};
       margin-bottom: ${props => props.theme.spacing.md};
       display: flex;
-      align-items: center;
+      /* Tick lines up with the first line of multi-line items */
+      align-items: baseline;
       gap: ${props => props.theme.spacing.sm};
       font-size: ${props => props.theme.fonts.size.lg};
 
@@ -103,14 +100,18 @@ const Guarantee = () => {
             <li role="listitem">100% recyclable</li>
             <li role="listitem">Colour bond steel, powder coated to provide resistance to chipping, flaking and blistering</li>
             <li role="listitem">Dual sided finish</li>
-            <li role="listitem">1 year installation warranty</li>
-            <li role="listitem">25 year manufacturer warranty with Climar Industries</li>
+            <li role="listitem">{`${business.warranty.installationYears} year installation warranty`}</li>
+            <li role="listitem">
+              {`${business.warranty.manufacturerYears} year manufacturer warranty with ${business.warranty.manufacturer}`}
+            </li>
           </ul>
         </GuaranteeContent>
         <GuaranteeImage>
-          <img 
-            src={getResizedImageUrl('fence_blue_s.jpg', 600)} 
-            alt="A blue fence in a garden next to a child's playground" 
+          <Img
+            path="fence_blue_s.jpg"
+            widths={[400, 600, 900, 1200]}
+            sizes="(max-width: 768px) 90vw, 540px"
+            alt="A blue fence in a garden next to a child's playground"
             loading="lazy"
           />
         </GuaranteeImage>

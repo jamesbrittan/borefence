@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
+import { services, servicePath } from './catalogue/services';
 
 const renderAt = (path) => {
   window.history.pushState({}, '', path);
@@ -23,15 +25,31 @@ describe('routes', () => {
     expect(screen.getByRole('button', { name: /send message/i })).toBeInTheDocument();
   });
 
-  it.each([
-    ['/services/fencing', 'Fencing'],
-    ['/services/railings', 'Railings'],
-    ['/services/gates', 'Gates'],
-    ['/services/sheds', 'Sheds'],
-    ['/services/tree-felling', 'Tree Felling & Stump Grinding'],
-  ])('renders the %s Service page', (path, title) => {
-    renderAt(path);
-    expect(screen.getByRole('heading', { level: 1, name: title })).toBeInTheDocument();
+  it.each(services.map((service) => [servicePath(service), service.name]))(
+    'renders the %s Service page',
+    (path, name) => {
+      renderAt(path);
+      expect(screen.getByRole('heading', { level: 1, name })).toBeInTheDocument();
+      expect(document.title).toBe(`${name} | BoreFence`);
+    }
+  );
+
+  it('shows the 404 page for an unknown Service', () => {
+    renderAt('/services/no-such-service');
+    expect(screen.getByRole('heading', { level: 1, name: /page not found/i })).toBeInTheDocument();
+  });
+
+  it('starts each Service page fresh when moving between Services', async () => {
+    const user = userEvent.setup();
+    renderAt('/services/gates');
+    await user.click(screen.getByRole('button', { name: /^View image 7 of 7$/ }));
+    expect(screen.getByText('7 / 7')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Services' }));
+    await user.click(within(document.getElementById('services-menu')).getByRole('link', { name: 'Sheds' }));
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Sheds' })).toBeInTheDocument();
+    expect(screen.getByText('1 / 2')).toBeInTheDocument();
   });
 
   it('shows the 404 page for an unknown URL', () => {

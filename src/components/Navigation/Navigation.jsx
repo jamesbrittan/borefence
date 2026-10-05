@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { getImageUrl } from '../../utils/imageUtils';
+import { imageSrc } from '../../images';
+import { services, servicePath } from '../../catalogue/services';
 
-const logoPath = getImageUrl('logo.png');
+// Twice the largest display width (202px) for high-density screens.
+const logoPath = imageSrc('logo.png', { width: 404 });
 
 const Nav = styled.nav`
-  ${props => props.theme.mixins.container}
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -202,20 +203,12 @@ const DropdownLink = styled(RouterNavLink)`
   }
 `;
 
-const services = [
-  { name: 'Fencing', path: '/services/fencing' },
-  { name: 'Railings', path: '/services/railings' },
-  { name: 'Gates', path: '/services/gates' },
-  { name: 'Sheds', path: '/services/sheds' },
-  { name: 'Tree Felling & Stump Grinding', path: '/services/tree-felling' },
-];
-
 const Navigation = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const buttonRef = useRef(null);
   const dropdownRef = useRef(null);
   const { pathname } = useLocation();
-  const isOnServicePage = services.some((service) => service.path === pathname);
+  const isOnServicePage = services.some((service) => servicePath(service) === pathname);
 
   const closeServices = () => setIsServicesOpen(false);
 
@@ -272,8 +265,8 @@ const Navigation = () => {
             </ServicesButton>
             <DropdownMenu id="services-menu" $isOpen={isServicesOpen}>
               {services.map((service) => (
-                <li key={service.path}>
-                  <DropdownLink to={service.path} onClick={closeServices}>
+                <li key={service.slug}>
+                  <DropdownLink to={servicePath(service)} onClick={closeServices}>
                     {service.name}
                   </DropdownLink>
                 </li>

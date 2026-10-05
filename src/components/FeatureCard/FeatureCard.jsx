@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledFeatureCard = styled.article`
   text-align: center;
-  padding: ${props => props.theme.spacing.component.padding.default};
+  padding: ${props => props.theme.spacing.card};
   border-radius: ${props => props.theme.radius.medium};
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   
@@ -12,9 +12,9 @@ const StyledFeatureCard = styled.article`
   }
 
   h3 {
-    ${props => props.theme.typography.h3}
     color: ${props => props.theme.colors.primary};
-    margin: ${props => props.theme.spacing.md} 0;
+    /* The card's padding provides the space above */
+    margin: 0 0 ${props => props.theme.spacing.md};
     font-size: ${props => props.theme.spacing.lg};
     line-height: 1.3;
     position: relative;
@@ -33,6 +33,7 @@ const StyledFeatureCard = styled.article`
     ${props => props.theme.typography.body}
     color: ${props => props.theme.colors.text};
     line-height: 1.6;
+    margin-bottom: 0;
   }
 `;
 

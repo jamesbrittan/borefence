@@ -4,6 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Serve images through the Netlify Image CDN (see src/images/imageSrc.js)
+  VITE_IMAGE_CDN = "netlify"
 
 [[redirects]]
   from = "/*"

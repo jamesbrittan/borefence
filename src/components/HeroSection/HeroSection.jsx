@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import { getResponsiveImageUrl } from '../../utils/imageUtils';
+import { imageSrc } from '../../images';
+import { services, servicePath } from '../../catalogue/services';
 import { Link } from 'react-router-dom';
 import { css } from 'styled-components';
+
+const HERO_IMAGE = 'fence_brown_h.jpg';
 
 // Dark tinted glass shared by the quote form and the service links. Opaque
 // enough that white text keeps 4.5:1 contrast even over pure white sky.
@@ -31,11 +34,20 @@ const StyledHeroSection = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('${props => props.backgroundImage ? props.backgroundImage : getResponsiveImageUrl('fence_brown_h.jpg', 1920)}');
+    background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 1920 })}');
     background-size: cover;
     background-position: center;
     filter: brightness(1.15) contrast(1.05);
     z-index: 1;
+
+    /* Smaller hero downloads on smaller screens */
+    @media (max-width: ${props => props.theme.breakpoints.desktop}) {
+      background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 1280 })}');
+    }
+
+    @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+      background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 800 })}');
+    }
   }
 
   &::after {
@@ -68,13 +80,14 @@ const StyledHeroSection = styled.section`
 `;
 
 const HeroContent = styled.div`
-  ${props => props.theme.mixins.narrowContainer}
+  ${props => props.theme.mixins.container}
   position: relative;
   z-index: 3;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: ${props => props.theme.spacing.xxl};
-  padding: ${props => props.theme.spacing.xxl} 0;
+  gap: ${props => props.theme.spacing.section};
+  /* Extra bottom space for the "Our product" card, which overlaps the hero by 2rem */
+  padding-block: ${props => props.theme.spacing.section} calc(${props => props.theme.spacing.section} + 2rem);
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
@@ -82,6 +95,8 @@ const HeroContent = styled.div`
 `;
 
 const HeroTextContent = styled.div`
+  /* Size to the text, so the accent bar doesn't stretch to the form's height */
+  align-self: start;
   padding-left: ${props => props.theme.spacing.xl};
   position: relative;
   transform: translateY(-10px);
@@ -200,16 +215,14 @@ const ServiceLinksList = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  /* Spacing instead of separators, so a wrapped line never starts with one */
+  gap: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.md};
 `;
 
 const ServiceLinkItem = styled.div`
   display: flex;
   align-items: center;
   white-space: nowrap;
-  
-  &:not(:last-child) {
-    margin-right: ${props => props.theme.spacing.xs};
-  }
 `;
 
 const ServiceLinksPrompt = styled.span`
@@ -244,21 +257,10 @@ const ServiceLink = styled(Link)`
   }
 `;
 
-const ServiceLinkSeparator = styled.span`
-  display: inline-block;
-  width: 1px;
-  height: 0.9em;
-  background-color: ${props => props.theme.colors.accent};
-  opacity: 0.7;
-  margin: 0 ${props => props.theme.spacing.xxs};
-  position: relative;
-  top: 0.1em;
-`;
-
 const FormColumn = styled.div`
   max-width: 400px;
   ${smokedGlass}
-  padding: ${props => props.theme.spacing.component.padding.large} ${props => props.theme.spacing.component.padding.default};
+  padding: ${props => props.theme.spacing.cardLarge} ${props => props.theme.spacing.card};
   border-radius: ${props => props.theme.radius.large};
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.2),
@@ -284,7 +286,7 @@ const FormColumn = styled.div`
   
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
     max-width: 100%;
-    padding: ${props => props.theme.spacing.component.padding.default};
+    padding: ${props => props.theme.spacing.card};
     transform: translateY(0);
     
     &:hover {
@@ -301,14 +303,6 @@ const HeroSection = ({
   rightColumnContent,
   showServiceLinks = false
 }) => {
-  const servicePages = [
-    { name: 'Fencing', path: '/services/fencing' },
-    { name: 'Railings', path: '/services/railings' },
-    { name: 'Gates', path: '/services/gates' },
-    { name: 'Sheds', path: '/services/sheds' },
-    { name: 'Tree Felling & stump grinding', path: '/services/tree-felling' }
-  ];
-
   return (
     <StyledHeroSection backgroundImage={backgroundImage}>
       <HeroContent>
@@ -322,10 +316,9 @@ const HeroSection = ({
               <ServiceLinksPrompt>Explore our services:</ServiceLinksPrompt>
               <ServiceLinksWrapper>
                 <ServiceLinksList>
-                  {servicePages.map((service, index) => (
-                    <ServiceLinkItem key={service.path}>
-                      {index > 0 && <ServiceLinkSeparator aria-hidden="true" />}
-                      <ServiceLink to={service.path}>{service.name}</ServiceLink>
+                  {services.map((service) => (
+                    <ServiceLinkItem key={service.slug}>
+                      <ServiceLink to={servicePath(service)}>{service.name}</ServiceLink>
                     </ServiceLinkItem>
                   ))}
                 </ServiceLinksList>

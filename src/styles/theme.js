@@ -37,7 +37,7 @@ const theme = {
   colors: {
     primary: '#1B3B5F',    // Deep Navy Blue (10.5:1)
     primaryLight: 'rgba(27, 59, 95, 0.2)',
-    primaryDark: '#1d4ed8',
+    primaryDark: '#132B45',
     secondary: '#2D5F8A',  // Medium Blue (7.2:1)
     accent: '#4A90E2',     // Ocean Blue (4.5:1)
     text: '#1A1A1A',
@@ -71,23 +71,13 @@ const theme = {
     xxxl: '4rem',    // 64px
     huge: '6rem',    // 96px
     giant: '8rem',   // 128px
-    section: {
-      padding: {
-        default: '4rem 0',
-        large: '6rem 0',
-        hero: '6rem 0 12rem'
-      },
-      gap: {
-        default: '4rem',
-        small: '2rem'
-      }
-    },
+    // Spacing system: values that scale smoothly with the screen width, so
+    // spacing tightens on phones without jumping at breakpoints.
+    gutter: 'clamp(1.25rem, 5vw, 2.5rem)',   // page side margin: 20px -> 40px
+    section: 'clamp(2.5rem, 6vw, 4rem)',     // between page sections: 40px -> 64px
+    card: 'clamp(1.25rem, 4vw, 2rem)',       // inside cards: 20px -> 32px
+    cardLarge: 'clamp(1.5rem, 5vw, 3rem)',   // inside large cards: 24px -> 48px
     component: {
-      padding: {
-        default: '2rem',
-        small: '1rem',
-        large: '3rem'
-      },
       gap: {
         default: '1.5rem',
         small: '0.5rem',
@@ -124,27 +114,20 @@ const theme = {
     large: '0 8px 16px rgba(0, 0, 0, 0.1)',
   },
   layout: {
-    sectionPadding: '4rem 0',
-    contentWidth: '80%',
-    maxWidth: '1080px',
-    mobileContentWidth: '90%',
+    maxWidth: '1080px', // widest the page content gets
   },
   mixins: {
     fullWidth: css`
       width: 100%;
     `,
-    narrowContainer: css`
-      width: 80%;
-      max-width: 1080px;
-      margin: 0 auto;
-
-      @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-        width: 90%;
-      }
-    `,
-    section: css`
+    // The page container: content up to layout.maxWidth wide, centred, with
+    // the gutter on each side. Everything that lines up with the page edge
+    // uses this, so all sections share one left edge at every width.
+    container: css`
       width: 100%;
-      padding: 4rem 0;
+      max-width: calc(${props => props.theme.layout.maxWidth} + 2 * ${props => props.theme.spacing.gutter});
+      margin-inline: auto;
+      padding-inline: ${props => props.theme.spacing.gutter};
     `,
   },
 };

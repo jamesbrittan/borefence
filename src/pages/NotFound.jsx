@@ -10,8 +10,8 @@ const NotFoundContainer = styled.main`
 `;
 
 const NotFoundContent = styled.div`
-  ${props => props.theme.mixins.narrowContainer}
-  padding: ${props => props.theme.spacing.huge} 0;
+  ${props => props.theme.mixins.container}
+  padding-block: ${props => props.theme.spacing.section};
   text-align: center;
 `;
 

@@ -17,20 +17,6 @@ const GuaranteeWrapper = styled.div`
   margin-top: -2rem;
   background-color: transparent;
   z-index: 5;
-  
-  &::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      ${props => props.theme.colors.border},
-      transparent
-    );
-    margin-top: ${props => props.theme.spacing.xl};
-  }
 `;
 
 const DesignWrapper = styled.div`

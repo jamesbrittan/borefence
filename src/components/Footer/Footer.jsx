@@ -1,18 +1,20 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { business, telHref } from '../../business/details';
+import { services, servicePath } from '../../catalogue/services';
 
 const FooterContainer = styled.footer`
   ${props => props.theme.mixins.fullWidth}
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.white};
-  padding: 4rem 0 2rem;
+  padding: ${props => props.theme.spacing.section} 0 ${props => props.theme.spacing.xl};
 `;
 
 const FooterContent = styled.div`
-  ${props => props.theme.mixins.narrowContainer}
+  ${props => props.theme.mixins.container}
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: ${props => props.theme.spacing.xl};
 `;
 
 const FooterSection = styled.div`
@@ -52,6 +54,13 @@ const FooterLink = styled.a`
   }
 `;
 
+const FooterList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: ${props => props.theme.spacing.sm};
+`;
+
 const Footer = () => {
   return (
     <FooterContainer>
@@ -67,6 +76,19 @@ const Footer = () => {
           <FooterText>
             Email: <FooterLink href={`mailto:${business.email}`}>{business.email}</FooterLink>
           </FooterText>
+        </FooterSection>
+
+        <FooterSection as="nav" aria-label="Services">
+          <FooterTitle>Services</FooterTitle>
+          <FooterList>
+            {services.map((service) => (
+              <li key={service.slug}>
+                <FooterText as="span">
+                  <FooterLink as={Link} to={servicePath(service)}>{service.name}</FooterLink>
+                </FooterText>
+              </li>
+            ))}
+          </FooterList>
         </FooterSection>
       </FooterContent>
     </FooterContainer>

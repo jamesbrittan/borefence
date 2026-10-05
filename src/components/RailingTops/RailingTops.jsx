@@ -3,17 +3,16 @@ import { Img } from '../../images';
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto ${props => props.theme.spacing.xl};
   display: flex;
   flex-direction: column;
   gap: ${props => props.theme.spacing.md};
 `;
 
-const SectionHeading = styled.h3`
+// Same style and spacing as the colour palette heading above it
+const SectionHeading = styled.h2`
   ${props => props.theme.typography.heading}
-  font-size: ${props => props.theme.fonts.size.h3};
-  margin-top: ${props => props.theme.spacing.xl};
+  font-size: ${props => props.theme.fonts.size.sectionTitle};
+  margin-top: ${props => props.theme.spacing.section};
   margin-bottom: ${props => props.theme.spacing.md};
   text-align: center;
 `;
@@ -24,14 +23,10 @@ const GridContainer = styled.div`
   grid-template-rows: repeat(2, 1fr);
   gap: ${props => props.theme.spacing.md};
   
+  /* Two per row on tablets and phones, rather than one long column */
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: none;
   }
 `;
 

@@ -8,23 +8,13 @@ const MainImageContainer = styled.div`
   aspect-ratio: 3/2;
   border-radius: ${props => props.theme.radius.medium};
   overflow: hidden;
-  transition: transform 0.3s ease;
   position: relative;
-  
-  &:hover {
-    transform: scale(1.02);
-  }
 `;
 
 const MainImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.05);
-  }
 `;
 
 const ImageCounter = styled.div`
@@ -77,14 +67,9 @@ const ThumbnailWrapper = styled.button`
   overflow: hidden;
   cursor: pointer;
   border: 2px solid ${props => props.$isActive ? props.theme.colors.primary : 'transparent'};
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: border-color 0.2s ease;
   position: relative;
-  
-  &:hover {
-    transform: scale(1.05);
-    border-color: ${props => props.theme.colors.primary};
-  }
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -93,11 +78,18 @@ const ThumbnailWrapper = styled.button`
     right: 0;
     bottom: 0;
     background: ${props => props.$isActive ? 'transparent' : 'rgba(0, 0, 0, 0.2)'};
-    transition: background 0.2s ease;
+    transition: background-color 0.2s ease;
   }
-  
-  &:hover::after {
-    background: transparent;
+
+  /* Hint on hover (mouse only); selecting still needs a click, Enter or Space */
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: ${props => props.theme.colors.primary};
+    }
+
+    &:hover::after {
+      background: transparent;
+    }
   }
 
   &:focus-visible {
@@ -141,13 +133,16 @@ const NavButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease;
   pointer-events: auto;
-  
-  &:hover {
-    opacity: 1;
-    transform: scale(1.1);
+
+  /* With a mouse, the arrows stay subtle until hovered; on touch they're always fully visible */
+  @media (hover: hover) and (pointer: fine) {
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
   }
   
   &:focus {
@@ -224,7 +219,6 @@ const Gallery = ({ images }) => {
             key={image.src}
             ref={(el) => (thumbnailRefs.current[index] = el)}
             onClick={() => setCurrentIndex(index)}
-            onMouseEnter={() => setCurrentIndex(index)}
             $isActive={currentIndex === index}
             type="button"
             aria-pressed={currentIndex === index}

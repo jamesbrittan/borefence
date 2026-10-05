@@ -239,7 +239,7 @@ const ServiceLink = styled(Link)`
   font-size: ${props => props.theme.fonts.size.sm};
   text-decoration: none;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   padding: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.xs};
   border-radius: ${props => props.theme.radius.small};
   letter-spacing: 0.01em;
@@ -268,15 +268,6 @@ const FormColumn = styled.div`
     0 4px 8px rgba(0, 0, 0, 0.1);
   justify-self: end;
   transform: translateY(-10px);
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-15px);
-    box-shadow: 
-      0 12px 36px rgba(0, 0, 0, 0.25),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-      0 6px 10px rgba(0, 0, 0, 0.15);
-  }
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     justify-self: center;
@@ -288,10 +279,6 @@ const FormColumn = styled.div`
     max-width: 100%;
     padding: ${props => props.theme.spacing.card};
     transform: translateY(0);
-    
-    &:hover {
-      transform: translateY(0);
-    }
   }
 `;
 

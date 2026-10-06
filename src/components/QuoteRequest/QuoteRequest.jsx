@@ -1,7 +1,7 @@
-import styled, { css, keyframes } from 'styled-components';
-import { useId, useState } from 'react';
+import styled, { css } from 'styled-components';
+import { useId, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { QUOTE_FIELDS, QUOTE_FORM_NAME, emptyValues } from './fields';
+import { QUOTE_FIELDS, QUOTE_FORM_NAME, emptyValues, validate } from './fields';
 import { netlifySubmit } from './submit';
 
 // Colours for each variant, set once on the form as CSS custom properties so
@@ -22,6 +22,8 @@ const variants = {
     --quote-button-bg-hover: ${props => props.theme.colors.primaryDark};
     --quote-button-text: ${props => props.theme.colors.white};
     --quote-button-outline: ${props => props.theme.colors.primary};
+    --quote-error-text: ${props => props.theme.colors.error};
+    --quote-error-accent: ${props => props.theme.colors.error};
   `,
   glass: css`
     --quote-text: ${props => props.theme.colors.white};
@@ -36,6 +38,9 @@ const variants = {
     --quote-button-bg-hover: ${props => props.theme.colors.white};
     --quote-button-text: ${props => props.theme.colors.primary};
     --quote-button-outline: ${props => props.theme.colors.white};
+    /* White error text keeps 4.5:1 on the smoked glass; the red bar marks it as an error */
+    --quote-error-text: ${props => props.theme.colors.white};
+    --quote-error-accent: #FFB4A9;
   `,
 };
 
@@ -94,6 +99,28 @@ const Input = styled.input`
     border-color: var(--quote-input-border-focus);
     box-shadow: 0 0 0 3px var(--quote-focus-ring);
   }
+
+  &[aria-invalid='true'] {
+    border-color: var(--quote-error-accent);
+    border-width: 2px;
+  }
+`;
+
+const FieldError = styled.p`
+  margin: 0;
+  padding-left: ${props => props.theme.spacing.xs};
+  border-left: 3px solid var(--quote-error-accent);
+  color: var(--quote-error-text);
+  font-size: 0.875rem;
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  line-height: 1.4;
+`;
+
+const Reassurance = styled.p`
+  margin: 0;
+  color: var(--quote-text);
+  font-size: 0.875rem;
+  line-height: 1.5;
 `;
 
 const TextArea = styled(Input).attrs({ as: 'textarea' })`
@@ -164,17 +191,29 @@ const ERROR_MESSAGE = 'Something went wrong. Please try again or contact us dire
  */
 const QuoteRequest = ({ variant = 'card', headingLevel = 'h2', submit = netlifySubmit }) => {
   const [values, setValues] = useState(emptyValues);
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
   const location = useLocation();
   const id = useId();
+  const fieldRefs = useRef({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues((previous) => ({ ...previous, [name]: value }));
+    const next = { ...values, [name]: value };
+    setValues(next);
+    // Once a field has an error, re-check it as the visitor fixes it
+    if (errors[name]) setErrors((previous) => ({ ...previous, [name]: validate(next)[name] }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const found = validate(values);
+    setErrors(found);
+    const firstInvalid = QUOTE_FIELDS.find((field) => found[field.name]);
+    if (firstInvalid) {
+      fieldRefs.current[firstInvalid.name]?.focus();
+      return;
+    }
     setStatus('submitting');
     // Every named field, including the hidden form-name, form-source and honeypot
     const fields = Object.fromEntries(new FormData(e.currentTarget));
@@ -196,6 +235,7 @@ const QuoteRequest = ({ variant = 'card', headingLevel = 'h2', submit = netlifyS
         method="POST"
         data-netlify="true"
         netlify-honeypot="bot-field"
+        noValidate
         onSubmit={handleSubmit}
       >
         {/* Required by Netlify Forms */}
@@ -211,26 +251,35 @@ const QuoteRequest = ({ variant = 'card', headingLevel = 'h2', submit = netlifyS
 
         <FormHeading as={headingLevel}>Get a free quote</FormHeading>
 
-        {QUOTE_FIELDS.map(({ name, label, type, ...attributes }) => {
+        {QUOTE_FIELDS.map(({ name, label, type, autoComplete, placeholder, required }) => {
           const Control = type === 'textarea' ? TextArea : Input;
+          const fieldId = `${id}-${name}`;
+          const error = errors[name];
           return (
             <FormGroup key={name}>
-              <Label htmlFor={`${id}-${name}`}>{label}</Label>
+              <Label htmlFor={fieldId}>{label}</Label>
               <Control
-                id={`${id}-${name}`}
+                ref={(el) => (fieldRefs.current[name] = el)}
+                id={fieldId}
                 name={name}
                 {...(type === 'textarea' ? { rows: 4 } : { type })}
-                {...attributes}
+                autoComplete={autoComplete}
+                placeholder={placeholder}
+                required={required}
                 value={values[name]}
                 onChange={handleChange}
+                aria-invalid={error ? 'true' : undefined}
+                aria-describedby={error ? `${fieldId}-error` : undefined}
               />
+              {error && <FieldError id={`${fieldId}-error`}>{error}</FieldError>}
             </FormGroup>
           );
         })}
 
         <SubmitButton type="submit" disabled={status === 'submitting'}>
-          {status === 'submitting' ? 'Sending...' : 'Send Message'}
+          {status === 'submitting' ? 'Sending...' : 'Request a free quote'}
         </SubmitButton>
+        <Reassurance>We&apos;ll only use your details to reply to your enquiry.</Reassurance>
       </StyledForm>
 
       {/* Always-present live regions so screen readers announce the result.
@@ -247,11 +296,6 @@ const QuoteRequest = ({ variant = 'card', headingLevel = 'h2', submit = netlifyS
 
 export default QuoteRequest;
 
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
 // Full-width band with a soft divider line along its top
 const Band = styled.div`
   background-color: ${props => props.theme.colors.background};
@@ -259,7 +303,6 @@ const Band = styled.div`
   position: relative;
   /* When jumped to (e.g. #quote), stop below the sticky header */
   scroll-margin-top: 5rem;
-  animation: ${fadeIn} 1s ease-out forwards;
 
   &::before {
     content: '';

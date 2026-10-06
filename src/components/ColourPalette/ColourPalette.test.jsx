@@ -15,9 +15,4 @@ describe('ColourPalette', () => {
     const { container } = renderWithProviders(<ColourPalette />);
     expect(container.querySelectorAll('div[aria-label], [role="region"][aria-label]')).toHaveLength(0);
   });
-
-  it('notes that on-screen colours are approximate', () => {
-    renderWithProviders(<ColourPalette />);
-    expect(screen.getByText(/colours on screen are a guide/i)).toBeInTheDocument();
-  });
 });

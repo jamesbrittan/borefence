@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Img } from "../../images";
 import { business, postcodeList } from "../../business/details";
 
-const DesignSection = styled.section`
+const AboutSection = styled.section`
   ${(props) => props.theme.mixins.fullWidth}
   padding: ${(props) => props.theme.spacing.section} 0;
   background-color: ${(props) => props.theme.colors.background};
@@ -34,14 +34,8 @@ const Content = styled.div`
   ${(props) => props.theme.typography.body}
   color: ${(props) => props.theme.colors.text};
 
-  strong {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: ${props => props.theme.fonts.size.lg};
-  }
-
   p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     line-height: 1.6;
     font-size: ${props => props.theme.fonts.size.md};
   }
@@ -49,15 +43,15 @@ const Content = styled.div`
 
 const SectionTitle = styled.h2`
   ${(props) => props.theme.typography.heading}
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
   margin-bottom: ${(props) => props.theme.spacing.lg};
   font-size: ${props => props.theme.fonts.size.sectionTitle};
   line-height: 1.2;
 `;
 
-const DesignOptions = () => {
+const About = () => {
   return (
-    <DesignSection aria-labelledby="design-options-title">
+    <AboutSection aria-labelledby="about-title">
       <Container>
         <ImageWrapper>
           <Img
@@ -69,18 +63,18 @@ const DesignOptions = () => {
           />
         </ImageWrapper>
         <Content>
-          <SectionTitle id="design-options-title">
+          <SectionTitle id="about-title">
             About BoreFence
           </SectionTitle>
           <p>
-            {`Our team are based in ${business.area.base} - we have been trading for ${business.yearsTrading}+ years ` +
-              `as an accredited fitter of Colourfence and ColourRail covering the ${postcodeList()} postcodes ` +
-              `and ${business.area.region}`}
+            {`Our team are based in ${business.area.base} – we have been trading for ${business.yearsTrading}+ years ` +
+              `as an accredited fitter of ColourFence and ColourRail, covering the ${postcodeList()} postcodes ` +
+              `and ${business.area.region}.`}
           </p>
         </Content>
       </Container>
-    </DesignSection>
+    </AboutSection>
   );
 };
 
-export default DesignOptions;
+export default About;

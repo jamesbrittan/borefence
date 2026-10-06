@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { business, telHref } from '../../business/details';
+import { business, telHref, postcodeList } from '../../business/details';
 import { services, servicePath } from '../../catalogue/services';
+
+// Off-white on navy: 9.6:1 contrast, set explicitly rather than with opacity
+const FOOTER_TEXT = '#E6ECF3';
 
 const FooterContainer = styled.footer`
   ${props => props.theme.mixins.fullWidth}
   background-color: ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.white};
-  padding: ${props => props.theme.spacing.section} 0 ${props => props.theme.spacing.xl};
+  color: ${FOOTER_TEXT};
+  padding-top: ${props => props.theme.spacing.section};
 `;
 
 const FooterContent = styled.div`
@@ -17,30 +20,38 @@ const FooterContent = styled.div`
   gap: ${props => props.theme.spacing.xl};
 `;
 
-const FooterSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
 const FooterTitle = styled.h2`
   ${props => props.theme.typography.heading}
   font-size: 1.25rem;
   color: ${props => props.theme.colors.white};
-  margin-bottom: 1rem;
+  margin-bottom: ${props => props.theme.spacing.md};
 `;
 
-const FooterText = styled.p`
-  ${props => props.theme.typography.body}
-  color: ${props => props.theme.colors.white};
-  opacity: 0.9;
-  line-height: 1.6;
+// Every column is a list, so all items share one rhythm
+const FooterList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: ${props => props.theme.spacing.sm};
+`;
+
+const ContactItem = styled.li`
+  display: flex;
+  flex-direction: column;
+`;
+
+// "Phone", "Mobile", "Email": small and muted, so the numbers stand out
+const ContactLabel = styled.span`
+  font-size: ${props => props.theme.fonts.size.sm};
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 `;
 
 const FooterLink = styled.a`
   color: ${props => props.theme.colors.white};
   text-decoration: underline;
   text-underline-offset: 3px;
+  overflow-wrap: anywhere;
 
   &:hover,
   &:focus {
@@ -54,43 +65,67 @@ const FooterLink = styled.a`
   }
 `;
 
-const FooterList = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: ${props => props.theme.spacing.sm};
+const ContactValue = styled(FooterLink)`
+  font-size: ${props => props.theme.fonts.size.lg};
+  font-weight: ${props => props.theme.fonts.weights.semiBold};
+`;
+
+const Area = styled.p`
+  margin: ${props => props.theme.spacing.md} 0 0;
+  font-size: ${props => props.theme.fonts.size.sm};
+`;
+
+const BottomBar = styled.div`
+  ${props => props.theme.mixins.container}
+  margin-top: ${props => props.theme.spacing.xl};
+  padding-bottom: ${props => props.theme.spacing.lg};
+  font-size: ${props => props.theme.fonts.size.sm};
+
+  /* The line sits on the text, so it spans the content width, not the gutter */
+  p {
+    margin: 0;
+    padding-top: ${props => props.theme.spacing.lg};
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
 `;
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <FooterContainer>
       <FooterContent>
-  
-        <FooterSection>
-          <FooterTitle>Contact Us</FooterTitle>
-          {business.phones.map((phone) => (
-            <FooterText key={phone.international}>
-              {phone.label}: <FooterLink href={telHref(phone)}>{phone.display}</FooterLink>
-            </FooterText>
-          ))}
-          <FooterText>
-            Email: <FooterLink href={`mailto:${business.email}`}>{business.email}</FooterLink>
-          </FooterText>
-        </FooterSection>
+        <section aria-labelledby="footer-contact">
+          <FooterTitle id="footer-contact">Contact Us</FooterTitle>
+          <FooterList>
+            {business.phones.map((phone) => (
+              <ContactItem key={phone.international}>
+                <ContactLabel>{phone.label}</ContactLabel>
+                <ContactValue href={telHref(phone)}>{phone.display}</ContactValue>
+              </ContactItem>
+            ))}
+            <ContactItem>
+              <ContactLabel>Email</ContactLabel>
+              <ContactValue href={`mailto:${business.email}`}>{business.email}</ContactValue>
+            </ContactItem>
+          </FooterList>
+          <Area>{`Covering ${business.area.base}, the ${postcodeList()} postcodes and ${business.area.region}.`}</Area>
+        </section>
 
-        <FooterSection as="nav" aria-label="Services">
-          <FooterTitle>Services</FooterTitle>
+        <nav aria-labelledby="footer-services">
+          <FooterTitle id="footer-services">Services</FooterTitle>
           <FooterList>
             {services.map((service) => (
               <li key={service.slug}>
-                <FooterText as="span">
-                  <FooterLink as={Link} to={servicePath(service)}>{service.name}</FooterLink>
-                </FooterText>
+                <FooterLink as={Link} to={servicePath(service)}>{service.name}</FooterLink>
               </li>
             ))}
           </FooterList>
-        </FooterSection>
+        </nav>
       </FooterContent>
+
+      <BottomBar>
+        <p>{`© ${year} ${business.legalName}. Trade Waste Licence ${business.wasteLicence.number}.`}</p>
+      </BottomBar>
     </FooterContainer>
   );
 };

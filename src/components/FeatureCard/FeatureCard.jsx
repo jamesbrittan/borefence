@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledFeatureCard = styled.article`
+const StyledFeatureCard = styled.li`
   text-align: center;
   padding: ${props => props.theme.spacing.card};
   border-radius: ${props => props.theme.radius.medium};

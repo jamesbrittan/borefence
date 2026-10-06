@@ -73,7 +73,6 @@ const ColourPalette = () => (
         </Swatch>
       ))}
     </Swatches>
-    <Note>Colours on screen are a guide; ask us to see a sample of the finish.</Note>
   </Section>
 );
 

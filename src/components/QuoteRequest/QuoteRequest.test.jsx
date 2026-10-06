@@ -9,7 +9,7 @@ const fillAndSubmit = async (user) => {
   await user.type(screen.getByLabelText('Name'), 'Sam');
   await user.type(screen.getByLabelText('Email'), 'sam@example.com');
   await user.type(screen.getByLabelText('Message'), 'A quote for 10m of fencing please');
-  await user.click(screen.getByRole('button', { name: /send message/i }));
+  await user.click(screen.getByRole('button', { name: /request a free quote/i }));
 };
 
 describe('QuoteRequest', () => {
@@ -89,5 +89,51 @@ describe('QuoteRequest', () => {
     );
     const ids = screen.getAllByLabelText('Name').map((input) => input.id);
     expect(new Set(ids).size).toBe(2);
+  });
+
+  describe('validation', () => {
+    it('shows an error under each missing field, focuses the first, and sends nothing', async () => {
+      const submit = inMemorySubmit();
+      const user = userEvent.setup();
+      renderWithProviders(<QuoteRequest submit={submit} />);
+
+      await user.click(screen.getByRole('button', { name: /request a free quote/i }));
+
+      expect(submit.submissions).toEqual([]);
+      const name = screen.getByLabelText('Name');
+      expect(name).toHaveFocus();
+      expect(name).toHaveAttribute('aria-invalid', 'true');
+      expect(name).toHaveAccessibleDescription('Enter your name');
+      expect(screen.getByLabelText('Email')).toHaveAccessibleDescription('Enter your email address');
+      expect(screen.getByLabelText('Message')).toHaveAccessibleDescription("Tell us what you'd like a quote for");
+      expect(screen.getByLabelText('Phone (optional)')).not.toHaveAttribute('aria-invalid');
+    });
+
+    it('explains a badly formatted email address', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<QuoteRequest submit={inMemorySubmit()} />);
+      await user.type(screen.getByLabelText('Name'), 'Sam');
+      await user.type(screen.getByLabelText('Email'), 'sam@example');
+      await user.type(screen.getByLabelText('Message'), 'Quote please');
+      await user.click(screen.getByRole('button', { name: /request a free quote/i }));
+
+      expect(screen.getByLabelText('Email')).toHaveFocus();
+      expect(screen.getByLabelText('Email')).toHaveAccessibleDescription('Enter an email address like name@example.com');
+    });
+
+    it('clears an error as soon as the field is fixed', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<QuoteRequest submit={inMemorySubmit()} />);
+      await user.click(screen.getByRole('button', { name: /request a free quote/i }));
+      await user.type(screen.getByLabelText('Name'), 'S');
+
+      expect(screen.getByLabelText('Name')).not.toHaveAttribute('aria-invalid');
+      expect(screen.queryByText('Enter your name')).not.toBeInTheDocument();
+    });
+  });
+
+  it('says how the details will be used, next to the button', () => {
+    renderWithProviders(<QuoteRequest />);
+    expect(screen.getByText(/only use your details to reply to your enquiry/i)).toBeInTheDocument();
   });
 });

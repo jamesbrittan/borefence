@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import QuoteRequest from '../components/QuoteRequest';
 import PageMeta from '../seo/PageMeta';
 import LocalBusinessSchema from '../seo/LocalBusinessSchema';
-import { business, postcodeList } from '../business/details';
+import { business, postcodeList, sellingPoints } from '../business/details';
 import Guarantee from '../components/Guarantee/Guarantee';
 import DesignOptions from '../components/DesignOptions/DesignOptions';
 import HeroSection from '../components/HeroSection/HeroSection';
@@ -39,22 +39,6 @@ const DesignWrapper = styled.div`
 `;
 
 const Home = () => {
-  const featuresData = [
-    {
-      title: "We offer a fully professional service",
-      description: "Our own fully accredited fitters"
-    },
-    {
-      title: "Complete clearance of your existing fence, concrete posts, walls and hedges",
-      description: `We carry a Trade Waste License - ${business.wasteLicence.authority} - ${business.legalName} ${business.wasteLicence.number}`
-    },
-    {
-      title: "Complete project management from start to finish",
-      description: "Your hassle free option"
-    }
-
-  ];
-
   return (
     <HomeContainer>
       <PageMeta
@@ -73,7 +57,7 @@ const Home = () => {
         <Guarantee />
       </GuaranteeWrapper>
 
-      <FeaturesSection features={featuresData} />
+      <FeaturesSection features={sellingPoints} />
 
       <DesignWrapper>
         <DesignOptions />

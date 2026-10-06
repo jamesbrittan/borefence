@@ -29,6 +29,22 @@ export const business = {
   },
 };
 
+// The three selling points on the home page
+export const sellingPoints = [
+  {
+    title: 'We offer a fully professional service',
+    description: 'Our own fully accredited fitters',
+  },
+  {
+    title: 'Complete clearance of your existing fence, concrete posts, walls and hedges',
+    description: `We carry a Trade Waste Licence – ${business.wasteLicence.authority} – ${business.legalName} ${business.wasteLicence.number}`,
+  },
+  {
+    title: 'Complete project management from start to finish',
+    description: 'Your hassle-free option',
+  },
+];
+
 export const telHref = (phone) => `tel:${phone.international}`;
 
 // "the NP and CF postcodes"

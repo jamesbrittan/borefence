@@ -1,121 +1,80 @@
 import styled from 'styled-components';
 
-const PaletteHeading = styled.h2`
+// Standard finishes; names as in CONTEXT.md ("Colour palette")
+const COLOURS = [
+  { name: 'Cream', key: 'cream' },
+  { name: 'Green', key: 'green' },
+  { name: 'Blue', key: 'blue' },
+  { name: 'Brown', key: 'brown' },
+  { name: 'Anthracite Grey', key: 'anthraciteGrey' },
+  { name: 'Matt or Gloss Black', key: 'mattBlack' },
+];
+
+const Section = styled.section`
+  margin-top: ${props => props.theme.spacing.section};
+`;
+
+const Heading = styled.h2`
   ${props => props.theme.typography.heading}
   font-size: ${props => props.theme.fonts.size.sectionTitle};
-  margin-top: ${props => props.theme.spacing.section};
   margin-bottom: ${props => props.theme.spacing.md};
   text-align: center;
 `;
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+// One evenly wrapping grid: 3 per row on desktop, 2 on tablets and phones
+const Swatches = styled.ul`
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: ${props => props.theme.spacing.md};
-`;
 
-const TopRow = styled.div`
-  display: flex;
-  width: 100%;
-  height: 300px;
-  gap: ${props => props.theme.spacing.md};
-  
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    flex-wrap: wrap;
-    height: auto;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
-const BottomRow = styled.div`
-  display: flex;
-  width: 100%;
-  height: 280px;
-  gap: ${props => props.theme.spacing.md};
-  
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    flex-wrap: wrap;
-    height: auto;
-  }
+const Swatch = styled.li`
+  background: ${props => props.theme.colors.white};
+  border-radius: ${props => props.theme.radius.medium};
+  box-shadow: ${props => props.theme.shadows.medium};
+  overflow: hidden;
 `;
 
-const ColorBlock = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// The colour itself; the name sits below it on white, so it's always readable
+const Chip = styled.div`
+  aspect-ratio: 16 / 9;
+  background-color: ${props => props.theme.colors.fence[props.$colourKey]};
+  /* A hairline keeps the light Cream chip distinct from the white card */
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+`;
+
+const Name = styled.p`
+  margin: 0;
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  text-align: center;
   font-weight: ${props => props.theme.fonts.weights.semiBold};
-  font-size: ${props => props.theme.fonts.size.lg};
-  text-transform: uppercase;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    min-height: 150px;
-    font-size: ${props => props.theme.fonts.size.md};
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    min-height: 100px;
-  }
 `;
 
-const LargeColorBlock = styled(ColorBlock)`
-  flex: 1;
-  
-  /* Two swatches per row on tablets and phones */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    flex: 1 1 45%;
-  }
+const Note = styled.p`
+  margin: ${props => props.theme.spacing.md} 0 0;
+  text-align: center;
+  font-size: ${props => props.theme.fonts.size.sm};
+  color: ${props => props.theme.colors.textLight};
 `;
 
-const CreamBlock = styled(LargeColorBlock)`
-  background-color: ${props => props.theme.colors.fence.cream};
-  color: #333333; /* Dark text for better contrast on light background */
-`;
-
-const GreenBlock = styled(LargeColorBlock)`
-  background-color: ${props => props.theme.colors.fence.green};
-  color: ${props => props.theme.colors.white};
-`;
-
-const BlueBlock = styled(LargeColorBlock)`
-  background-color: ${props => props.theme.colors.fence.blue};
-  color: ${props => props.theme.colors.white};
-`;
-
-const BrownBlock = styled(LargeColorBlock)`
-  background-color: ${props => props.theme.colors.fence.brown};
-  color: ${props => props.theme.colors.white};
-`;
-
-const AnthraciteGreyBlock = styled(LargeColorBlock)`
-  background-color: ${props => props.theme.colors.fence.anthraciteGrey};
-  color: ${props => props.theme.colors.white};
-`;
-
-const BlackBlock = styled(LargeColorBlock)`
-  background-color: ${props => props.theme.colors.fence.mattBlack};
-  color: ${props => props.theme.colors.white};
-`;
-
-const ColourPalette = () => {
-  return (
-    <div>
-      <PaletteHeading>Available Railing Colours</PaletteHeading>
-      <Container aria-label="Available fence colour options" role="region">
-        <TopRow>
-          <CreamBlock aria-label="Cream coloured finish">Cream</CreamBlock>
-          <GreenBlock aria-label="Green coloured finish">Green</GreenBlock>
-          <BlueBlock aria-label="Blue coloured finish">Blue</BlueBlock>
-          <BrownBlock aria-label="Brown coloured finish">Brown</BrownBlock>
-        </TopRow>
-        <BottomRow>
-          <AnthraciteGreyBlock aria-label="Anthracite Grey coloured finish">Anthracite Grey</AnthraciteGreyBlock>
-          <BlackBlock aria-label="Matt or Gloss Black coloured finish">Matt or Gloss Black</BlackBlock>
-        </BottomRow>
-      </Container>
-    </div>
-  );
-};
+const ColourPalette = () => (
+  <Section aria-labelledby="railing-colours">
+    <Heading id="railing-colours">Available Railing Colours</Heading>
+    <Swatches>
+      {COLOURS.map(({ name, key }) => (
+        <Swatch key={key}>
+          <Chip $colourKey={key} aria-hidden="true" />
+          <Name>{name}</Name>
+        </Swatch>
+      ))}
+    </Swatches>
+    <Note>Colours on screen are a guide; ask us to see a sample of the finish.</Note>
+  </Section>
+);
 
 export default ColourPalette;

@@ -22,7 +22,7 @@ describe('routes', () => {
   it('renders the contact page with the quote form', () => {
     renderAt('/contact');
     expect(screen.getByRole('heading', { name: /get a free quote/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /send message/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /request a free quote/i })).toBeInTheDocument();
   });
 
   it.each(services.map((service) => [servicePath(service), service.name]))(

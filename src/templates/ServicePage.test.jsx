@@ -13,7 +13,7 @@ describe('ServicePage', () => {
     const quoteLink = screen.getByRole('link', { name: 'Get a free quote' });
     const target = container.querySelector(quoteLink.getAttribute('href'));
     expect(target).not.toBeNull();
-    expect(within(target).getByRole('button', { name: /send message/i })).toBeInTheDocument();
+    expect(within(target).getByRole('button', { name: /request a free quote/i })).toBeInTheDocument();
 
     const phone = business.phones[0];
     expect(screen.getByRole('link', { name: `Call ${phone.display}` })).toHaveAttribute('href', `tel:${phone.international}`);

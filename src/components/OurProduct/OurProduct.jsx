@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Img } from '../../images';
 import { business } from '../../business/details';
 
-const GuaranteeSection = styled.section`
+const OurProductSection = styled.section`
   ${props => props.theme.mixins.container}
   position: relative;
   padding-bottom: ${props => props.theme.spacing.section};
@@ -16,16 +16,13 @@ const Container = styled.div`
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  position: relative;
-  z-index: 10;
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
   }
 `;
 
-const GuaranteeContent = styled.div`
+const Content = styled.div`
   padding: ${props => props.theme.spacing.cardLarge};
   display: flex;
   flex-direction: column;
@@ -37,14 +34,6 @@ const GuaranteeContent = styled.div`
     margin-bottom: ${props => props.theme.spacing.md};
     font-size: ${props => props.theme.fonts.size.h2};
     line-height: 1.2;
-  }
-
-  p {
-    ${props => props.theme.typography.body}
-    color: ${props => props.theme.colors.text};
-    margin-bottom: ${props => props.theme.spacing.md};
-    font-size: ${props => props.theme.fonts.size.lg};
-    line-height: 1.6;
   }
 
   ul {
@@ -63,7 +52,10 @@ const GuaranteeContent = styled.div`
       font-size: ${props => props.theme.fonts.size.lg};
 
       &::before {
+        /* Decorative: the second value hides the tick from screen readers
+           (older browsers ignore it and keep the first) */
         content: '✓';
+        content: '✓' / '';
         color: ${props => props.theme.colors.accent};
         font-weight: bold;
         font-size: ${props => props.theme.fonts.size.xl};
@@ -72,7 +64,7 @@ const GuaranteeContent = styled.div`
   }
 `;
 
-const GuaranteeImage = styled.div`
+const Photo = styled.div`
   position: relative;
   overflow: hidden;
   min-height: ${props => props.theme.spacing.giant};
@@ -88,36 +80,37 @@ const GuaranteeImage = styled.div`
   }
 `;
 
-const Guarantee = () => {
+const OurProduct = () => {
   return (
-    <GuaranteeSection aria-labelledby="guarantee-title">
+    <OurProductSection aria-labelledby="our-product-title">
       <Container>
-        <GuaranteeContent>
-          <h2 id="guarantee-title">Our product</h2>
+        <Content>
+          <h2 id="our-product-title">Our product</h2>
+          {/* role="list": Safari drops list semantics when list-style is none */}
           <ul role="list">
-            <li role="listitem">Low maintenance</li>
-            <li role="listitem">Won&apos;t rot, fade or distort with the weather. No need to stain or paint</li>
-            <li role="listitem">100% recyclable</li>
-            <li role="listitem">Colour bond steel, powder coated to provide resistance to chipping, flaking and blistering</li>
-            <li role="listitem">Dual sided finish</li>
-            <li role="listitem">{`${business.warranty.installationYears} year installation warranty`}</li>
-            <li role="listitem">
+            <li>Low maintenance</li>
+            <li>Won&apos;t rot, fade or distort with the weather. No need to stain or paint</li>
+            <li>100% recyclable</li>
+            <li>Colour-bonded steel, powder coated to resist chipping, flaking and blistering</li>
+            <li>Dual sided finish</li>
+            <li>{`${business.warranty.installationYears} year installation warranty`}</li>
+            <li>
               {`${business.warranty.manufacturerYears} year manufacturer warranty with ${business.warranty.manufacturer}`}
             </li>
           </ul>
-        </GuaranteeContent>
-        <GuaranteeImage>
+        </Content>
+        <Photo>
           <Img
             path="fence_blue_s.jpg"
             widths={[400, 600, 900, 1200]}
-            sizes="(max-width: 768px) 90vw, 540px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1160px) 50vw, 540px"
             alt="A blue fence in a garden next to a child's playground"
             loading="lazy"
           />
-        </GuaranteeImage>
+        </Photo>
       </Container>
-    </GuaranteeSection>
+    </OurProductSection>
   );
 };
 
-export default Guarantee;
+export default OurProduct;

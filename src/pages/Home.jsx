@@ -3,7 +3,7 @@ import QuoteRequest from '../components/QuoteRequest';
 import PageMeta from '../seo/PageMeta';
 import LocalBusinessSchema from '../seo/LocalBusinessSchema';
 import { business, postcodeList, sellingPoints } from '../business/details';
-import Guarantee from '../components/Guarantee/Guarantee';
+import OurProduct from '../components/OurProduct/OurProduct';
 import About from '../components/About/About';
 import HeroSection from '../components/HeroSection/HeroSection';
 import FeaturesSection from '../components/FeaturesSection/FeaturesSection';
@@ -12,11 +12,11 @@ const HomeContainer = styled.main`
   width: 100%;
 `;
 
-const GuaranteeWrapper = styled.div`
+// Overlaps the bottom of the hero by 2rem; z-index lifts it above the hero (z-index 2)
+const OurProductWrapper = styled.div`
   position: relative;
   margin-top: -2rem;
-  background-color: transparent;
-  z-index: 5;
+  z-index: 3;
 `;
 
 const Home = () => {
@@ -34,9 +34,9 @@ const Home = () => {
         showServiceLinks={true}
       />
 
-      <GuaranteeWrapper>
-        <Guarantee />
-      </GuaranteeWrapper>
+      <OurProductWrapper>
+        <OurProduct />
+      </OurProductWrapper>
 
       <FeaturesSection features={sellingPoints} />
 

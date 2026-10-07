@@ -16,10 +16,16 @@ const smokedGlass = css`
   border: 1px solid rgba(255, 255, 255, 0.25);
 `;
 
-// A scrim darkest behind the text: left-to-right on desktop, where the text
-// sits on the left; top-to-bottom on tablets and phones, where it sits on top.
-const SCRIM_SIDE = 'linear-gradient(90deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.58) 45%, rgba(15, 23, 42, 0.2) 100%)';
-const SCRIM_TOP = 'linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.55) 45%, rgba(15, 23, 42, 0.3) 100%)';
+// A scrim placed only where text sits:
+// - On desktop: starts with a gentle 30% edge tint, plateaus at 59% navy across
+//   the text column (calc(50% - 640px) to calc(50% + 60px)), and fades to 0% by
+//   calc(50% + 320px). The photo remains fully un-dimmed across the form side.
+// - On tablets and phones: covers the top text block at 50% navy through 480px,
+//   then fades to 0% by 800px so the lower hero and form area stay bright.
+const SCRIM_SIDE =
+  'linear-gradient(90deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.59) calc(50% - 640px), rgba(15, 23, 42, 0.59) calc(50% + 60px), rgba(15, 23, 42, 0) calc(50% + 320px))';
+const SCRIM_TOP =
+  'linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0, rgba(15, 23, 42, 0.5) 480px, rgba(15, 23, 42, 0) 800px)';
 
 const StyledHeroSection = styled.section`
   position: relative;

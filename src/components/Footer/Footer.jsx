@@ -21,8 +21,7 @@ const FooterContent = styled.div`
 `;
 
 const FooterTitle = styled.h2`
-  ${props => props.theme.typography.heading}
-  font-size: 1.25rem;
+  ${props => props.theme.typography.h3}
   color: ${props => props.theme.colors.white};
   margin-bottom: ${props => props.theme.spacing.md};
 `;
@@ -42,12 +41,13 @@ const ContactItem = styled.li`
 
 // "Phone", "Mobile", "Email": small and muted, so the numbers stand out
 const ContactLabel = styled.span`
-  font-size: ${props => props.theme.fonts.size.sm};
+  ${props => props.theme.typography.small}
   text-transform: uppercase;
   letter-spacing: 0.05em;
 `;
 
 const FooterLink = styled.a`
+  ${props => props.theme.typography.nav}
   color: ${props => props.theme.colors.white};
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -66,20 +66,20 @@ const FooterLink = styled.a`
 `;
 
 const ContactValue = styled(FooterLink)`
-  font-size: ${props => props.theme.fonts.size.lg};
+  ${props => props.theme.typography.lead}
   font-weight: ${props => props.theme.fonts.weights.semiBold};
 `;
 
 const Area = styled.p`
   margin: ${props => props.theme.spacing.md} 0 0;
-  font-size: ${props => props.theme.fonts.size.sm};
+  ${props => props.theme.typography.small}
 `;
 
 const BottomBar = styled.div`
   ${props => props.theme.mixins.container}
   margin-top: ${props => props.theme.spacing.xl};
   padding-bottom: ${props => props.theme.spacing.lg};
-  font-size: ${props => props.theme.fonts.size.sm};
+  ${props => props.theme.typography.small}
 
   /* The line sits on the text, so it spans the content width, not the gutter */
   p {

@@ -53,9 +53,8 @@ const StyledForm = styled.form`
 `;
 
 const FormHeading = styled.h2`
-  ${props => props.theme.typography.heading}
+  ${props => props.theme.typography.h3}
   color: var(--quote-text);
-  font-size: 1.25rem;
   margin-bottom: ${props => props.theme.spacing.md};
 `;
 
@@ -66,9 +65,8 @@ const FormGroup = styled.div`
 `;
 
 const Label = styled.label`
+  ${props => props.theme.typography.label}
   color: var(--quote-text);
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
-  font-size: 0.875rem;
   margin-bottom: ${props => props.theme.spacing.xxs};
 `;
 
@@ -80,9 +78,7 @@ const Input = styled.input`
   backdrop-filter: var(--quote-input-blur);
   -webkit-backdrop-filter: var(--quote-input-blur);
   color: var(--quote-text);
-  font-family: ${props => props.theme.fonts.body};
-  font-size: ${props => props.theme.spacing.md};
-  line-height: 1.5;
+  ${props => props.theme.typography.body}
   width: 100%;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
@@ -110,17 +106,14 @@ const FieldError = styled.p`
   margin: 0;
   padding-left: ${props => props.theme.spacing.xs};
   border-left: 3px solid var(--quote-error-accent);
+  ${props => props.theme.typography.label}
   color: var(--quote-error-text);
-  font-size: 0.875rem;
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
-  line-height: 1.4;
 `;
 
 const Reassurance = styled.p`
   margin: 0;
+  ${props => props.theme.typography.small}
   color: var(--quote-text);
-  font-size: 0.875rem;
-  line-height: 1.5;
 `;
 
 const TextArea = styled(Input).attrs({ as: 'textarea' })`
@@ -134,7 +127,7 @@ const SubmitButton = styled.button`
   border-radius: ${props => props.theme.radius.medium};
   background: var(--quote-button-bg);
   color: var(--quote-button-text);
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  ${props => props.theme.typography.button}
   cursor: pointer;
   transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 

@@ -138,11 +138,8 @@ const HeroTextContent = styled.div`
 `;
 
 const HeroTitle = styled.h1`
-  ${props => props.theme.typography.heading}
-  font-size: ${props => props.theme.fonts.size.HeroTitle};
-  font-weight: ${props => props.theme.fonts.weights.bold};
+  ${props => props.theme.typography.display}
   margin-bottom: ${props => props.theme.spacing.md};
-  line-height: 1.2;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   position: relative;
   
@@ -169,9 +166,8 @@ const HeroTitle = styled.h1`
 `;
 
 const HeroSubtitle = styled.p`
-  ${props => props.theme.typography.heading}
-  font-size: ${props => props.theme.fonts.size.subtitle};
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  ${props => props.theme.typography.lead}
+  font-weight: ${props => props.theme.fonts.weights.medium};
   margin-bottom: ${props => props.theme.spacing.lg};
   color: ${props => props.theme.colors.white};
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
@@ -180,8 +176,7 @@ const HeroSubtitle = styled.p`
 `;
 
 const HeroDescription = styled.p`
-  ${props => props.theme.typography.body}
-  font-size: ${props => props.theme.fonts.size.lg};
+  ${props => props.theme.typography.lead}
   color: ${props => props.theme.colors.white};
   margin-bottom: ${props => props.theme.spacing.xl};
   max-width: 600px;
@@ -226,25 +221,22 @@ const ServiceLinkItem = styled.div`
 `;
 
 const ServiceLinksPrompt = styled.span`
+  ${props => props.theme.typography.label}
+  font-size: ${props => props.theme.fonts.size.nav};
   color: ${props => props.theme.colors.white};
-  font-size: ${props => props.theme.fonts.size.md};
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
   margin-bottom: ${props => props.theme.spacing.xxs};
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 `;
 
 const ServiceLink = styled(Link)`
+  ${props => props.theme.typography.label}
   color: ${props => props.theme.colors.white};
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
-  font-size: ${props => props.theme.fonts.size.sm};
   text-decoration: none;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
   transition: color 0.2s ease;
   padding: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.xs};
   border-radius: ${props => props.theme.radius.small};
-  letter-spacing: 0.01em;
 
-  
   &:hover, &:focus {
     color: ${props => props.theme.colors.white};
     text-decoration: underline;

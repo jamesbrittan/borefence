@@ -38,4 +38,19 @@ describe('theme', () => {
       .map(({ file, key }) => `${file}: theme.${key}`);
     expect(missing).toEqual([]);
   });
+
+  // Type sizes and line heights belong in theme.typography (#35), so a
+  // component can't drift from the scale with a one-off value.
+  it('has no hard-coded font sizes or line heights in components', () => {
+    const offenders = sourceFiles(SRC)
+      .filter((file) => !file.includes(`${join('src', 'styles')}`))
+      .flatMap((file) =>
+        readFileSync(file, 'utf8')
+          .split('\n')
+          .map((line, i) => ({ line: line.trim(), at: `${relative(process.cwd(), file)}:${i + 1}` }))
+          .filter(({ line }) => /^(font-size|line-height):\s*(?!\s|\$\{)/.test(line))
+          .map(({ line, at }) => `${at}  ${line}`)
+      );
+    expect(offenders).toEqual([]);
+  });
 });

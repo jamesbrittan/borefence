@@ -14,7 +14,7 @@ const Link = styled.a`
   background: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.radius.medium};
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  ${props => props.theme.typography.button}
   transform: translateY(-200%);
 
   &:focus {

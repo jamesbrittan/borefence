@@ -14,15 +14,13 @@ const Intro = styled.section`
 `;
 
 const Title = styled.h1`
-  ${props => props.theme.typography.heading}
+  ${props => props.theme.typography.h1}
   color: ${props => props.theme.colors.primary};
-  font-size: ${props => props.theme.fonts.size.h1};
-  font-weight: ${props => props.theme.fonts.weights.bold};
   margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const Lead = styled.p`
-  font-size: ${props => props.theme.fonts.size.lg};
+  ${props => props.theme.typography.lead}
   max-width: 60ch;
   margin-bottom: ${props => props.theme.spacing.xl};
 `;
@@ -44,15 +42,14 @@ const Method = styled.li`
 
 const MethodLabel = styled.p`
   margin: 0 0 ${props => props.theme.spacing.xxs};
-  font-size: ${props => props.theme.fonts.size.sm};
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  ${props => props.theme.typography.label}
   color: ${props => props.theme.colors.textLight};
   text-transform: uppercase;
   letter-spacing: 0.05em;
 `;
 
 const MethodLink = styled.a`
-  font-size: ${props => props.theme.fonts.size.lg};
+  ${props => props.theme.typography.lead}
   font-weight: ${props => props.theme.fonts.weights.semiBold};
   overflow-wrap: anywhere;
   text-decoration: underline;

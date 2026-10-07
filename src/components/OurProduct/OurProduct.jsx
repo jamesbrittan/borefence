@@ -29,11 +29,9 @@ const Content = styled.div`
   gap: ${props => props.theme.spacing.component.gap.default};
 
   h2 {
-    ${props => props.theme.typography.heading}
+    ${props => props.theme.typography.h2}
     color: ${props => props.theme.colors.primary};
     margin-bottom: ${props => props.theme.spacing.md};
-    font-size: ${props => props.theme.fonts.size.h2};
-    line-height: 1.2;
   }
 
   ul {
@@ -49,7 +47,6 @@ const Content = styled.div`
       /* Tick lines up with the first line of multi-line items */
       align-items: baseline;
       gap: ${props => props.theme.spacing.sm};
-      font-size: ${props => props.theme.fonts.size.lg};
 
       &::before {
         /* Decorative: the second value hides the tick from screen readers
@@ -57,8 +54,8 @@ const Content = styled.div`
         content: '✓';
         content: '✓' / '';
         color: ${props => props.theme.colors.accent};
-        font-weight: bold;
-        font-size: ${props => props.theme.fonts.size.xl};
+        font-weight: ${props => props.theme.fonts.weights.bold};
+        font-size: ${props => props.theme.fonts.size.lead};
       }
     }
   }

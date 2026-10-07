@@ -8,9 +8,8 @@ const StyledFeatureCard = styled.li`
   h3 {
     color: ${props => props.theme.colors.primary};
     /* The card's padding provides the space above */
+    ${props => props.theme.typography.h3}
     margin: 0 0 ${props => props.theme.spacing.md};
-    font-size: ${props => props.theme.spacing.lg};
-    line-height: 1.3;
     position: relative;
     
     &::after {
@@ -26,7 +25,6 @@ const StyledFeatureCard = styled.li`
   p {
     ${props => props.theme.typography.body}
     color: ${props => props.theme.colors.text};
-    line-height: 1.6;
     margin-bottom: 0;
   }
 `;

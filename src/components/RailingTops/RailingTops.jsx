@@ -17,8 +17,7 @@ const Section = styled.section`
 
 // Same style and spacing as the colour palette heading above it
 const Heading = styled.h2`
-  ${props => props.theme.typography.heading}
-  font-size: ${props => props.theme.fonts.size.sectionTitle};
+  ${props => props.theme.typography.h2}
   margin-bottom: ${props => props.theme.spacing.md};
   text-align: center;
 `;

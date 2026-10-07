@@ -36,17 +36,13 @@ const Content = styled.div`
 
   p {
     margin-bottom: 0;
-    line-height: 1.6;
-    font-size: ${props => props.theme.fonts.size.md};
   }
 `;
 
 const SectionTitle = styled.h2`
-  ${(props) => props.theme.typography.heading}
+  ${(props) => props.theme.typography.h2}
   color: ${(props) => props.theme.colors.primary};
   margin-bottom: ${(props) => props.theme.spacing.lg};
-  font-size: ${props => props.theme.fonts.size.sectionTitle};
-  line-height: 1.2;
 `;
 
 const About = () => {

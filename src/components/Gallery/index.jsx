@@ -26,7 +26,7 @@ const ImageCounter = styled.div`
   color: white;
   padding: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.xs};
   border-radius: ${props => props.theme.radius.small};
-  font-size: 0.8rem;
+  ${props => props.theme.typography.label}
   z-index: 2;
   
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
@@ -36,8 +36,6 @@ const ImageCounter = styled.div`
   }
   
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: 0.75rem;
-    font-weight: bold;
     padding: 2px 6px;
     bottom: 5px;
     right: 5px;

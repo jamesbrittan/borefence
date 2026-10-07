@@ -301,8 +301,6 @@ const Band = styled.div`
   background-color: ${props => props.theme.colors.background};
   padding-block: ${props => props.theme.spacing.xl} ${props => props.theme.spacing.section};
   position: relative;
-  /* When jumped to (e.g. #quote), stop below the sticky header */
-  scroll-margin-top: 5rem;
 
   &::before {
     content: '';

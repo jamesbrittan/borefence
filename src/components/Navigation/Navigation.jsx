@@ -248,7 +248,7 @@ const Navigation = () => {
     <Nav>
       <NavContent>
         <LogoLink to="/">
-          <LogoImage src={logoPath} alt="Bore Fence Ltd" />
+          <LogoImage src={logoPath} alt="BoreFence home" />
         </LogoLink>
         <NavLinks>
           <DropdownContainer ref={dropdownRef} onBlur={handleBlur}>

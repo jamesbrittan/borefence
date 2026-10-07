@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MAIN_CONTENT_ID } from '../components/SkipLink';
 import { QuoteRequestSection } from '../components/QuoteRequest';
 import PageMeta from '../seo/PageMeta';
 import { business, telHref, postcodeList } from '../business/details';
@@ -70,7 +71,7 @@ const Area = styled.p`
 
 const Contact = () => {
   return (
-    <ContactContainer>
+    <ContactContainer id={MAIN_CONTENT_ID} tabIndex={-1}>
       <PageMeta
         title="Contact us"
         description={`Get a free quote from ${business.name} for fencing, railings, gates and sheds. Call ${business.phones[0].display} or send us a message.`}

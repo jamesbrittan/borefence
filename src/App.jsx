@@ -4,6 +4,7 @@ import theme from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import SkipLink from './components/SkipLink';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
@@ -14,6 +15,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
+        <SkipLink />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

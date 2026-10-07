@@ -67,8 +67,7 @@ const currentPageStyle = props => `
 const NavLink = styled(RouterNavLink)`
   color: ${props => props.theme.colors.text};
   text-decoration: none;
-  font-weight: ${props => props.theme.fonts.weights.medium};
-  font-size: ${props => props.theme.fonts.size.md};
+  ${props => props.theme.typography.nav}
   transition: color 0.2s;
 
   &:hover, &:focus {
@@ -97,8 +96,7 @@ const DropdownContainer = styled.div`
 
 const ServicesButton = styled.button`
   color: ${props => props.theme.colors.text};
-  font-weight: ${props => props.theme.fonts.weights.medium};
-  font-size: ${props => props.theme.fonts.size.md};
+  ${props => props.theme.typography.nav}
   background: none;
   border: none;
   padding: 0;
@@ -180,6 +178,7 @@ const DropdownMenu = styled.ul`
 `;
 
 const DropdownLink = styled(RouterNavLink)`
+  ${props => props.theme.typography.nav}
   display: block;
   padding: 0.75rem 1rem;
   color: ${props => props.theme.colors.text};

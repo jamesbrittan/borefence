@@ -60,15 +60,11 @@ const TitleSection = styled.div`
 `;
 
 const Title = styled.h1`
-  ${props => props.theme.typography.heading}
+  ${props => props.theme.typography.h1}
   color: ${props => props.theme.colors.primary};
-  /* 4.2rem on wide screens, scaling down so long words fit on phones */
-  font-size: clamp(2.25rem, 10vw, 4.2rem);
   overflow-wrap: break-word;
   margin: 0 0 ${props => props.theme.spacing.lg} 0;
   position: relative;
-  font-weight: 700;
-  letter-spacing: -0.5px;
   
   &::after {
     content: '';
@@ -88,16 +84,14 @@ const Title = styled.h1`
 const Description = styled.div`
   ${props => props.theme.typography.body}
   color: ${props => props.theme.colors.text};
-  font-size: 1.1rem;
   margin: ${props => props.theme.spacing.sm} 0;
-  line-height: 1.8;
   /* Readable line length when the card stacks and the text gets wide */
   max-width: 65ch;
   position: relative;
   
   strong {
     color: ${props => props.theme.colors.primary};
-    font-weight: 600;
+    font-weight: ${props => props.theme.fonts.weights.semiBold};
   }
 `;
 
@@ -119,7 +113,7 @@ const actionBase = css`
   min-height: 44px;
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
   border-radius: ${props => props.theme.radius.medium};
-  font-weight: ${props => props.theme.fonts.weights.semiBold};
+  ${props => props.theme.typography.button}
   text-decoration: none;
   transition: background-color 0.15s ease, color 0.15s ease;
 `;
@@ -164,8 +158,7 @@ const OtherServices = styled.section`
 `;
 
 const OtherServicesHeading = styled.h2`
-  ${props => props.theme.typography.heading}
-  font-size: ${props => props.theme.fonts.size.sectionTitle};
+  ${props => props.theme.typography.h2}
   margin-bottom: ${props => props.theme.spacing.lg};
 `;
 
@@ -185,19 +178,18 @@ const OtherServiceLink = styled(Link)`
   border-radius: ${props => props.theme.radius.medium};
   box-shadow: ${props => props.theme.shadows.small};
   color: ${props => props.theme.colors.text};
-  font-weight: normal;
+  font-weight: ${props => props.theme.fonts.weights.regular};
   transition: box-shadow 0.15s ease;
 
   h3 {
+    ${props => props.theme.typography.h3}
     color: ${props => props.theme.colors.primary};
-    font-size: ${props => props.theme.fonts.size.xl};
     margin-bottom: ${props => props.theme.spacing.xs};
   }
 
   p {
     margin: 0;
-    font-size: ${props => props.theme.fonts.size.sm};
-    line-height: 1.5;
+    ${props => props.theme.typography.small}
   }
 
   &:hover h3,

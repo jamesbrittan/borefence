@@ -19,17 +19,15 @@ const NotFoundContent = styled.div`
 `;
 
 const Title = styled.h1`
-  ${props => props.theme.typography.heading}
+  ${props => props.theme.typography.h1}
   color: ${props => props.theme.colors.primary};
-  font-size: ${props => props.theme.fonts.size.h1};
-  font-weight: ${props => props.theme.fonts.weights.bold};
 `;
 
 const Suggestions = styled.nav`
   margin-top: ${props => props.theme.spacing.lg};
 
   h2 {
-    font-size: ${props => props.theme.fonts.size.lg};
+    ${props => props.theme.typography.h3}
     margin-bottom: ${props => props.theme.spacing.sm};
   }
 
@@ -48,9 +46,8 @@ const Suggestions = styled.nav`
 `;
 
 const Message = styled.p`
-  ${props => props.theme.typography.body}
+  ${props => props.theme.typography.lead}
   color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fonts.size.lg};
 `;
 
 const NotFound = () => {

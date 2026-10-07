@@ -10,28 +10,18 @@ const theme = {
       semiBold: 600,
       bold: 700,
     },
+    // Type scale (#35 / docs/adr/0003-type-scale.md). Each step scales
+    // smoothly with the screen: about 1.25x between steps on phones, about
+    // 1.33x on desktop. Use these through theme.typography, not directly.
     size: {
-      // Heading sizes
-      HeroTitle: 'clamp(2.5rem, 5vw, 3.5rem)',
-      h1: 'clamp(2.2rem, 4vw, 3rem)',
-      h2: 'clamp(1.8rem, 3vw, 2.5rem)',
-      h3: 'clamp(1.5rem, 2.5vw, 2rem)',
-      h4: 'clamp(1.3rem, 2vw, 1.75rem)',
-      h5: 'clamp(1.1rem, 1.5vw, 1.5rem)',
-      h6: '1.25rem',
-      
-      // Body text sizes
-      xl: '1.25rem',
-      lg: '1.125rem',
-      md: '1rem',
-      sm: '0.875rem',
-      xs: '0.75rem',
-      
-      // Special cases
-      subtitle: 'clamp(1.1rem, 2vw, 1.3rem)',
-      sectionTitle: 'clamp(1.8rem, 3vw, 2.2rem)',
-      buttonText: '1rem',
-      small: '0.8rem',
+      display: 'clamp(2.5rem, 2rem + 2.5vw, 3.5rem)',      // 40 -> 56px  home hero
+      h1: 'clamp(2rem, 1.6rem + 2vw, 2.75rem)',            // 32 -> 44px  page titles
+      h2: 'clamp(1.625rem, 1.4rem + 1.1vw, 2.125rem)',     // 26 -> 34px  section headings
+      h3: 'clamp(1.3rem, 1.2rem + 0.5vw, 1.5rem)',         // 21 -> 24px  card / component headings
+      lead: 'clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem)',   // 18 -> 20px  intro paragraphs
+      body: '1.0625rem',                                    // 17px        running text
+      nav: '1rem',                                          // 16px        navigation, buttons
+      small: '0.875rem',                                    // 14px        labels, captions, notes
     },
   },
   colors: {
@@ -85,16 +75,78 @@ const theme = {
       }
     }
   },
+  // Text styles: font, size, weight, line height and spacing together.
+  // Style by role, not by tag: e.g. a form heading can be an <h2> for
+  // structure and still use the h3 style.
   typography: {
+    headingFont: css`
+      font-family: ${props => props.theme.fonts.heading};
+      font-weight: ${props => props.theme.fonts.weights.semiBold};
+      line-height: 1.2;
+    `,
+    display: css`
+      font-family: ${props => props.theme.fonts.heading};
+      font-size: ${props => props.theme.fonts.size.display};
+      font-weight: ${props => props.theme.fonts.weights.bold};
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    `,
+    h1: css`
+      font-family: ${props => props.theme.fonts.heading};
+      font-size: ${props => props.theme.fonts.size.h1};
+      font-weight: ${props => props.theme.fonts.weights.bold};
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    `,
+    h2: css`
+      font-family: ${props => props.theme.fonts.heading};
+      font-size: ${props => props.theme.fonts.size.h2};
+      font-weight: ${props => props.theme.fonts.weights.semiBold};
+      line-height: 1.2;
+    `,
+    h3: css`
+      font-family: ${props => props.theme.fonts.heading};
+      font-size: ${props => props.theme.fonts.size.h3};
+      font-weight: ${props => props.theme.fonts.weights.semiBold};
+      line-height: 1.25;
+    `,
+    lead: css`
+      font-family: ${props => props.theme.fonts.body};
+      font-size: ${props => props.theme.fonts.size.lead};
+      font-weight: ${props => props.theme.fonts.weights.regular};
+      line-height: 1.5;
+    `,
     body: css`
-      font-family: 'Barlow', sans-serif;
-      font-weight: 400;
+      font-family: ${props => props.theme.fonts.body};
+      font-size: ${props => props.theme.fonts.size.body};
+      font-weight: ${props => props.theme.fonts.weights.regular};
       line-height: 1.6;
     `,
-    heading: css`
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      line-height: 1.2;
+    small: css`
+      font-family: ${props => props.theme.fonts.body};
+      font-size: ${props => props.theme.fonts.size.small};
+      font-weight: ${props => props.theme.fonts.weights.regular};
+      line-height: 1.5;
+    `,
+    // Form labels and small headings over lists
+    label: css`
+      font-family: ${props => props.theme.fonts.body};
+      font-size: ${props => props.theme.fonts.size.small};
+      font-weight: ${props => props.theme.fonts.weights.semiBold};
+      line-height: 1.4;
+    `,
+    // Header and footer navigation links
+    nav: css`
+      font-family: ${props => props.theme.fonts.body};
+      font-size: ${props => props.theme.fonts.size.nav};
+      font-weight: ${props => props.theme.fonts.weights.medium};
+      line-height: 1.5;
+    `,
+    button: css`
+      font-family: ${props => props.theme.fonts.body};
+      font-size: ${props => props.theme.fonts.size.nav};
+      font-weight: ${props => props.theme.fonts.weights.semiBold};
+      line-height: 1.25;
     `,
   },
   breakpoints: {

@@ -55,13 +55,6 @@ const Name = styled.p`
   font-weight: ${props => props.theme.fonts.weights.semiBold};
 `;
 
-const Note = styled.p`
-  margin: ${props => props.theme.spacing.md} 0 0;
-  text-align: center;
-  font-size: ${props => props.theme.fonts.size.sm};
-  color: ${props => props.theme.colors.textLight};
-`;
-
 const ColourPalette = () => (
   <Section aria-labelledby="railing-colours">
     <Heading id="railing-colours">Available Railing Colours</Heading>

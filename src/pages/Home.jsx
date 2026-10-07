@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MAIN_CONTENT_ID } from '../components/SkipLink';
 import QuoteRequest from '../components/QuoteRequest';
 import PageMeta from '../seo/PageMeta';
 import LocalBusinessSchema from '../seo/LocalBusinessSchema';
@@ -21,7 +22,7 @@ const OurProductWrapper = styled.div`
 
 const Home = () => {
   return (
-    <HomeContainer>
+    <HomeContainer id={MAIN_CONTENT_ID} tabIndex={-1}>
       <PageMeta
         fullTitle={`${business.name} | Garden Fencing and Railings`}
         description={`${business.name} fit ColourFence fencing, ColourRail railings, gates and sheds across ${business.area.base}, the ${postcodeList()} postcodes and ${business.area.region}. Get a free quote.`}

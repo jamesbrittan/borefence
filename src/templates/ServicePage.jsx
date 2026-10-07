@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { MAIN_CONTENT_ID } from '../components/SkipLink';
 import { QuoteRequestSection } from '../components/QuoteRequest';
 import PageMeta from '../seo/PageMeta';
 import Gallery from '../components/Gallery';
@@ -227,7 +228,7 @@ const ServicePage = ({ service }) => {
   const phone = business.phones[0];
 
   return (
-    <ServiceContainer>
+    <ServiceContainer id={MAIN_CONTENT_ID} tabIndex={-1}>
       <PageMeta title={name} description={summary} />
       <FullWidthSection>
         <HeaderSection>

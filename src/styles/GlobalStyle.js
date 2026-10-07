@@ -19,6 +19,16 @@ const GlobalStyle = createGlobalStyle`
 
   /* Header, page and footer stack vertically; the page grows so the footer
      sits at the bottom of the window on short pages. */
+  /* In-page jumps (skip link, #quote) stop below the sticky header */
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  /* Pages' <main> takes focus from the skip link; no ring on a whole page */
+  main:focus {
+    outline: none;
+  }
+
   #root {
     display: flex;
     flex-direction: column;

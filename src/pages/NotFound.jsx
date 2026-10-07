@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MAIN_CONTENT_ID } from '../components/SkipLink';
 import { Link } from 'react-router-dom';
 import PageMeta from '../seo/PageMeta';
 import { services, servicePath } from '../catalogue/services';
@@ -54,7 +55,7 @@ const Message = styled.p`
 
 const NotFound = () => {
   return (
-    <NotFoundContainer>
+    <NotFoundContainer id={MAIN_CONTENT_ID} tabIndex={-1}>
       <PageMeta title="Page not found" noIndex />
       <NotFoundContent>
         <Title>Page not found</Title>

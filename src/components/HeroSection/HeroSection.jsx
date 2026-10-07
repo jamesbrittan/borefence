@@ -1,13 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import { imageSrc } from '../../images';
 import { services, servicePath } from '../../catalogue/services';
-import { Link } from 'react-router-dom';
-import { css } from 'styled-components';
+import { business, telHref } from '../../business/details';
 
 const HERO_IMAGE = 'fence_brown_h.jpg';
 
 // Dark tinted glass shared by the quote form and the service links. Opaque
-// enough that white text keeps 4.5:1 contrast even over pure white sky.
+// enough that white text keeps 4.5:1 contrast even over pure white sky
+// (ADR-0001).
 const smokedGlass = css`
   background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(15px) saturate(160%);
@@ -15,152 +16,109 @@ const smokedGlass = css`
   border: 1px solid rgba(255, 255, 255, 0.25);
 `;
 
+// A scrim darkest behind the text: left-to-right on desktop, where the text
+// sits on the left; top-to-bottom on tablets and phones, where it sits on top.
+const SCRIM_SIDE = 'linear-gradient(90deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.58) 45%, rgba(15, 23, 42, 0.2) 100%)';
+const SCRIM_TOP = 'linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.55) 45%, rgba(15, 23, 42, 0.3) 100%)';
+
 const StyledHeroSection = styled.section`
   position: relative;
   width: 100%;
-  min-height: 68vh;
+  /* Height follows the content, with a sensible minimum */
+  min-height: clamp(560px, 70vh, 720px);
   display: flex;
   align-items: center;
-  justify-content: center;
   color: ${props => props.theme.colors.white};
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 2; // updated z-index to 2
+  z-index: 2; /* the "Our product" card overlaps the hero's bottom edge */
 
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 1920 })}');
+    inset: 0;
+    background-image: url('${props => props.$backgroundImage || imageSrc(HERO_IMAGE, { width: 1920 })}');
     background-size: cover;
-    background-position: center;
-    filter: brightness(1.15) contrast(1.05);
+    background-position: center 60%;
     z-index: 1;
 
     /* Smaller hero downloads on smaller screens */
     @media (max-width: ${props => props.theme.breakpoints.desktop}) {
-      background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 1280 })}');
+      background-image: url('${props => props.$backgroundImage || imageSrc(HERO_IMAGE, { width: 1280 })}');
     }
 
     @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-      background-image: url('${props => props.backgroundImage || imageSrc(HERO_IMAGE, { width: 800 })}');
+      background-image: url('${props => props.$backgroundImage || imageSrc(HERO_IMAGE, { width: 800 })}');
     }
   }
 
   &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0.35) 30%,
-      rgba(0, 0, 0, 0.2) 60%,
-      rgba(0, 0, 0, 0.05) 100%
-    );
-    
-    @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.5) 0%,
-        rgba(0, 0, 0, 0.4) 25%,
-        rgba(0, 0, 0, 0.2) 75%,
-        rgba(0, 0, 0, 0.05) 100%
-      );
-    }
-    
+    inset: 0;
+    background: ${SCRIM_SIDE};
     z-index: 2;
+
+    @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+      background: ${SCRIM_TOP};
+    }
   }
 `;
 
+// Text about 7/12, form about 5/12, vertically centred against each other
 const HeroContent = styled.div`
   ${props => props.theme.mixins.container}
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 7fr 5fr;
+  align-items: center;
   gap: ${props => props.theme.spacing.section};
-  /* Extra bottom space for the "Our product" card, which overlaps the hero by 2rem */
-  padding-block: ${props => props.theme.spacing.section} calc(${props => props.theme.spacing.section} + 2rem);
+  /* Extra bottom space for the "Our product" card, which overlaps the hero by
+     2rem. Kept tight so the hero fits above the fold on 1280x800 screens. */
+  padding-block: ${props => props.theme.spacing.xxl} calc(${props => props.theme.spacing.xxl} + 2rem);
+
+  /* Equal columns on small desktops so the form's fields stay wide enough */
+  @media (max-width: ${props => props.theme.breakpoints.wide}) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
+    gap: ${props => props.theme.spacing.xl};
   }
 `;
 
-const HeroTextContent = styled.div`
-  /* Size to the text, so the accent bar doesn't stretch to the form's height */
-  align-self: start;
-  padding-left: ${props => props.theme.spacing.xl};
-  position: relative;
-  transform: translateY(-10px);
-  
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(
-      to bottom,
-      ${props => props.theme.colors.accent},
-      ${props => props.theme.colors.primaryLight}
-    );
-    border-radius: ${props => props.theme.radius.small};
-  }
-  
+const HeroText = styled.div`
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     text-align: center;
-    margin: 0 auto;
-    padding-left: 0;
-    padding-bottom: ${props => props.theme.spacing.lg};
-    
-    &::before {
-      width: 100%;
-      height: 4px;
-      left: 0;
-      top: auto;
-      bottom: 0;
-      background: linear-gradient(
-        to right,
-        ${props => props.theme.colors.accent},
-        ${props => props.theme.colors.primaryLight}
-      );
-    }
   }
 `;
 
+// The hero's one accent: a short underline under the headline, fading to
+// transparent in its own colour
 const HeroTitle = styled.h1`
   ${props => props.theme.typography.display}
-  margin-bottom: ${props => props.theme.spacing.md};
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  position: relative;
-  
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    text-align: center;
-  }
-  
+  max-width: 18ch;
+  text-wrap: balance;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  margin-bottom: ${props => props.theme.spacing.lg};
+
   &::after {
     content: '';
     display: block;
-    width: 80px;
+    width: 72px;
     height: 3px;
-    background: linear-gradient(
-      to right,
-      ${props => props.theme.colors.accent},
-      ${props => props.theme.colors.primaryLight}
-    );
     margin-top: ${props => props.theme.spacing.md};
-    
-    @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-      margin: ${props => props.theme.spacing.md} auto 0;
+    border-radius: 2px;
+    background: linear-gradient(to right, ${props => props.theme.colors.accent}, rgb(74 144 226 / 0));
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    margin-inline: auto;
+
+    &::after {
+      margin-inline: auto;
+      background: linear-gradient(to right, rgb(74 144 226 / 0), ${props => props.theme.colors.accent}, rgb(74 144 226 / 0));
     }
   }
 `;
@@ -168,148 +126,134 @@ const HeroTitle = styled.h1`
 const HeroSubtitle = styled.p`
   ${props => props.theme.typography.lead}
   font-weight: ${props => props.theme.fonts.weights.medium};
+  max-width: 45ch;
+  text-wrap: balance;
   margin-bottom: ${props => props.theme.spacing.lg};
-  color: ${props => props.theme.colors.white};
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  max-width: 700px;
-  position: relative;
-`;
 
-const HeroDescription = styled.p`
-  ${props => props.theme.typography.lead}
-  color: ${props => props.theme.colors.white};
-  margin-bottom: ${props => props.theme.spacing.xl};
-  max-width: 600px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-`;
-
-
-const ServiceLinksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: ${props => props.theme.spacing.md};
-  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
-  ${smokedGlass}
-  border-radius: ${props => props.theme.radius.medium};
-  width: fit-content;
-  max-width: 90%;
-  
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
   }
 `;
 
-const ServiceLinksWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+const HeroDescription = styled.p`
+  ${props => props.theme.typography.body}
+  max-width: 55ch;
+  margin-bottom: ${props => props.theme.spacing.lg};
 `;
 
-const ServiceLinksList = styled.div`
+const ServicesLabel = styled.p`
+  ${props => props.theme.typography.label}
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: ${props => props.theme.spacing.xs};
+`;
+
+// Each Service as its own pill: sized to its text, wrapping naturally
+const ServiceList = styled.ul`
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  /* Spacing instead of separators, so a wrapped line never starts with one */
-  gap: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.md};
-`;
+  gap: ${props => props.theme.spacing.xs};
 
-const ServiceLinkItem = styled.div`
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-`;
-
-const ServiceLinksPrompt = styled.span`
-  ${props => props.theme.typography.label}
-  font-size: ${props => props.theme.fonts.size.nav};
-  color: ${props => props.theme.colors.white};
-  margin-bottom: ${props => props.theme.spacing.xxs};
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+    justify-content: center;
+  }
 `;
 
 const ServiceLink = styled(Link)`
   ${props => props.theme.typography.label}
+  ${smokedGlass}
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.md};
+  border-radius: 999px;
   color: ${props => props.theme.colors.white};
-  text-decoration: none;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  transition: color 0.2s ease;
-  padding: ${props => props.theme.spacing.xxs} ${props => props.theme.spacing.xs};
-  border-radius: ${props => props.theme.radius.small};
+  transition: background-color 0.2s ease;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: ${props => props.theme.colors.white};
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  
+
   &:focus-visible {
     outline: 2px solid ${props => props.theme.colors.white};
     outline-offset: 2px;
   }
 `;
 
+const Call = styled.p`
+  ${props => props.theme.typography.body}
+  margin: ${props => props.theme.spacing.md} 0 0;
+
+  a {
+    color: ${props => props.theme.colors.white};
+    font-weight: ${props => props.theme.fonts.weights.semiBold};
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  a:focus-visible {
+    outline: 2px solid ${props => props.theme.colors.white};
+    outline-offset: 2px;
+  }
+`;
+
 const FormColumn = styled.div`
-  max-width: 400px;
   ${smokedGlass}
-  padding: ${props => props.theme.spacing.cardLarge} ${props => props.theme.spacing.card};
+  width: 100%;
+  padding: ${props => props.theme.spacing.card};
   border-radius: ${props => props.theme.radius.large};
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.2),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-    0 4px 8px rgba(0, 0, 0, 0.1);
-  justify-self: end;
-  transform: translateY(-10px);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
 
   @media (max-width: ${props => props.theme.breakpoints.tablet}) {
     justify-self: center;
     max-width: 500px;
-    width: 100%;
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    max-width: 100%;
-    padding: ${props => props.theme.spacing.card};
-    transform: translateY(0);
   }
 `;
 
-const HeroSection = ({ 
-  title, 
-  subtitle, 
-  description, 
+const HeroSection = ({
+  title,
+  subtitle,
+  description,
   backgroundImage,
   rightColumnContent,
-  showServiceLinks = false
+  showServiceLinks = false,
+  showPhone = false,
 }) => {
+  const phone = business.phones[0];
   return (
-    <StyledHeroSection backgroundImage={backgroundImage}>
+    <StyledHeroSection $backgroundImage={backgroundImage}>
       <HeroContent>
-        <HeroTextContent>
+        <HeroText>
           <HeroTitle>{title}</HeroTitle>
           {subtitle && <HeroSubtitle>{subtitle}</HeroSubtitle>}
           {description && <HeroDescription>{description}</HeroDescription>}
-          
+
           {showServiceLinks && (
-            <ServiceLinksContainer>
-              <ServiceLinksPrompt>Explore our services:</ServiceLinksPrompt>
-              <ServiceLinksWrapper>
-                <ServiceLinksList>
-                  {services.map((service) => (
-                    <ServiceLinkItem key={service.slug}>
-                      <ServiceLink to={servicePath(service)}>{service.name}</ServiceLink>
-                    </ServiceLinkItem>
-                  ))}
-                </ServiceLinksList>
-              </ServiceLinksWrapper>
-            </ServiceLinksContainer>
+            <nav aria-labelledby="hero-services">
+              <ServicesLabel id="hero-services">Our services</ServicesLabel>
+              <ServiceList>
+                {services.map((service) => (
+                  <li key={service.slug}>
+                    <ServiceLink to={servicePath(service)}>{service.name}</ServiceLink>
+                  </li>
+                ))}
+              </ServiceList>
+            </nav>
           )}
-        </HeroTextContent>
-        {rightColumnContent && (
-          <FormColumn>
-            {rightColumnContent}
-          </FormColumn>
-        )}
+
+          {showPhone && (
+            <Call>
+              Prefer to talk? Call <a href={telHref(phone)}>{phone.display}</a>
+            </Call>
+          )}
+        </HeroText>
+        {rightColumnContent && <FormColumn>{rightColumnContent}</FormColumn>}
       </HeroContent>
     </StyledHeroSection>
   );

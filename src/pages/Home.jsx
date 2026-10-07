@@ -29,10 +29,11 @@ const Home = () => {
       />
       <LocalBusinessSchema />
       <HeroSection
-        title="BoreFence -Fencing and Railings"
+        title={"BoreFence\u00a0– Fencing and Railings"}
         subtitle="Adding security, protection and style to your outdoor space"
         rightColumnContent={<QuoteRequest variant="glass" />}
-        showServiceLinks={true}
+        showServiceLinks
+        showPhone
       />
 
       <OurProductWrapper>

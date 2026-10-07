@@ -22,6 +22,8 @@ const variants = {
     --quote-button-bg-hover: ${props => props.theme.colors.primaryDark};
     --quote-button-text: ${props => props.theme.colors.white};
     --quote-button-outline: ${props => props.theme.colors.primary};
+    --quote-message-height: 120px;
+    --quote-field-padding-y: ${props => props.theme.spacing.sm};
     --quote-error-text: ${props => props.theme.colors.error};
     --quote-error-accent: ${props => props.theme.colors.error};
   `,
@@ -38,6 +40,9 @@ const variants = {
     --quote-button-bg-hover: ${props => props.theme.colors.white};
     --quote-button-text: ${props => props.theme.colors.primary};
     --quote-button-outline: ${props => props.theme.colors.white};
+    /* A shorter message box keeps the hero within one screen */
+    --quote-message-height: 96px;
+    --quote-field-padding-y: ${props => props.theme.spacing.xs};
     /* White error text keeps 4.5:1 on the smoked glass; the red bar marks it as an error */
     --quote-error-text: ${props => props.theme.colors.white};
     --quote-error-accent: #FFB4A9;
@@ -71,7 +76,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  padding: var(--quote-field-padding-y) ${props => props.theme.spacing.md};
   border: 1px solid var(--quote-input-border);
   border-radius: ${props => props.theme.radius.medium};
   background: var(--quote-input-bg);
@@ -117,7 +122,9 @@ const Reassurance = styled.p`
 `;
 
 const TextArea = styled(Input).attrs({ as: 'textarea' })`
-  min-height: 120px;
+  /* Set the height directly; rows={4} would otherwise make it taller */
+  height: var(--quote-message-height);
+  min-height: 72px;
   resize: vertical;
 `;
 
